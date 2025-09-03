@@ -1,101 +1,155 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-export default function Home() {
+const cardStyle = `
+  bg-gradient-to-tr from-white/10 via-white/5 to-white/10
+  backdrop-blur-xl
+  border border-white/25
+  rounded-xl
+  shadow-inner shadow-black/25
+  p-8
+`;
+
+const buttonHover = {
+  hover: { scale: 1.05, transition: { duration: 0.2 } },
+};
+
+export default function HomePage() {
+  const infoCards = [
+    {
+      title: "Experience",
+      href: "/experience",
+      icon: "fa-briefcase",
+      description:
+        "See where I’ve put computer science into practice with team collaboration and tackling real-world problems.",
+      button: "View My Journey",
+    },
+    {
+      title: "Education",
+      href: "/education",
+      icon: "fa-graduation-cap",
+      description:
+        "Explore the courses and studies that built my foundation in computer science, software design, and development.",
+      button: "Explore My Studies",
+    },
+    {
+      title: "Skills",
+      href: "/skills",
+      icon: "fa-tools",
+      description:
+       "The programming languages, frameworks, and tools I rely on to design, build, and deliver quality software.",
+      button: "Check Out My Toolkit",
+    },
+  ];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="flex min-h-screen flex-col items-center bg-[#070707] px-4 pt-16 text-white">
+      {/* Title Section */}
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="mb-6 text-center text-5xl font-bold"
+      >
+        Hello, I’m Thayer.
+      </motion.h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Intro Card */}
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className={`mb-12 flex w-full max-w-6xl flex-col items-center text-white lg:flex-row lg:space-x-6 ${cardStyle}`}
+      >
+        <p className="flex-1 text-center text-lg lg:text-left">
+          I’m a recent Computer Science graduate with a passion for building
+          clean, user-friendly software. Trained in agile principles and modern
+          development practices, I enjoy tackling complex problems and finding
+          creative solutions. In my free time, I explore game development, experimenting with state machine AI and object-oriented design.
+        </p>
+        <div className="flex-shrink-0">
+          <Image
+            src="/images/icons/Avatar.png"
+            alt="Thayer profile avatar"
+            width={128}
+            height={128}
+            className="rounded-full object-cover"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </motion.section>
+
+      {/* Cards Section */}
+      <div className="flex w-full max-w-6xl flex-col gap-8 lg:flex-row">
+        {/* Projects Card */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+          className={`relative flex flex-1 flex-col lg:flex-[2] ${cardStyle}`}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <div className="mb-4 flex items-center">
+            <div className="mr-3 rounded-full bg-[#A673E7]/20 p-3">
+              <i className="fas fa-laptop-code text-3xl text-[#A673E7]" />
+            </div>
+            <h2 className="text-4xl font-semibold">See My Projects!</h2>
+          </div>
+          <p className="mb-6 text-lg">
+            My projects range from small utilities to full web and mobile applications, 
+            each highlighting different skills I’ve developed along the way. 
+            Explore the technologies behind them, browse image galleries that showcase their design, 
+            or visit my GitHub to dive into the code itself.
+            Take a look at what I’ve been building!
+          </p>
+          <Link href="/projects">
+            <motion.button
+              variants={buttonHover}
+              whileHover="hover"
+              className="w-max rounded-lg bg-[#A673E7] px-4 p-2 transition duration-300 hover:bg-[#8a57cc]"
+            >
+              See My Projects
+            </motion.button>
+          </Link>
+        </motion.section>
+
+        {/* Info Cards (Experience, Education, Skills) */}
+        <div className="flex flex-1 flex-col gap-8">
+          {infoCards.map((card, index) => (
+            <motion.section
+              key={card.title}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: 0.5 + index * 0.15,
+              }}
+              className={`${cardStyle} flex flex-col`}
+            >
+              <div className="mb-2 flex items-center">
+                <div className="mr-3 rounded-full bg-[#A673E7]/20 p-2">
+                  <i
+                    className={`fas ${card.icon} text-2xl text-[#A673E7]`}
+                  />
+                </div>
+                <h2 className="text-3xl font-semibold">{card.title}</h2>
+              </div>
+              <p className="text-lg">{card.description}</p>
+              <Link href={card.href}>
+                <motion.button
+                  variants={buttonHover}
+                  whileHover="hover"
+                  className="mt-2 w-max rounded-lg bg-[#A673E7] px-4 p-2 transition duration-300 hover:bg-[#8a57cc]"
+                >
+                  {card.button}
+                </motion.button>
+              </Link>
+            </motion.section>
+          ))}
+        </div>
+      </div>
+    </main>
   );
 }
