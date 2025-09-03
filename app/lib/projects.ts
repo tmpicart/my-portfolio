@@ -9,6 +9,7 @@ export type Project = {
     frameworks?: string[];
     features?: string[];
   };
+  github: string;
 };
 
 export const projects: Project[] = [
@@ -44,6 +45,7 @@ export const projects: Project[] = [
         "Gameplay improvements and bug fixes",
       ],
     },
+    github: "https://github.com/tmpicart/John-Dungeon",
   },
   {
     slug: "medical-codex",
@@ -74,6 +76,7 @@ export const projects: Project[] = [
         "Improved maintainability and scalability with code refactor",
       ],
     },
+    github: "", // If this project has a GitHub repo, you can add it here
   },
   {
     slug: "ticketmaster-search",
@@ -102,6 +105,7 @@ export const projects: Project[] = [
         "Mobile-first UX design",
       ],
     },
+    github: "https://github.com/tmpicart/TicketMasterMobile",
   },
   {
     slug: "portfolio-website",
@@ -122,5 +126,6 @@ export const projects: Project[] = [
         "Showcases projects, skills, and modern web development practices",
       ],
     },
+    github: "https://github.com/tmpicart/my-portfolio",
   },
 ];
