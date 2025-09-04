@@ -18,4 +18,4 @@ This is my personal developer portfolio. It highlights my skills, projects, and 
 ## Deployment
 
 This project is deployed on Vercel. Any updates pushed to the GitHub repository will automatically trigger a new deployment.
-You can view the live site here: (https://tmpicart-portfolio.vercel.app/projects/john-dungeon)
+You can view the live site here: (https://tmpicart-portfolio.vercel.app)
