@@ -76,7 +76,7 @@ export const projects: Project[] = [
         "Improved maintainability and scalability with code refactor",
       ],
     },
-    github: "", // If this project has a GitHub repo, you can add it here
+    github: "",
   },
   {
     slug: "ticketmaster-search",
@@ -112,16 +112,20 @@ export const projects: Project[] = [
     title: "My Portfolio Website",
     description: "A personal portfolio showcasing projects, skills, and experience.",
     images: [
-      "/images/john-dungeon/1.png",
-      "/images/john-dungeon/2.png",
-      "/images/john-dungeon/3.png",
+      "/images/portfolio/Portfolio_1.png",
+      "/images/portfolio/Portfolio_2.png",
+      "/images/icons/Avatar.png",
     ],
-    imageInfos: [[], [], []],
+    imageInfos: [
+      ["Vercel Deployment", "- Website is deployed and fully functional via vercel"],
+      ["Mobile Responsive", "- Mobile Support and adaptive/scalable design"],
+      ["Thanks for Visiting!", "- Thank you for taking the time to view my page!"],
+    ],
     bullets: {
       languages: ["JavaScript", "TypeScript"],
       frameworks: ["Next.js", "Tailwind CSS", "Framer Motion"],
       features: [
-        "Fully responsive design",
+        "Fully responsive design", 
         "Interactive animations",
         "Showcases projects, skills, and modern web development practices",
       ],

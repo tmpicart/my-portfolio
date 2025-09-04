@@ -8,7 +8,6 @@ import { HiOutlineArrowsExpand, HiChevronLeft, HiChevronRight } from "react-icon
 import { motion, Variants } from "framer-motion";
 import { projects } from "@/app/lib/projects";
 
-
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const router = useRouter();
@@ -29,17 +28,15 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-  if (!emblaApi) return;
+    if (!emblaApi) return;
 
-  const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
+    const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
 
-  emblaApi.on("select", onSelect);
-
-  return () => {
-    emblaApi.off("select", onSelect);
-  };
-}, [emblaApi]);
-
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -66,6 +63,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         variants={containerVariants}
       >
         <div className="w-full max-w-[1040px] px-6">
+          {/* Back Button */}
           <motion.button
             onClick={() => router.push("/projects")}
             className="mb-6 rounded-md bg-[#40434E] px-5 py-2 font-semibold shadow-md transition-colors duration-300 hover:bg-[#A673E7]"
@@ -75,6 +73,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             ← Back to Projects
           </motion.button>
 
+          {/* Title */}
           <motion.h1
             className="mb-10 text-center text-4xl font-bold md:text-5xl"
             initial={{ opacity: 0, y: -16 }}
@@ -121,9 +120,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         <div className="max-w-[60%] text-gray-200 space-y-1">
                           {project.imageInfos[index].map((line, i) =>
                             i === 0 ? (
-                              <h3 key={i} className="font-bold text-lg">
-                                {line}
-                              </h3>
+                              <h3 key={i} className="font-bold text-lg">{line}</h3>
                             ) : (
                               <p key={i} className="ml-3">{line}</p>
                             )
@@ -147,6 +144,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               <HiChevronRight className="h-7 w-7" />
             </button>
 
+            {/* Carousel Dots */}
             <motion.div className="mt-6 flex justify-center gap-3">
               {project.images.map((_, index) => (
                 <button
@@ -161,38 +159,57 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             </motion.div>
           </motion.div>
 
-          {/* Description */}
-          <motion.div className="w-full mb-6 text-left" variants={cardVariants}>
-            <motion.p
-              className="text-gray-200 text-lg md:text-xl leading-relaxed"
+          {/* Project Overview Panel */}
+          <motion.div
+            className="w-full mb-12 rounded-xl bg-[#1F1E2E] p-6 shadow-lg space-y-6"
+            variants={cardVariants}
+          >
+            <p className="text-gray-200 text-lg md:text-xl leading-relaxed">{project.description}</p>
+
+            <div className="flex flex-col md:flex-row md:gap-6 gap-4">
+              {project.bullets.languages && (
+                <div className="flex-1 bg-[#272636] p-4 rounded-lg shadow-inner">
+                  <h4 className="font-semibold text-[#A673E7] mb-1">Languages</h4>
+                  <p>{project.bullets.languages.join(", ")}</p>
+                </div>
+              )}
+              {project.bullets.frameworks && (
+                <div className="flex-1 bg-[#272636] p-4 rounded-lg shadow-inner">
+                  <h4 className="font-semibold text-[#A673E7] mb-1">Frameworks / Libraries</h4>
+                  <p>{project.bullets.frameworks.join(", ")}</p>
+                </div>
+              )}
+            </div>
+
+            {project.bullets.features && (
+              <div>
+                <h4 className="font-semibold text-[#A673E7] mb-1">Features</h4>
+                <ul className="list-disc ml-5 space-y-1">
+                  {project.bullets.features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </motion.div>
+
+          {project.github && project.github.trim() !== "" && (
+            <motion.div
+              className="mb-12 flex justify-center"
+              variants={cardVariants}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.4 } }}
             >
-              {project.description}
-            </motion.p>
-          </motion.div>
-
-          {/* Bullets */}
-          <motion.div className="w-full mb-12 space-y-6" variants={cardVariants}>
-            {project.bullets.languages && (
-              <div className="bg-[#1F1E2E] p-4 rounded-lg shadow-inner w-full">
-                <span className="font-semibold text-[#A673E7]">Languages:</span> {project.bullets.languages.join(", ")}
-              </div>
-            )}
-            {project.bullets.frameworks && (
-              <div className="bg-[#1F1E2E] p-4 rounded-lg shadow-inner w-full">
-                <span className="font-semibold text-[#A673E7]">Frameworks / Libraries:</span> {project.bullets.frameworks.join(", ")}
-              </div>
-            )}
-            {project.bullets.features && (
-              <div className="bg-[#1F1E2E] p-4 rounded-lg shadow-inner w-full">
-                <span className="font-semibold text-[#A673E7]">Features:</span>
-                {project.bullets.features.map((feature) => (
-                  <p key={feature} className="ml-4">- {feature}</p>
-                ))}
-              </div>
-            )}
-          </motion.div>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#40434E] px-6 py-3 font-semibold shadow-md transition-colors duration-300 hover:bg-[#A673E7] hover:shadow-lg"
+              >
+                View on GitHub
+              </a>
+            </motion.div>
+          )}
         </div>
 
         {/* Modal */}
@@ -225,28 +242,33 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             </button>
 
             <div
-              className="relative flex flex-row max-w-[90vw] max-h-[90vh] rounded-xl overflow-hidden shadow-xl bg-[#1C1B29]"
+              className="relative flex flex-col md:flex-row max-w-[90vw] max-h-[90vh] rounded-xl overflow-hidden shadow-xl bg-[#1C1B29]"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex-grow flex items-center justify-center p-2">
+              {/* Image */}
+              <div className="flex-grow flex items-center justify-center p-2 md:p-6">
                 <Image
                   src={project.images[modalSlide]}
                   alt="Enlarged image"
                   width={1600}
                   height={1200}
-                  className="object-contain max-h-[90vh] max-w-full"
+                  className="object-contain max-h-[60vh] md:max-h-[90vh] max-w-full"
                   unoptimized
                   priority
                   key={modalSlide}
                 />
               </div>
 
+              {/* Info panel below image on mobile */}
               {project.imageInfos?.[modalSlide] && (
-                <div className="w-1/4 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2">
-                  <h3 className="text-xl font-bold">{project.imageInfos[modalSlide][0]}</h3>
-                  {project.imageInfos[modalSlide].slice(1).map((line, i) => (
-                    <p key={i} className="ml-2 text-sm">{line}</p>
-                  ))}
+                <div className="w-full md:w-1/4 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2 md:flex-shrink-0">
+                  {project.imageInfos[modalSlide].map((line, i) =>
+                    i === 0 ? (
+                      <h3 key={i} className="text-xl font-bold">{line}</h3>
+                    ) : (
+                      <p key={i} className="ml-0 md:ml-2 text-sm">{line}</p>
+                    )
+                  )}
                 </div>
               )}
             </div>
