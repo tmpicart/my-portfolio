@@ -23,7 +23,7 @@ const experiences: Experience[] = [
       "Integrated AI-driven translation with Gemini API and Levenshtein fuzzy matching for accuracy.",
       "Collaborated effectively in Agile using Slack and Notion, streamlining workflows and delivery.",
     ],
-    logo: "/images/icons/greyboxproject_logo.jfif"
+    logo: "/images/icons/greyboxproject_logo.png"
   },
   {
     company: "Berlin Lions Club",
