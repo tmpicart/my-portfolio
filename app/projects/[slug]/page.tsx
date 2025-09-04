@@ -221,12 +221,36 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
+            {/* Mobile arrows below the card */}
+            <div className="absolute bottom-4 flex w-full justify-center gap-6 md:hidden z-50">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalSlide((modalSlide - 1 + project.images.length) % project.images.length);
+                }}
+                className="rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7]"
+              >
+                <HiChevronLeft className="h-6 w-6" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalSlide((modalSlide + 1) % project.images.length);
+                }}
+                className="rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7]"
+              >
+                <HiChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+
+            {/* Desktop arrows on the sides */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setModalSlide((modalSlide - 1 + project.images.length) % project.images.length);
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7] z-50"
+              className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7] z-50"
             >
               <HiChevronLeft className="h-6 w-6" />
             </button>
@@ -236,11 +260,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 e.stopPropagation();
                 setModalSlide((modalSlide + 1) % project.images.length);
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7] z-50"
+              className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#40434E] p-3 text-white shadow-lg hover:bg-[#A673E7] z-50"
             >
               <HiChevronRight className="h-6 w-6" />
             </button>
 
+            {/* Modal content */}
             <div
               className="relative flex flex-col md:flex-row max-w-[90vw] max-h-[90vh] rounded-xl overflow-hidden shadow-xl bg-[#1C1B29]"
               onClick={(e) => e.stopPropagation()}
@@ -259,7 +284,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 />
               </div>
 
-              {/* Info panel below image on mobile */}
+              {/* Info panel */}
               {project.imageInfos?.[modalSlide] && (
                 <div className="w-full md:w-1/4 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2 md:flex-shrink-0">
                   {project.imageInfos[modalSlide].map((line, i) =>
