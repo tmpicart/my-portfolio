@@ -4,8 +4,8 @@ import Navbar from "./components/Navbar";
 
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Showcasing my work, experience, and skills",
+  title: "Tmpicart Portfolio",
+  description: "Explore my projects, skills, education, and professional experience."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
