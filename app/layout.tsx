@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Link from "next/link";
+import Navbar from "./components/Navbar";
+
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -18,33 +19,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex flex-col min-h-screen bg-[#070707] text-white antialiased caret-transparent">
         
-        {/* Navigation */}
-        <nav className="fixed top-0 left-0 z-50 w-full bg-[#40434E] p-4 shadow-lg">
-          <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <Link href="/" className="text-2xl font-bold hover:text-[#A673E7]">
-              Home
-            </Link>
-            <div className="space-x-6">
-              <Link href="/projects" className="hover:text-[#A673E7]">Projects</Link>
-              <Link href="/experience" className="hover:text-[#A673E7]">Experience</Link>
-              <Link href="/skills" className="hover:text-[#A673E7]">Skills</Link>
-              <Link href="/education" className="hover:text-[#A673E7]">Education</Link>
-            </div>
-          </div>
-        </nav>
+        {/* Navbar */}
+        <Navbar />
 
         {/* Main Content */}
-        <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-20">
+        <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-20 md:pt-24">
           {children}
         </main>
 
         {/* Footer */}
         <footer className="flex flex-col items-center bg-gradient-to-t from-[#101010] to-[#070707] py-6 text-center">
-          <h2 className="mb-2 text-2xl font-semibold">Let’s Connect</h2>
-          <p className="mb-3 text-base text-gray-300">
+          <h2 className="mb-2 text-2xl md:text-3xl font-semibold">Let’s Connect</h2>
+          <p className="mb-3 text-base md:text-lg text-gray-300">
             Reach me on LinkedIn, GitHub, or view my resume.
           </p>
-          <div className="flex space-x-6 text-3xl">
+          <div className="flex space-x-6 text-3xl md:text-4xl">
             <a
               href="https://www.linkedin.com/in/tmpicart"
               target="_blank"
@@ -62,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <i className="fab fa-github"></i>
             </a>
             <a
-              href="/files/Resume-Thayer-Picart.pdf"
+              href="/files/Resume-Thayer Picart.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-[#A673E7]"
