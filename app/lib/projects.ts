@@ -116,7 +116,7 @@ export const projects: Project[] = [
     slug: "portfolio-website",
     title: "My Portfolio Website",
     description:
-      "This is my portfolio website built to showcase my projects, skills, education, and experience. Feel free to explore or check out my GitHub, LinkedIn, or Resume found at the bottom of every page.",
+      "This is my portfolio website built to showcase my projects, skills, education, and experience. Feel free to explore! Check out my GitHub, LinkedIn, or shoot me an email with the links at the bottom of every page.",
     images: [
       "/images/portfolio/Portfolio_1.png",
       "/images/portfolio/Portfolio_2.png",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
       frameworks: ["Next.js", "Tailwind CSS", "Framer Motion"],
       features: [
         "Fully responsive and mobile-friendly design",
-        "Interactive animations and page load",
+        "Interactive effects and load animations",
         "Showcases modern web development practices, including Next.js and Tailwind",
         "Vercel deployment via GitHub, automatically updated with every push",
       ],
