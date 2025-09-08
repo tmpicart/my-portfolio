@@ -8,7 +8,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu whenever the route changes
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);

@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
-
 export const metadata: Metadata = {
-  title: "Tmpicart Portfolio",
-  description: "Explore my projects, skills, education, and professional experience."
+  title: "Thayer's Portfolio",
+  description: "Explore my projects, skills, education, and professional experience!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -29,11 +28,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Footer */}
         <footer className="flex flex-col items-center bg-gradient-to-t from-[#101010] to-[#070707] py-6 text-center">
+      
           <h2 className="mb-2 text-2xl md:text-3xl font-semibold">Let’s Connect</h2>
+          
           <p className="mb-3 text-base md:text-lg text-gray-300">
-            Reach me on LinkedIn, GitHub, or view my resume.
+            Reach me on LinkedIn, GitHub, or send me an email.
           </p>
+          
           <div className="flex space-x-6 text-3xl md:text-4xl">
+            
+            {/* LinkedIn */}
             <a
               href="https://www.linkedin.com/in/tmpicart"
               target="_blank"
@@ -42,6 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               <i className="fab fa-linkedin"></i>
             </a>
+            
+            {/* GitHub */}
             <a
               href="https://github.com/tmpicart"
               target="_blank"
@@ -50,13 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               <i className="fab fa-github"></i>
             </a>
+            
+            {/* Email */}
             <a
-              href="/files/Resume-Thayer Picart.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:tmpicart@gmail.com"
               className="transition-colors hover:text-[#A673E7]"
             >
-              <i className="fas fa-file-pdf"></i>
+              <i className="fas fa-envelope"></i>
             </a>
           </div>
         </footer>

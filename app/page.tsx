@@ -48,13 +48,14 @@ export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-[#070707] px-4 pt-8 text-white">
       
+       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="mb-6 text-center text-4xl sm:text-5xl font-bold"
       >
-        Hello, I’m Thayer.
+        Hello, I’m Thayer!
       </motion.h1>
 
       <motion.section
@@ -63,6 +64,8 @@ export default function HomePage() {
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className={`mb-12 flex w-full max-w-6xl flex-col items-center text-white gap-6 lg:flex-row lg:gap-8 ${cardStyle}`}
       >
+
+         {/* Intro */}
         <p className="flex-1 text-center text-lg lg:text-left">
           I’m a recent Computer Science graduate with a passion for building
           clean, user-friendly software. Trained in agile principles and modern
@@ -81,6 +84,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
+       {/* Project Card */}
       <div className="flex w-full max-w-6xl flex-col gap-8 lg:flex-row">
         
         <motion.section
@@ -112,6 +116,7 @@ export default function HomePage() {
           </Link>
         </motion.section>
 
+         {/* Other Cards */}
         <div className="flex flex-1 flex-col gap-8">
           {infoCards.map((card, index) => (
             <motion.section
