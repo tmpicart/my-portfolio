@@ -63,6 +63,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         variants={containerVariants}
       >
         <div className="w-full max-w-[1040px] px-6">
+          
           {/* Back Button */}
           <motion.button
             onClick={() => router.push("/projects")}
@@ -221,7 +222,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
-            {/* Mobile arrows below the card */}
+            {/* Mobile arrows (below card)*/}
             <div className="absolute bottom-4 flex w-full justify-center gap-6 md:hidden z-50">
               <button
                 onClick={(e) => {
@@ -244,7 +245,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               </button>
             </div>
 
-            {/* Desktop arrows on the sides */}
+            {/* Desktop arrows (on sides)*/}
             <button
               onClick={(e) => {
                 e.stopPropagation();

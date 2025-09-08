@@ -79,6 +79,8 @@ function CourseList({ courses }: { courses: string[] }) {
 export default function EducationPage() {
   return (
     <main className="flex flex-col items-center w-full pt-8 px-4 pb-8 bg-[#070707]">
+      
+       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
