@@ -28,20 +28,20 @@ export default function HomePage() {
       button: "View My Journey",
     },
     {
-      title: "Education",
-      href: "/education",
-      icon: "fa-graduation-cap",
-      description:
-        "Explore the courses and studies that built my foundation in computer science, software design, and development.",
-      button: "Explore My Studies",
-    },
-    {
       title: "Skills",
       href: "/skills",
       icon: "fa-tools",
       description:
         "The programming languages, frameworks, and tools I rely on to design, build, and deliver quality software.",
       button: "Check Out My Toolkit",
+    },
+    {
+      title: "Education",
+      href: "/education",
+      icon: "fa-graduation-cap",
+      description:
+        "Explore the courses and studies that built my foundation in computer science, software design, and development.",
+      button: "Explore My Studies",
     },
   ];
 
