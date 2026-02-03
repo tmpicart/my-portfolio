@@ -75,8 +75,8 @@ export default function HomePage() {
         </p>
         <div className="flex-shrink-0">
           <Image
-            src="/images/icons/Avatar.png"
-            alt="Thayer profile avatar"
+            src="/images/icons/pfp.jpg"
+            alt="Thayer profile pic"
             width={128}
             height={128}
             className="rounded-full object-cover"
