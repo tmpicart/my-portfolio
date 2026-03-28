@@ -28,7 +28,7 @@ const projects: Project[] = [
   {
     title: "Portfolio Website",
     description: "Learn more about the portfolio site you are currently visiting!",
-    image: "/images/icons/Avatar.png",
+    image: "/images/icons/code_img.jpg",
     slug: "portfolio-website",
   },
   {
