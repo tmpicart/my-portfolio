@@ -120,7 +120,7 @@ export const projects: Project[] = [
     images: [
       "/images/portfolio/Portfolio_1.png",
       "/images/portfolio/Portfolio_2.png",
-      "/images/icons/Avatar.png",
+      "/images/icons/laptop_img.jpg",
     ],
     imageInfos: [
       ["Vercel Deployment", "- Website is deployed and fully functional via Vercel"],
