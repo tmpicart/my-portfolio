@@ -29,7 +29,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // Track img slide
+  // Track active slide
   useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
@@ -73,6 +73,8 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     visible: { opacity: 1, y: 0, transition: { duration: 0.36, ease: "easeOut" } },
   };
 
+  const arrowClass = "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] text-white shadow-lg transition-colors hover:bg-[#A673E7]";
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-[#070707] text-white">
       <motion.main
@@ -107,12 +109,11 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             className="relative mb-10 w-full rounded-2xl bg-[#1F1E2E] px-6 py-6 shadow-lg"
             variants={cardVariants}
           >
-            <button
-              onClick={() => emblaApi?.scrollPrev()}
-              className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-[#40434E] p-4 text-white shadow-lg transition-colors duration-300 hover:bg-[#A673E7]"
-              aria-label="Previous slide"
-            >
+            <button onClick={() => emblaApi?.scrollPrev()} className={`${arrowClass} left-4 p-4`} aria-label="Previous slide">
               <HiChevronLeft className="h-7 w-7" />
+            </button>
+            <button onClick={() => emblaApi?.scrollNext()} className={`${arrowClass} right-4 p-4`} aria-label="Next slide">
+              <HiChevronRight className="h-7 w-7" />
             </button>
 
             <div className="overflow-hidden" ref={emblaRef} style={{ maxHeight: 480 }}>
@@ -147,7 +148,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                             ) : (
                               <p key={i} className="ml-3 text-xl">{line}</p>
                             )
-                          )} 
+                          )}
                         </div>
                       )}
                       <div className="self-end flex items-center gap-2 rounded-md bg-[#40434E] px-4 py-2 text-base font-semibold text-white shadow-md pointer-events-auto">
@@ -159,14 +160,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               </div>
             </div>
 
-            <button
-              onClick={() => emblaApi?.scrollNext()}
-              className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-[#40434E] p-4 text-white shadow-lg transition-colors duration-300 hover:bg-[#A673E7]"
-              aria-label="Next slide"
-            >
-              <HiChevronRight className="h-7 w-7" />
-            </button>
-
             {/* Dots */}
             <div className="mt-6 flex justify-center gap-3">
               {project.images.map((_, index) => (
@@ -174,9 +167,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                   key={index}
                   aria-label={`Go to slide ${index + 1}`}
                   className={`h-4 w-4 rounded-full transition-colors duration-200 ${
-                    index === currentSlide
-                      ? "bg-white"
-                      : "bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
+                    index === currentSlide ? "bg-white" : "bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
                   }`}
                   onClick={() => emblaApi?.scrollTo(index)}
                 />
@@ -220,10 +211,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
           {/* GitHub link */}
           {project.github && project.github.trim() !== "" && (
-            <motion.div
-              className="mb-12 flex justify-center"
-              variants={cardVariants}
-            >
+            <motion.div className="mb-12 flex justify-center" variants={cardVariants}>
               <a
                 href={project.github}
                 target="_blank"
@@ -254,19 +242,10 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 {/* Modal carousel */}
                 <div className="relative flex-grow flex flex-col min-w-0">
 
-                  {/* Side arrows */}
-                  <button
-                    onClick={() => modalEmblaApi?.scrollPrev()}
-                    className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] p-3 text-white shadow-lg transition-colors hover:bg-[#A673E7]"
-                    aria-label="Previous image"
-                  >
+                  <button onClick={() => modalEmblaApi?.scrollPrev()} className={`${arrowClass} left-3 p-3`} aria-label="Previous image">
                     <HiChevronLeft className="h-6 w-6" />
                   </button>
-                  <button
-                    onClick={() => modalEmblaApi?.scrollNext()}
-                    className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] p-3 text-white shadow-lg transition-colors hover:bg-[#A673E7]"
-                    aria-label="Next image"
-                  >
+                  <button onClick={() => modalEmblaApi?.scrollNext()} className={`${arrowClass} right-3 p-3`} aria-label="Next image">
                     <HiChevronRight className="h-6 w-6" />
                   </button>
 
@@ -299,9 +278,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         aria-label={`Go to image ${index + 1}`}
                         onClick={() => scrollModalTo(index)}
                         className={`rounded-full transition-all duration-200 ${
-                          index === modalSlide
-                            ? "h-3 w-3 bg-white"
-                            : "h-2.5 w-2.5 bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
+                          index === modalSlide ? "h-3 w-3 bg-white" : "h-2.5 w-2.5 bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
                         }`}
                       />
                     ))}
