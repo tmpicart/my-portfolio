@@ -121,9 +121,9 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         <div className="max-w-[60%] text-gray-200 space-y-1">
                           {project.imageInfos[index].map((line, i) =>
                             i === 0 ? (
-                              <h3 key={i} className="font-bold text-lg">{line}</h3>
+                              <h3 key={i} className="font-bold text-2xl">{line}</h3>
                             ) : (
-                              <p key={i} className="ml-3">{line}</p>
+                              <p key={i} className="ml-3 text-xl">{line}</p>
                             )
                           )}
                         </div>
@@ -290,9 +290,9 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 <div className="w-full md:w-1/4 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2 md:flex-shrink-0">
                   {project.imageInfos[modalSlide].map((line, i) =>
                     i === 0 ? (
-                      <h3 key={i} className="text-xl font-bold">{line}</h3>
+                      <h3 key={i} className="text-2xl font-bold">{line}</h3>
                     ) : (
-                      <p key={i} className="ml-0 md:ml-2 text-sm">{line}</p>
+                      <p key={i} className="ml-0 md:ml-2 text-xl">{line}</p>
                     )
                   )}
                 </div>

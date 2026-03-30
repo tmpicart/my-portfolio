@@ -24,15 +24,15 @@ export default function HomePage() {
       href: "/experience",
       icon: "fa-briefcase",
       description:
-        "See where I’ve put computer science into practice with team collaboration and tackling real-world problems.",
-      button: "View My Journey",
+        "See where I've put my development skills into practice and work as part of a team to tackle real-world problems.",
+      button: "View My Experience",
     },
     {
       title: "Skills",
       href: "/skills",
       icon: "fa-tools",
       description:
-        "The programming languages, frameworks, and tools I rely on to design, build, and deliver quality software.",
+        "View the programming languages, frameworks, and tools that help me develop my projects.",
       button: "Check Out My Toolkit",
     },
     {
@@ -40,7 +40,7 @@ export default function HomePage() {
       href: "/education",
       icon: "fa-graduation-cap",
       description:
-        "Explore the courses and studies that built my foundation in computer science, software design, and development.",
+        "Explore the courses and classes that built my foundation in software design and development.",
       button: "Explore My Studies",
     },
   ];
@@ -67,11 +67,9 @@ export default function HomePage() {
 
          {/* Intro */}
         <p className="flex-1 text-center text-lg lg:text-left">
-          I’m a recent Computer Science graduate with a passion for building
-          clean, user-friendly software. Trained in agile principles and modern
-          development practices, I enjoy tackling complex problems and finding
-          creative solutions. In my free time, I explore game development,
-          experimenting with state machine AI and object-oriented design.
+          I'm a Software Engineer with experience in web and mobile development within collaborative, agile environments. 
+          I enjoy building clean, functional applications, and have a deep curiosity for how technology works across both software and hardware. 
+          In my spare time, I'm into game development and D&D. I like thinking about how systems are designed, balanced, and how things fit together.
         </p>
         <div className="flex-shrink-0">
           <Image
@@ -100,10 +98,10 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-semibold">See My Projects!</h2>
           </div>
           <p className="mb-6 text-lg">
-            My projects range from small utilities to full web and mobile applications, 
-            each highlighting different skills I’ve developed along the way. 
-            Explore the technologies behind them, browse image galleries that showcase their design, 
-            or visit my GitHub to dive into the code itself.
+            Here are some of the things I've worked on,  
+            each highlighting different skills developed along the way. 
+            Explore the technologies behind them, browse images showing their design, 
+            or visit my GitHub and dive into the code.
           </p>
           <Link href="/projects">
             <motion.button
