@@ -20,6 +20,13 @@ const projects: Project[] = [
     slug: "medical-codex",
   },
   {
+    title: "John Dungeon",
+    description:
+      "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
+    image: "/images/john/John_5.png",
+    slug: "john-dungeon",
+  },
+  {
     title: "TicketMaster Search Mobile",
     description: "A mobile app built to search for events and tickets via the TicketMaster API.",
     image: "/images/ticketmaster/TicketMaster_1.png",
@@ -30,13 +37,6 @@ const projects: Project[] = [
     description: "Learn more about the portfolio site you are currently visiting!",
     image: "/images/icons/code_img.jpg",
     slug: "portfolio-website",
-  },
-  {
-    title: "John Dungeon",
-    description:
-      "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
-    image: "/images/john/John_5.png",
-    slug: "john-dungeon",
   },
 ];
 
@@ -95,8 +95,8 @@ function ProjectCard({ title, description, image, slug, large }: ProjectCardProp
 }
 
 export default function ProjectsPage() {
-  const featuredProject = projects.find((p) => p.slug === "john-dungeon");
-  const otherProjects = projects.filter((p) => p.slug !== "john-dungeon");
+  const featuredProject = projects.find((p) => p.slug === "medical-codex");
+  const otherProjects = projects.filter((p) => p.slug !== "medical-codex");
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[#070707] px-4 pt-8 text-white">
