@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
 
         {/* Main Content */}
-        <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-20 md:pt-24">
+        <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-12 md:pt-16">
           {children}
         </main>
 

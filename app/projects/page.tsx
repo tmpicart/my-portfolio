@@ -11,6 +11,16 @@ type Project = {
   slug: string;
 };
 
+type PageMeta = {
+  eyebrow: string;
+  title: string;
+};
+
+const pageMeta: PageMeta = {
+  eyebrow: "Project Hub",
+  title: "Projects",
+};
+
 const projects: Project[] = [
   {
     title: "Medical Codex Translation Tool",
@@ -41,54 +51,82 @@ const projects: Project[] = [
 ];
 
 const cardStyle = `
-  flex h-full flex-col
-  rounded-xl bg-[#40434E] p-6 shadow-lg
-  cursor-pointer
-  overflow-hidden
+  group relative flex flex-col overflow-hidden rounded-[36px] border border-white/[0.12]
+  bg-white/[0.08] p-6 backdrop-blur-2xl
+  ring-1 ring-white/[0.05] transition-all duration-300 ease-out
 `;
 
 const projectVariants: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  hidden: { opacity: 0, y: 18, scale: 0.99 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.8, 0.25, 1] },
+    scale: 1.01,
+    transition: { type: "spring", stiffness: 160, damping: 22, delay: 0.06 + i * 0.06 },
   }),
-  hover: {
-    scale: 1.05,
-    y: -5,
-    boxShadow: "0 8px 25px rgba(166,115,231,0.9)",
-    transition: { type: "spring", stiffness: 300, damping: 20 },
-  },
 };
 
-type ProjectCardProps = Project & { large?: boolean };
+const imageClasses = "object-cover transition duration-500 ease-out";
 
-function ProjectCard({ title, description, image, slug, large }: ProjectCardProps) {
+const hoverAnimation = {
+  scale: 1.04,
+  rotate: 0.25,
+  y: 0,
+  zIndex: 50,
+  backgroundColor: "rgba(166,115,231,0.22)",
+  borderColor: "rgba(166,115,231,0.55)",
+  transition: { type: "spring" as const, stiffness: 180, damping: 16 },
+};
+
+type ProjectCardProps = Project & { size?: "small" | "medium" | "large" };
+
+function ProjectCard({ title, description, image, slug, size = "medium" }: ProjectCardProps) {
+  const sizeStyles = {
+    large: {
+      cardPadding: "p-8",
+      cardHeight: "h-[36rem]",
+      imageHeight: "h-[24rem]",
+      titleClass: "text-4xl",
+      descClass: "text-lg",
+      dividerClass: "w-24 sm:w-28",
+    },
+    medium: {
+      cardPadding: "p-6",
+      cardHeight: "h-[28rem]",
+      imageHeight: "h-48",
+      titleClass: "text-2xl",
+      descClass: "text-base",
+      dividerClass: "w-20",
+    },
+    small: {
+      cardPadding: "p-6",
+      cardHeight: "h-[24rem]",
+      imageHeight: "h-40",
+      titleClass: "text-2xl",
+      descClass: "text-sm",
+      dividerClass: "w-20",
+    },
+  }[size];
   return (
     <Link href={`/projects/${slug}`} className="block h-full">
       <motion.div
-        className={`${cardStyle} ${large ? "p-8 h-[28rem]" : "p-6 h-48"}`}
+        style={{ zIndex: 0 }}
+        className={`${cardStyle} ${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
         variants={projectVariants}
         initial="hidden"
         animate="visible"
-        whileHover="hover"
+        whileHover={hoverAnimation}
       >
-        <div className={`relative w-full ${large ? "h-[28rem]" : "h-48"} rounded-md overflow-hidden`}>
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className={large ? "object-contain" : "object-contain"}
-          />
+        <div className={`relative w-full overflow-hidden rounded-md ${sizeStyles.imageHeight}`}>
+          <div className="flex items-center justify-center w-full h-full">
+            <Image src={image} alt={title} width={1600} height={900} className="max-h-full max-w-full object-contain" />
+          </div>
         </div>
-        <h3 className={`${large ? "mt-4 text-4xl" : "mt-4 text-2xl"} font-bold text-white`}>
+        <h3 className={`${sizeStyles.titleClass} mt-3 font-bold text-white`}>
           {title}
         </h3>
-        <p className={`${large ? "mt-2 text-lg" : "mt-2 text-gray-200"} text-gray-200 flex-grow`}>
-          {description}
-        </p>
+        <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-[#7C4DFF] to-[#A673E7] ${sizeStyles.dividerClass}`} />
+        <p className={`${sizeStyles.descClass} text-gray-200`}>{description}</p>
       </motion.div>
     </Link>
   );
@@ -99,47 +137,51 @@ export default function ProjectsPage() {
   const otherProjects = projects.filter((p) => p.slug !== "medical-codex");
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-[#070707] px-4 pt-8 text-white">
-      
-      {/* Title */}
-      <motion.h1
-        initial="hidden"
-        animate="visible"
-        variants={projectVariants}
-        custom={0}
-        className="mb-8 text-center text-5xl font-bold"
+    <main className="relative flex min-h-screen flex-col items-center overflow-hidden rounded-[44px] border border-white/[0.04] bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)] px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14">
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
+
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative mb-8 text-center"
       >
-        My Projects
-      </motion.h1>
+        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#B8A6FF]">
+          {pageMeta.eyebrow}
+        </p>
+        <h1 className="text-4xl font-bold sm:text-5xl text-white tracking-tight">
+          {pageMeta.title}
+        </h1>
+      </motion.div>
 
-      {/* Featured Project */}
-      {featuredProject && (
-        <div className="hidden md:block w-full max-w-5xl mb-8">
-          <ProjectCard {...featuredProject} large />
-        </div>
-      )}
-
-      {/* Other Projects */}
-      <div className="grid w-full max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        
-        {/* Featured project as normal card on small screens */}
+      <div className="w-full max-w-6xl">
         {featuredProject && (
-          <div className="block md:hidden">
-            <ProjectCard {...featuredProject} />
-          </div>
-        )}
-
-        {otherProjects.map((project, i) => (
           <motion.div
-            key={project.slug}
+            key={featuredProject.slug}
             variants={projectVariants}
-            custom={i + 1}
+            custom={0}
             initial="hidden"
             animate="visible"
+            className="w-full"
           >
-            <ProjectCard {...project} />
+            <ProjectCard {...featuredProject} size="large" />
           </motion.div>
-        ))}
+        )}
+
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+          {otherProjects.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              variants={projectVariants}
+              custom={i + 1}
+              initial="hidden"
+              animate="visible"
+              className="h-full"
+            >
+              <ProjectCard {...project} size="medium" />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </main>
   );
