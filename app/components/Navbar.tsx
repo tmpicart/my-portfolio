@@ -4,6 +4,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+const links = [
+  { href: "/projects", label: "Projects" },
+  { href: "/experience", label: "Experience" },
+  { href: "/skills", label: "Skills" },
+  { href: "/education", label: "Education" },
+];
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -13,36 +20,41 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full bg-[#40434E] p-4 shadow-lg">
+    <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#40434E] px-4 py-3 shadow-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
-        <Link href="/" className="text-2xl font-bold hover:text-[#A673E7]">
+        <Link href="/" className="text-2xl font-bold text-white transition-colors hover:text-[#A673E7]">
           Home
         </Link>
 
-        {/* Hamburger button - mobile only */}
         <button
-          className="text-2xl md:hidden"
+          aria-label="Toggle navigation menu"
+          className="rounded-lg border border-white/10 bg-[#4b4e58] p-2 text-2xl text-white transition hover:border-[#A673E7]/40 hover:text-[#A673E7] md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <i className={menuOpen ? "fas fa-times" : "fas fa-bars"}></i>
         </button>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex md:space-x-6 md:items-center">
-          <Link href="/projects" className="hover:text-[#A673E7]">Projects</Link>
-          <Link href="/experience" className="hover:text-[#A673E7]">Experience</Link>
-          <Link href="/skills" className="hover:text-[#A673E7]">Skills</Link>
-          <Link href="/education" className="hover:text-[#A673E7]">Education</Link>
+        <div className="hidden items-center space-x-6 md:flex">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className="transition-colors hover:text-[#A673E7]">
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="flex flex-col md:hidden bg-[#40434E] mt-2 space-y-2 px-4 pb-4">
-          <Link href="/projects" className="hover:text-[#A673E7]">Projects</Link>
-          <Link href="/experience" className="hover:text-[#A673E7]">Experience</Link>
-          <Link href="/skills" className="hover:text-[#A673E7]">Skills</Link>
-          <Link href="/education" className="hover:text-[#A673E7]">Education</Link>
+        <div className="mx-auto mt-3 flex max-w-6xl flex-col gap-2 rounded-xl border border-white/10 bg-[#2f3138] p-2 shadow-inner md:hidden">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg border border-white/10 bg-[#4b4e58] px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-[#A673E7]/40 hover:bg-[#5b5f69] hover:text-[#A673E7]"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       )}
     </nav>
