@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import { useEffect } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { projects } from "@/app/lib/projects";
 
 const pageMeta = {
   eyebrow: "About Me",
@@ -18,7 +22,23 @@ const buttonHover = {
   hover: { scale: 1.04, transition: { duration: 0.2 } },
 };
 
+const arrowClass =
+  "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] text-white shadow-lg transition-colors hover:bg-[#A673E7]";
+
 export default function HomePage() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+  });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [emblaApi]);
+
   const infoCards = [
     {
       title: "Experience",
@@ -60,7 +80,7 @@ export default function HomePage() {
           {pageMeta.eyebrow}
         </p>
         <h1 className="text-4xl font-bold sm:text-5xl">Hello, I’m Thayer!</h1>
-         </motion.div>
+      </motion.div>
 
       <motion.section
         initial={{ opacity: 0, y: 40 }}
@@ -75,17 +95,17 @@ export default function HomePage() {
             Software Engineer
           </div>
           <p className="text-lg leading-relaxed text-gray-200 sm:text-xl">
-            I like building things that are useful and fun to use. Most of my experience has been in web development, but I’m always ready to learn new technologies and pick up a different platform. I’m happiest when I’m figuring out how pieces fit together and making sure the result feels clean and easy to use. Outside of work, I’m into game development and D&D, and that probably shows up in the way I think about structure, design, and problem solving.
+            I like building things that are useful and fun to use. My background is mostly web development, but I've branched into mobile and game projects too, and I'm always up for learning whatever platform a problem calls for. I'm happiest when I'm figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I'm into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
             <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              Full-stack
+              Web
             </span>
             <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              User-first design
+              Mobile
             </span>
             <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              Quality driven
+              Game Dev
             </span>
           </div>
         </div>
@@ -119,6 +139,50 @@ export default function HomePage() {
           <p className="mb-6 text-lg leading-relaxed text-gray-200">
             Here are some of the things I've worked on, each highlighting different skills developed along the way. Explore the technologies behind them, browse images showing their design, or visit my GitHub and dive into the code.
           </p>
+
+          <div className="relative mb-6">
+            <button
+              onClick={() => emblaApi?.scrollPrev()}
+              className={`${arrowClass} left-2 h-10 w-10`}
+              aria-label="Previous project"
+            >
+              <HiChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              onClick={() => emblaApi?.scrollNext()}
+              className={`${arrowClass} right-2 h-10 w-10`}
+              aria-label="Next project"
+            >
+              <HiChevronRight className="h-6 w-6" />
+            </button>
+
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {projects.map((project) => (
+                  <Link
+                    key={project.slug}
+                    href={`/projects/${project.slug}`}
+                    className="relative flex-[0_0_100%] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]"
+                  >
+                    <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-md bg-[#1F1E2E] sm:h-56">
+                      <Image
+                        src={project.images[0]}
+                        alt={project.title}
+                        width={1600}
+                        height={900}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                    </div>
+                    <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-white sm:text-base">
+                      {project.title}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <Link href="/projects">
             <motion.button
               variants={buttonHover}

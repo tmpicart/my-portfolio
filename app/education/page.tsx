@@ -107,7 +107,7 @@ export default function EducationPage() {
             Central Connecticut State University
           </motion.h2>
           <motion.p variants={cardVariants} className="mb-1 text-2xl font-bold leading-snug text-white md:text-3xl">
-            B.S. Computer Science, Cum Laude — 2024
+            B.S. Computer Science, Cum Laude — Dec 2024
           </motion.p>
           <motion.p variants={cardVariants} className="mb-6 text-sm text-gray-400 md:text-base">
             GPA: 3.59
