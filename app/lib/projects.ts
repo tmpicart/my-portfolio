@@ -52,7 +52,7 @@ export const projects: Project[] = [
     slug: "medical-codex",
     title: "Medical Codex Translation Tool",
     description:
-      "A tool designed to bridge language barriers in medical aid by translating terms across multiple languages. Originally developed by a team of three, it went on to win the senior project showcase for that semester. The tool leverages an extensive term database and provides AI-powered fallback translations for any missing entries.",
+      "A tool designed to bridge language barriers by translating medical terms across multiple languages. Developed by a team of three, it won the senior project showcase for that semester. The tool leverages an extensive term database and provides AI-powered fallback translations for any missing entries.",
     images: [
       "/images/codex/codex_1.png",
       "/images/codex/codex_2.png",
