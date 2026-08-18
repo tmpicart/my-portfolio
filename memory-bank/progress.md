@@ -1,0 +1,72 @@
+# Progress
+
+**Updated: 2026-08-17** — what works, what's changing, and the roadmap that
+drives it. Each roadmap item = one future task = one commit.
+
+## What Works (stable, deployed)
+
+- All 6 routes functional and responsive: `/`, `/projects`,
+  `/projects/[slug]` (carousel + enlarged-image modal), `/skills`,
+  `/education`, `/experience`
+- Deployed on Vercel from `main`; `refactor/cleanup` is the working branch
+- Project data layer exists (`lib/projects.ts`) and the `[slug]` page uses it
+
+## Task Log
+
+- **2026-08-17 — Kickoff:** established `.clinerules`, `.clineignore`, and
+  this memory bank after a full project scan. No source changes. Roadmap
+  below is the plan of record.
+
+## Roadmap — Refactor (dependency-ordered)
+
+- **R1. Repair lint tooling** — rewrite `eslint.config.mjs` as native flat
+  config (drop FlatCompat + `@eslint/eslintrc`), set `lint` script to
+  `eslint .`, run it, fix surfaced violations. Restores the safety net every
+  later item leans on.
+- **R2. Restructure to standard layout** — adopt `src/` with `app/` for
+  routes only; `components/` and `lib/` as siblings; `@/*` alias → `./src/*`;
+  kebab-case filenames; extract footer from layout (FA icons intact — CDN
+  removal waits for R7). Verify via build.
+- **R3. Consolidate project data** — extend `Project` with `summary`,
+  `thumbnail`, `featured: boolean` (exactly one true; Thayer moves the flag
+  to change the spotlight); hub page imports lib and drops its local copy;
+  restructure `imageInfos` into a typed caption object (title + lines).
+- **R4. Extract remaining content to the data layer** — `lib/experience.ts`,
+  `lib/education.ts`; `lib/skills.ts` with icon-ID strings mapped to
+  react-icons in a component (data stays serializable).
+- **R5. Extract shared components** — `PageShell`, `PageHeader`, `GlassCard`,
+  `TagPill`, `CarouselArrows`; per-page style-string constants die.
+- **R6. Design tokens via Tailwind v4 `@theme`** — palette defined once in
+  `globals.css`; scattered hex literals → semantic classes; delete dead
+  `scrollbar-*` classes.
+- **R7. Unify icons on react-icons** — migrate all remaining Font Awesome
+  usages (all have react-icons equivalents), remove FA CDN `<link>`.
+- **R8. Server/client boundary** — convert the four zero-hook pages to
+  Server Components with motion client islands; split home's carousel into a
+  client component. Prerequisite for F2 metadata.
+- **R9. `[slug]` page + modal quality pass** — server shell + client
+  carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
+  `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
+  (drop `unoptimized`); remove inline styles.
+- **R10. Motion consolidation** — single `lib/motion.ts` variants module;
+  variants at module scope; simplify stagger logic; unify hover-variant
+  naming.
+- **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
+  git history) and unused template SVGs after verifying references;
+  compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`, `John_1.png`);
+  normalize asset filenames.
+- **R12. Naming & consistency audit** — enforce Naming Conventions from
+  `.clinerules` across remaining identifiers; final build + lint + visual
+  check; README refresh (real stack, working commands, live link).
+
+## Roadmap — Features
+
+- **F1. Resume button** — PDF in `public/`, icon link in footer beside the
+  existing contact icons.
+- **F2. SEO implementation** *(after R8)* — per-page `metadata` exports,
+  Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`, `robots.ts`,
+  per-project `generateMetadata` from lib data.
+
+## Status
+
+Next task: **R1**. See `activeContext.md` for the current working snapshot.

@@ -1,0 +1,75 @@
+# Cline Rules — Portfolio Website
+
+Next.js 16 (App Router) + React 19 + TypeScript 5 + Tailwind CSS 4 portfolio
+for Thayer (github.com/tmpicart). Deployed on Vercel from main; pushes to main
+auto-deploy. Work happens on feature/refactor branches; main stays the stable
+line. The repo is public and doubles as a work sample — assume recruiters may
+read anything committed here.
+
+## Commands
+- `npm run dev` — dev server
+- `npm run build` — production build
+- `npm run lint` — ESLint check (script currently broken on Next 16; fix is
+  roadmap R1)
+
+## Code Conventions
+- Server Components by default; `"use client"` only where interactivity demands
+  it (state, effects, framer-motion, embla) — small client islands, not
+  whole-page clients.
+- Styling: Tailwind utility classes only; no inline `style` objects except
+  values utilities genuinely can't express.
+- Animation: framer-motion. Carousels: embla-carousel-react.
+- Icons: react-icons. Do not add new Font Awesome `<i>` usages; remaining
+  ones are scheduled for migration.
+- TypeScript: no `any`. Model data with explicit interfaces (pattern:
+  `Project` in `lib/projects.ts`).
+- Content lives in the `lib/` data layer as typed TS; pages render from it —
+  never hardcode content in components.
+- `next/image` for images, `next/link` for internal navigation. Always.
+
+## Naming Conventions
+- Files: kebab-case (`page-shell.tsx`). Components/exports: PascalCase.
+- Functions/variables: camelCase; booleans read as predicates (`isOpen`).
+- Hooks: `use` prefix. No abbreviations (`pfp` → `profile`); names describe
+  role, not type (`modalCarouselApi`, not `emblaApi2`).
+
+## File Organization
+- Top-to-bottom: `"use client"` → imports (external, then internal) → types →
+  module constants/data → variants → internal components → default export.
+- Constants live at module scope, never inside a component body (avoids
+  per-render reallocation).
+- One component per file once extracted to `components/`; page files export
+  only the page.
+
+## Comments
+- Explain why, not what — names and structure carry the "what."
+- Keep intent comments on non-obvious logic; delete redundant JSX section
+  markers once components are extracted.
+- No commented-out code; no TODOs without a roadmap reference.
+
+## Guardrails
+- Ask before installing, removing, or updating any dependency.
+- Visual identity is settled: dark theme, `#A673E7` accent, glassmorphism.
+  Refactors must be visually neutral — change structure, not appearance.
+- Stay inside a task's stated scope; flag out-of-scope issues instead of
+  fixing them unprompted.
+- Never commit secrets; `.env*` stays ignored.
+- Quality gates before declaring done: `npm run lint` + `npm run build` both
+  clean. (No test framework — static presentation site; revisit if interactive
+  behavior with failure modes is added.)
+
+## Git
+- Commit at task end with a conventional-style message; add files by explicit
+  path only — never `git add -A`.
+- Never push without asking. Never force-push. Never commit directly to main.
+
+## Memory Bank Protocol
+- At task start: read `memory-bank/activeContext.md` and
+  `memory-bank/progress.md`.
+- Before task completion: update both — what changed, what's next.
+
+## Communication
+- Explain the *why* behind non-obvious decisions; Thayer reviews everything
+  like a PR and is learning agentic workflows through this project.
+- Committed files use professional, recruiter-safe language.
+- Don't re-explain context the memory bank already holds — link/update it.
