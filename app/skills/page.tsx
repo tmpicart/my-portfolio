@@ -1,13 +1,13 @@
 "use client";
 
-import { FaJava } from "react-icons/fa";
+import { FaAws, FaJava, FaSlack } from "react-icons/fa";
 import {
   SiPython,
   SiC,
   SiJavascript,
   SiGodotengine,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiNextdotjs,
   SiFastapi,
   SiDjango,
@@ -17,9 +17,7 @@ import {
   SiFirebase,
   SiGit,
   SiGithub,
-  SiSlack,
   SiNotion,
-  SiAmazon,
   SiJira,
 } from "react-icons/si";
 import { motion, Variants } from "framer-motion";
@@ -60,7 +58,7 @@ const skillCategories: SkillCategory[] = [
     title: "Styling & Markup",
     skills: [
       { name: "HTML", icon: <SiHtml5 className="text-orange-500" /> },
-      { name: "CSS", icon: <SiCss3 className="text-blue-400" /> },
+      { name: "CSS", icon: <SiCss className="text-blue-400" /> },
       { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
       { name: "Bootstrap", icon: <SiBootstrap className="text-purple-600" /> },
     ],
@@ -78,7 +76,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: "SQL", icon: <SiMysql className="text-blue-600" /> },
       { name: "Firebase", icon: <SiFirebase className="text-yellow-500" /> },
-      { name: "AWS", icon: <SiAmazon className="text-orange-500" /> },
+      { name: "AWS", icon: <FaAws className="text-orange-500" /> },
     ],
   },
   {
@@ -87,7 +85,7 @@ const skillCategories: SkillCategory[] = [
       { name: "Agile", icon: <SiJira className="text-blue-500" /> },
       { name: "Git", icon: <SiGit className="text-red-500" /> },
       { name: "GitHub", icon: <SiGithub className="text-gray-800 dark:text-white" /> },
-      { name: "Slack", icon: <SiSlack className="text-purple-500" /> },
+      { name: "Slack", icon: <FaSlack className="text-purple-500" /> },
       { name: "Notion", icon: <SiNotion className="text-black dark:text-white" /> },
     ],
   },
