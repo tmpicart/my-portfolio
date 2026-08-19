@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { projects } from "@/app/lib/projects";
+import { projects } from "@/lib/projects";
 
 const pageMeta = {
   eyebrow: "About Me",

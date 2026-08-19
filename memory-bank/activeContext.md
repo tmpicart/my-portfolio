@@ -4,26 +4,27 @@
 
 ## Current State
 
-- **R1 complete** (plus an approved deps-hygiene commit that preceded it), on
-  branch `refactor/cleanup`:
-  - Deps: all in-range bumps landed (`next` 16.3.1, `react` 19.2.8, etc.);
-    all 11 npm audit findings cleared. react-icons 5.7 removed `SiAmazon`/
-    `SiSlack` and renamed `SiCss3` → skills page repaired (`FaAws`, `FaSlack`
-    from `react-icons/fa` — the React package, not the FA CDN; CDN removal is
-    still R7).
-  - Lint: `eslint.config.mjs` is native flat config (no FlatCompat), `lint`
-    script is `eslint .`, `@eslint/eslintrc` removed from direct deps.
-    `npm run lint` and `npm run build` both green.
+- **R2 complete**, on branch `refactor/cleanup` (stacked on R1):
+  - Standard layout adopted: `src/app/` (routes only), `src/components/`,
+    `src/lib/` as siblings; `@/*` alias → `./src/*`; component files
+    kebab-case (`navbar.tsx`, `footer.tsx`).
+  - Footer extracted from layout to `src/components/footer.tsx` — Server
+    Component, markup verbatim, FA icons intact (CDN removal stays R7).
+  - Import convention set in R2: alias (`@/…`) across `src/` top-level
+    boundaries, relative (`./…`) for files that move together (e.g. layout's
+    `./globals.css`).
+  - R2 lesson: a stale `.next/` (old dev-server type validators referencing
+    pre-move paths) fails `next build` type-checking after a restructure —
+    delete `.next/` and rebuild.
 - Three lint suppressions carry roadmap refs: `[slug]` ×2 → R9, Navbar ×1 →
-  R13 (new item). Everything else was fixed in place.
+  R13. Everything else was fixed in place.
 - The site remains visually unchanged; no feature work has landed.
 
 ## What's Next
 
-**Roadmap R2 — restructure to standard layout** (`src/` adoption, route-only
-`app/`, `components/` + `lib/` siblings, `@/*` alias retarget, kebab-case
-filenames, footer extraction). Verify via lint + build — both now work, so
-R2 finally has both quality gates available. See `progress.md` for full order.
+**Roadmap R3 — consolidate project data** (`Project` gains `summary`,
+`thumbnail`, `featured: boolean` — exactly one true; hub page imports lib and
+drops its local copy; `imageInfos` → typed caption object with title + lines).
 
 Starting pattern for every task: read this file + `progress.md` first, work
 the single roadmap item, run the quality gates, update both files, commit by

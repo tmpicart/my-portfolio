@@ -13,6 +13,15 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Task Log
 
+- **2026-08-19 — R2 standard-layout restructure:** `git mv` tree into `src/`
+  (11 files, history preserved) — `src/app/` routes only, `src/components/` +
+  `src/lib/` siblings, `Navbar.tsx` → `navbar.tsx`; `@/*` alias → `./src/*`;
+  footer extracted to `src/components/footer.tsx` (Server Component, markup
+  verbatim, FA icons intact for R7); import convention set: alias across
+  `src/` top-level boundaries, relative for colocated files. Windows note:
+  directory-level `git mv` hit a handle lock; per-file `git mv` worked.
+  Build initially failed on stale `.next/dev` type validators referencing
+  pre-move paths — cleared `.next/`, rebuilt green. Lint + build both green.
 - **2026-08-19 — Deps hygiene (pre-R1, approved):** in-range bumps for all
   packages (`next` 16.1.6 → 16.3.1, `react` 19.2.8, `tailwind` 4.3.3,
   `framer-motion` 12.43, `typescript` 5.9.3, `eslint` 9.39.5); all 11 audit
@@ -28,10 +37,7 @@ drives it. Each roadmap item = one future task = one commit.
 ## Roadmap — Refactor (dependency-ordered)
 
 - **R1. ~~Repair lint tooling~~** ✅ done 2026-08-19 — see Task Log.
-- **R2. Restructure to standard layout** — adopt `src/` with `app/` for
-  routes only; `components/` and `lib/` as siblings; `@/*` alias → `./src/*`;
-  kebab-case filenames; extract footer from layout (FA icons intact — CDN
-  removal waits for R7). Verify via build.
+- **R2. ~~Restructure to standard layout~~** ✅ done 2026-08-19 — see Task Log.
 - **R3. Consolidate project data** — extend `Project` with `summary`,
   `thumbnail`, `featured: boolean` (exactly one true; Thayer moves the flag
   to change the spotlight); hub page imports lib and drops its local copy;
@@ -66,7 +72,7 @@ drives it. Each roadmap item = one future task = one commit.
 - **R13. Navbar menu-close pattern** *(added during R1)* — replace the
   effect-based `setMenuOpen(false)` on pathname change with the React
   render-time state-reset pattern; remove the `set-state-in-effect`
-  suppression in `Navbar.tsx`.
+  suppression in `src/components/navbar.tsx`.
 
 ## Roadmap — Features
 
@@ -78,4 +84,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R2**. See `activeContext.md` for the current working snapshot.
+Next task: **R3**. See `activeContext.md` for the current working snapshot.

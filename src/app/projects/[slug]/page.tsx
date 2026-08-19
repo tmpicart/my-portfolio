@@ -6,7 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useState, useEffect, use, useCallback } from "react";
 import { HiOutlineArrowsExpand, HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { motion, Variants } from "framer-motion";
-import { projects } from "@/app/lib/projects";
+import { projects } from "@/lib/projects";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
