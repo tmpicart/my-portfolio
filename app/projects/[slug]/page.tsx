@@ -37,10 +37,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     return () => { emblaApi.off("select", onSelect); };
   }, [emblaApi]);
 
-  // Keep main carousel in sync with modal
+  // Keep main carousel in sync with modal.
+  // R9 (modal/carousel restructure) replaces this effect-sync design entirely.
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.scrollTo(modalSlide, true);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- R9
     setCurrentSlide(modalSlide);
   }, [modalSlide, emblaApi]);
 
@@ -56,6 +58,8 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   useEffect(() => {
     if (!modalEmblaApi || !isModalOpen) return;
     modalEmblaApi.scrollTo(modalSlide, true);
+    // R9: intentional until the carousel/modal effects are redesigned
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen, modalEmblaApi]);
 
   const scrollModalTo = useCallback(

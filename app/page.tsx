@@ -12,12 +12,6 @@ const pageMeta = {
   eyebrow: "About Me",
 };
 
-const cardStyle = `
-  relative overflow-hidden rounded-[26px] border border-white/[0.12] bg-white/[0.04]
-  p-8 shadow-[0_16px_40px_rgba(0,0,0,0.24)] backdrop-blur-xl
-  transition-all duration-300 ease-out
-`;
-
 const buttonHover = {
   hover: { scale: 1.04, transition: { duration: 0.2 } },
 };
@@ -95,7 +89,7 @@ export default function HomePage() {
             Software Engineer
           </div>
           <p className="text-lg leading-relaxed text-gray-200 sm:text-xl">
-            I like building things that are useful and fun to use. My background is mostly web development, but I've branched into mobile and game projects too, and I'm always up for learning whatever platform a problem calls for. I'm happiest when I'm figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I'm into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.
+            I like building things that are useful and fun to use. My background is mostly web development, but I&#39;ve branched into mobile and game projects too, and I&#39;m always up for learning whatever platform a problem calls for. I&#39;m happiest when I&#39;m figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I&#39;m into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
             <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
@@ -137,7 +131,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-semibold sm:text-4xl text-white">See My Projects!</h2>
           </div>
           <p className="mb-6 text-lg leading-relaxed text-gray-200">
-            Here are some of the things I've worked on, each highlighting different skills developed along the way. Explore the technologies behind them, browse images showing their design, or visit my GitHub and dive into the code.
+            Here are some of the things I&#39;ve worked on, each highlighting different skills developed along the way. Explore the technologies behind them, browse images showing their design, or visit my GitHub and dive into the code.
           </p>
 
           <div className="relative mb-6">

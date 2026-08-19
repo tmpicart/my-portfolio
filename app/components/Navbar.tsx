@@ -16,6 +16,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // R13 (Navbar menu-close pattern): proper fix is a render-time pathname
+    // reset; suppressed until that roadmap item lands
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- R13
     setMenuOpen(false);
   }, [pathname]);
 

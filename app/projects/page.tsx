@@ -66,8 +66,6 @@ const projectVariants: Variants = {
   }),
 };
 
-const imageClasses = "object-cover transition duration-500 ease-out";
-
 const hoverAnimation = {
   scale: 1.04,
   rotate: 0.25,

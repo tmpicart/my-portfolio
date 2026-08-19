@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-17** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-19** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -13,16 +13,21 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Task Log
 
+- **2026-08-19 — Deps hygiene (pre-R1, approved):** in-range bumps for all
+  packages (`next` 16.1.6 → 16.3.1, `react` 19.2.8, `tailwind` 4.3.3,
+  `framer-motion` 12.43, `typescript` 5.9.3, `eslint` 9.39.5); all 11 audit
+  findings cleared; skills-page icons repaired after react-icons 5.7 renamed/
+  removed three `si` icons. No majors.
+- **2026-08-19 — R1 lint repair:** native flat config, `eslint .` script,
+  `@eslint/eslintrc` dropped; 11 surfaced findings resolved (8 fixed in
+  place, 3 suppressed with roadmap refs). Lint + build both green.
 - **2026-08-17 — Kickoff:** established `.clinerules`, `.clineignore`, and
   this memory bank after a full project scan. No source changes. Roadmap
   below is the plan of record.
 
 ## Roadmap — Refactor (dependency-ordered)
 
-- **R1. Repair lint tooling** — rewrite `eslint.config.mjs` as native flat
-  config (drop FlatCompat + `@eslint/eslintrc`), set `lint` script to
-  `eslint .`, run it, fix surfaced violations. Restores the safety net every
-  later item leans on.
+- **R1. ~~Repair lint tooling~~** ✅ done 2026-08-19 — see Task Log.
 - **R2. Restructure to standard layout** — adopt `src/` with `app/` for
   routes only; `components/` and `lib/` as siblings; `@/*` alias → `./src/*`;
   kebab-case filenames; extract footer from layout (FA icons intact — CDN
@@ -58,6 +63,10 @@ drives it. Each roadmap item = one future task = one commit.
 - **R12. Naming & consistency audit** — enforce Naming Conventions from
   `.clinerules` across remaining identifiers; final build + lint + visual
   check; README refresh (real stack, working commands, live link).
+- **R13. Navbar menu-close pattern** *(added during R1)* — replace the
+  effect-based `setMenuOpen(false)` on pathname change with the React
+  render-time state-reset pattern; remove the `set-state-in-effect`
+  suppression in `Navbar.tsx`.
 
 ## Roadmap — Features
 
@@ -69,4 +78,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R1**. See `activeContext.md` for the current working snapshot.
+Next task: **R2**. See `activeContext.md` for the current working snapshot.

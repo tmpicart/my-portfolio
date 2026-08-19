@@ -17,10 +17,10 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 - `npm run dev` — dev server
 - `npm run build` — production build (this is the real quality gate today)
 - `npm run start` — serve the production build locally
-- `npm run lint` — **currently broken**: `next lint` was removed in Next 16
-  and the FlatCompat-based `eslint.config.mjs` crashes under ESLint 9
-  ("circular structure"). Repair is roadmap R1 (native flat config +
-  `eslint .` script). Until then, `npm run build` is the only gate.
+- `npm run lint` — **repaired 2026-08-19 (R1)**: native ESLint 9 flat config
+  (`eslint-config-next/core-web-vitals` + `/typescript`, no FlatCompat) with
+  `eslint .` script. Three known suppressions carry roadmap refs: `[slug]`
+  hooks ×2 → R9, Navbar menu-close → R13.
 
 ## Deployment & Branches
 
