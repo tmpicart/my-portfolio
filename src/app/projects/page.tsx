@@ -4,12 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
-type Project = {
-  title: string;
-  description: string;
-  image: string;
-  slug: string;
-};
+import { projects, type Project } from "@/lib/projects";
 
 type PageMeta = {
   eyebrow: string;
@@ -20,35 +15,6 @@ const pageMeta: PageMeta = {
   eyebrow: "Project Hub",
   title: "Projects",
 };
-
-const projects: Project[] = [
-  {
-    title: "Medical Codex Translation Tool",
-    description:
-      "A web-based tool designed to translate medical terminology from language to language for better accessibility.",
-    image: "/images/codex/codex_1.png",
-    slug: "medical-codex",
-  },
-  {
-    title: "John Dungeon",
-    description:
-      "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
-    image: "/images/john/John_5.png",
-    slug: "john-dungeon",
-  },
-  {
-    title: "TicketMaster Search Mobile",
-    description: "A mobile app built to search for events and tickets via the TicketMaster API.",
-    image: "/images/ticketmaster/TicketMaster_1.png",
-    slug: "ticketmaster-search",
-  },
-  {
-    title: "Portfolio Website",
-    description: "Learn more about the portfolio site you are currently visiting!",
-    image: "/images/icons/code_img.jpg",
-    slug: "portfolio-website",
-  },
-];
 
 const cardStyle = `
   group relative flex flex-col overflow-hidden rounded-[36px] border border-white/[0.12]
@@ -78,7 +44,7 @@ const hoverAnimation = {
 
 type ProjectCardProps = Project & { size?: "small" | "medium" | "large" };
 
-function ProjectCard({ title, description, image, slug, size = "medium" }: ProjectCardProps) {
+function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: ProjectCardProps) {
   const sizeStyles = {
     large: {
       cardPadding: "p-8",
@@ -117,22 +83,22 @@ function ProjectCard({ title, description, image, slug, size = "medium" }: Proje
       >
         <div className={`relative w-full overflow-hidden rounded-md ${sizeStyles.imageHeight}`}>
           <div className="flex items-center justify-center w-full h-full">
-            <Image src={image} alt={title} width={1600} height={900} className="max-h-full max-w-full object-contain" />
+            <Image src={thumbnail} alt={title} width={1600} height={900} className="max-h-full max-w-full object-contain" />
           </div>
         </div>
         <h3 className={`${sizeStyles.titleClass} mt-3 font-bold text-white`}>
           {title}
         </h3>
         <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-[#7C4DFF] to-[#A673E7] ${sizeStyles.dividerClass}`} />
-        <p className={`${sizeStyles.descClass} text-gray-200`}>{description}</p>
+        <p className={`${sizeStyles.descClass} text-gray-200`}>{summary}</p>
       </motion.div>
     </Link>
   );
 }
 
 export default function ProjectsPage() {
-  const featuredProject = projects.find((p) => p.slug === "medical-codex");
-  const otherProjects = projects.filter((p) => p.slug !== "medical-codex");
+  const featuredProject = projects.find((p) => p.featured);
+  const otherProjects = projects.filter((p) => !p.featured);
 
   return (
     <main className="relative flex min-h-screen flex-col items-center overflow-hidden rounded-[44px] border border-white/[0.04] bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)] px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14">

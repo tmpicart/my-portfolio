@@ -1,9 +1,17 @@
+export type ImageCaption = {
+  title: string;
+  lines: string[];
+};
+
 export type Project = {
   slug: string;
   title: string;
+  summary: string;
   description: string;
+  thumbnail: string;
+  featured: boolean;
   images: string[];
-  imageInfos?: string[][];
+  captions: ImageCaption[];
   bullets: {
     languages?: string[];
     frameworks?: string[];
@@ -16,8 +24,11 @@ export const projects: Project[] = [
   {
     slug: "john-dungeon",
     title: "John Dungeon",
+    summary: "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
     description:
       "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally developed over a tight three-week deadline by a team of five, the project earned the highest rating among competing games, with 4.59 stars. I have since taken over development as a solo project to fix bugs, refactor code, enhance gameplay, and expand content.",
+    thumbnail: "/images/john/John_5.png",
+    featured: false,
     images: [
       "/images/john/John_1.png",
       "/images/john/John_2.png",
@@ -26,13 +37,33 @@ export const projects: Project[] = [
       "/images/john/John_5.png",
       "/images/john/John_6.png",
     ],
-    imageInfos: [
-      ["Title Screen", "- Start or exit the game; includes death and restart mechanics"],
-      ["NPC Interaction", "- Players can talk to NPCs with functional dialogue"],
-      ["Shop System & Upgrades", "- Upgrade health and weapons with in-game currency"],
-      ["Varied Enemies", "- Slimes, necromancers, skeletons, archers, and more; AI controlled with state machines"],
-      ["Multi-Phase Boss", "- Sorceress at the dungeon end with varied attacks and a second phase"],
-      ["Phase 2", "- Boss attacks intensify with new patterns"],
+    captions: [
+      {
+        title: "Title Screen",
+        lines: ["- Start or exit the game; includes death and restart mechanics"],
+      },
+      {
+        title: "NPC Interaction",
+        lines: ["- Players can talk to NPCs with functional dialogue"],
+      },
+      {
+        title: "Shop System & Upgrades",
+        lines: ["- Upgrade health and weapons with in-game currency"],
+      },
+      {
+        title: "Varied Enemies",
+        lines: [
+          "- Slimes, necromancers, skeletons, archers, and more; AI controlled with state machines",
+        ],
+      },
+      {
+        title: "Multi-Phase Boss",
+        lines: ["- Sorceress at the dungeon end with varied attacks and a second phase"],
+      },
+      {
+        title: "Phase 2",
+        lines: ["- Boss attacks intensify with new patterns"],
+      },
     ],
     bullets: {
       languages: ["GDScript"],
@@ -51,8 +82,12 @@ export const projects: Project[] = [
   {
     slug: "medical-codex",
     title: "Medical Codex Translation Tool",
+    summary:
+      "A web-based tool designed to translate medical terminology from language to language for better accessibility.",
     description:
       "A tool designed to bridge language barriers by translating medical terms across multiple languages. Developed by a team of three, it won the senior project showcase for that semester. The tool leverages an extensive term database and provides AI-powered fallback translations for any missing entries.",
+    thumbnail: "/images/codex/codex_1.png",
+    featured: true,
     images: [
       "/images/codex/codex_1.png",
       "/images/codex/codex_2.png",
@@ -60,12 +95,27 @@ export const projects: Project[] = [
       "/images/codex/codex_4.png",
       "/images/codex/codex_5.png",
     ],
-    imageInfos: [
-      ["Home Page", "- Select language and enter a term; fuzzy matching ensures accuracy"],
-      ["Translation", "- 'Tylenol' translated to Ukrainian using the backend database"],
-      ["AI Translation", "- Fallback AI translation available if no database entry exists"],
-      ["Mobile Viewing", "- Responsive and mobile-friendly design"],
-      ["Security", "- Inputs are protected from SQL injection and other vulnerabilities"],
+    captions: [
+      {
+        title: "Home Page",
+        lines: ["- Select language and enter a term; fuzzy matching ensures accuracy"],
+      },
+      {
+        title: "Translation",
+        lines: ["- 'Tylenol' translated to Ukrainian using the backend database"],
+      },
+      {
+        title: "AI Translation",
+        lines: ["- Fallback AI translation available if no database entry exists"],
+      },
+      {
+        title: "Mobile Viewing",
+        lines: ["- Responsive and mobile-friendly design"],
+      },
+      {
+        title: "Security",
+        lines: ["- Inputs are protected from SQL injection and other vulnerabilities"],
+      },
     ],
     bullets: {
       languages: ["JavaScript", "TypeScript", "SQL"],
@@ -84,19 +134,34 @@ export const projects: Project[] = [
   {
     slug: "ticketmaster-search",
     title: "TicketMaster Search Mobile",
+    summary: "A mobile app built to search for events and tickets via the TicketMaster API.",
     description:
       "Mobile app to search, view, and save events from TicketMaster via the TicketMaster API, with Firebase authentication and data storage allowing users to log in and save their favorite events.",
+    thumbnail: "/images/ticketmaster/TicketMaster_1.png",
+    featured: false,
     images: [
       "/images/ticketmaster/TicketMaster_1.png",
       "/images/ticketmaster/TicketMaster_2.png",
       "/images/ticketmaster/TicketMaster_3.png",
       "/images/ticketmaster/TicketMaster_4.png",
     ],
-    imageInfos: [
-      ["User Authentication", "- Users sign up or log in via Google accounts"],
-      ["Main Page", "- Search by city and event type; concise event data display"],
-      ["Favoriting Events", "- Save important events for tracking"],
-      ["Favorite List", "- Favorites stored securely; direct ticket purchase links retained"],
+    captions: [
+      {
+        title: "User Authentication",
+        lines: ["- Users sign up or log in via Google accounts"],
+      },
+      {
+        title: "Main Page",
+        lines: ["- Search by city and event type; concise event data display"],
+      },
+      {
+        title: "Favoriting Events",
+        lines: ["- Save important events for tracking"],
+      },
+      {
+        title: "Favorite List",
+        lines: ["- Favorites stored securely; direct ticket purchase links retained"],
+      },
     ],
     bullets: {
       languages: ["Kotlin"],
@@ -115,17 +180,29 @@ export const projects: Project[] = [
   {
     slug: "portfolio-website",
     title: "My Portfolio Website",
+    summary: "Learn more about the portfolio site you are currently visiting!",
     description:
       "This is my portfolio website built to showcase my projects, skills, education, and experience. Feel free to explore! Check out my GitHub, LinkedIn, or shoot me an email with the links at the bottom of every page.",
+    thumbnail: "/images/icons/code_img.jpg",
+    featured: false,
     images: [
       "/images/portfolio/Portfolio_1.png",
       "/images/portfolio/Portfolio_2.png",
       "/images/icons/laptop_img.jpg",
     ],
-    imageInfos: [
-      ["Vercel Deployment", "- Website is deployed and fully functional via Vercel"],
-      ["Mobile Responsive", "- Mobile support and adaptive/scalable design"],
-      ["Thanks for Visiting!", "- Thank you for taking the time to view my page!"],
+    captions: [
+      {
+        title: "Vercel Deployment",
+        lines: ["- Website is deployed and fully functional via Vercel"],
+      },
+      {
+        title: "Mobile Responsive",
+        lines: ["- Mobile support and adaptive/scalable design"],
+      },
+      {
+        title: "Thanks for Visiting!",
+        lines: ["- Thank you for taking the time to view my page!"],
+      },
     ],
     bullets: {
       languages: ["JavaScript", "TypeScript"],
@@ -140,3 +217,11 @@ export const projects: Project[] = [
     github: "https://github.com/tmpicart/my-portfolio",
   },
 ];
+
+// The hub's spotlight card is driven by this flag — enforce the one-true invariant
+// at module load so a bad edit fails the build, not the page.
+if (projects.filter((project) => project.featured).length !== 1) {
+  throw new Error(
+    "lib/projects.ts: exactly one project must be marked featured: true"
+  );
+}

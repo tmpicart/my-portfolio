@@ -160,7 +160,7 @@ export default function HomePage() {
                   >
                     <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-md bg-[#1F1E2E] sm:h-56">
                       <Image
-                        src={project.images[0]}
+                        src={project.thumbnail}
                         alt={project.title}
                         width={1600}
                         height={900}

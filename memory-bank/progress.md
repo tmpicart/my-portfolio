@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-19** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-20** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -13,6 +13,17 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Task Log
 
+- **2026-08-20 — R3 consolidate project data:** `lib/projects.ts` now the
+  single source of truth — `Project` gained `summary`, `thumbnail`,
+  `featured` (module-load assertion pins exactly one true; spotlight is now a
+  flag flip); `imageInfos: string[][]` → required `captions: ImageCaption[]`
+  (`{ title, lines }`, `- ` prefixes kept verbatim, rendering unchanged);
+  hub page dropped its local project array and selects spotlight/cards from
+  lib via the flag (portfolio card title now lib's canonical
+  "My Portfolio Website"); home carousel switched from `images[0]` to
+  `thumbnail` — Thayer-approved exception to visual neutrality, so John
+  Dungeon/Portfolio home slides now match hub cards. `images`/`captions`
+  stay parallel arrays; merge deferred to R9. Lint + build both green.
 - **2026-08-19 — R2 standard-layout restructure:** `git mv` tree into `src/`
   (11 files, history preserved) — `src/app/` routes only, `src/components/` +
   `src/lib/` siblings, `Navbar.tsx` → `navbar.tsx`; `@/*` alias → `./src/*`;
@@ -38,10 +49,7 @@ drives it. Each roadmap item = one future task = one commit.
 
 - **R1. ~~Repair lint tooling~~** ✅ done 2026-08-19 — see Task Log.
 - **R2. ~~Restructure to standard layout~~** ✅ done 2026-08-19 — see Task Log.
-- **R3. Consolidate project data** — extend `Project` with `summary`,
-  `thumbnail`, `featured: boolean` (exactly one true; Thayer moves the flag
-  to change the spotlight); hub page imports lib and drops its local copy;
-  restructure `imageInfos` into a typed caption object (title + lines).
+- **R3. ~~Consolidate project data~~** ✅ done 2026-08-20 — see Task Log.
 - **R4. Extract remaining content to the data layer** — `lib/experience.ts`,
   `lib/education.ts`; `lib/skills.ts` with icon-ID strings mapped to
   react-icons in a component (data stays serializable).
@@ -84,4 +92,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R3**. See `activeContext.md` for the current working snapshot.
+Next task: **R4**. See `activeContext.md` for the current working snapshot.

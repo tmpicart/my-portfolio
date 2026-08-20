@@ -144,15 +144,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                     {/* Hover info */}
                     <div className="absolute inset-0 flex flex-col justify-between p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
-                      {project.imageInfos?.[index] && (
+                      {project.captions[index] && (
                         <div className="max-w-[60%] text-gray-200 space-y-1">
-                          {project.imageInfos[index].map((line, i) =>
-                            i === 0 ? (
-                              <h3 key={i} className="font-bold text-2xl">{line}</h3>
-                            ) : (
-                              <p key={i} className="ml-3 text-xl">{line}</p>
-                            )
-                          )}
+                          <h3 className="font-bold text-2xl">{project.captions[index].title}</h3>
+                          {project.captions[index].lines.map((line) => (
+                            <p key={line} className="ml-3 text-xl">{line}</p>
+                          ))}
                         </div>
                       )}
                       <div className="self-end flex items-center gap-2 rounded-md bg-[#40434E] px-4 py-2 text-base font-semibold text-white shadow-md pointer-events-auto">
@@ -290,15 +287,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 </div>
 
                 {/* Info panel */}
-                {project.imageInfos?.[modalSlide] && (
+                {project.captions[modalSlide] && (
                   <div className="w-full md:w-1/4 md:flex-shrink-0 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2">
-                    {project.imageInfos[modalSlide].map((line, i) =>
-                      i === 0 ? (
-                        <h3 key={i} className="text-2xl font-bold">{line}</h3>
-                      ) : (
-                        <p key={i} className="md:ml-2 text-xl">{line}</p>
-                      )
-                    )}
+                    <h3 className="text-2xl font-bold">{project.captions[modalSlide].title}</h3>
+                    {project.captions[modalSlide].lines.map((line) => (
+                      <p key={line} className="md:ml-2 text-xl">{line}</p>
+                    ))}
                   </div>
                 )}
               </div>
