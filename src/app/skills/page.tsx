@@ -1,37 +1,9 @@
 "use client";
 
-import { FaAws, FaJava, FaSlack } from "react-icons/fa";
-import {
-  SiPython,
-  SiC,
-  SiJavascript,
-  SiGodotengine,
-  SiHtml5,
-  SiCss,
-  SiNextdotjs,
-  SiFastapi,
-  SiDjango,
-  SiTailwindcss,
-  SiBootstrap,
-  SiMysql,
-  SiFirebase,
-  SiGit,
-  SiGithub,
-  SiNotion,
-  SiJira,
-} from "react-icons/si";
 import { motion, Variants } from "framer-motion";
-import { JSX } from "react";
 
-type Skill = {
-  name: string;
-  icon: JSX.Element;
-};
-
-type SkillCategory = {
-  title: string;
-  skills: Skill[];
-};
+import { SkillIcon } from "@/components/skill-icon";
+import { skillCategories } from "@/lib/skills";
 
 type PageMeta = {
   eyebrow: string;
@@ -42,54 +14,6 @@ const pageMeta: PageMeta = {
   eyebrow: "Core Toolkit",
   title: "Skills",
 };
-
-const skillCategories: SkillCategory[] = [
-  {
-    title: "Programming Languages",
-    skills: [
-      { name: "Python", icon: <SiPython className="text-blue-500" /> },
-      { name: "Java", icon: <FaJava className="text-red-600" /> },
-      { name: "C", icon: <SiC className="text-gray-600" /> },
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-      { name: "GDScript", icon: <SiGodotengine className="text-blue-400" /> },
-    ],
-  },
-  {
-    title: "Styling & Markup",
-    skills: [
-      { name: "HTML", icon: <SiHtml5 className="text-orange-500" /> },
-      { name: "CSS", icon: <SiCss className="text-blue-400" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
-      { name: "Bootstrap", icon: <SiBootstrap className="text-purple-600" /> },
-    ],
-  },
-  {
-    title: "Frameworks & Libraries",
-    skills: [
-      { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" /> },
-      { name: "FastAPI", icon: <SiFastapi className="text-green-500" /> },
-      { name: "Django", icon: <SiDjango className="text-green-700" /> },
-    ],
-  },
-  {
-    title: "Databases & Cloud",
-    skills: [
-      { name: "SQL", icon: <SiMysql className="text-blue-600" /> },
-      { name: "Firebase", icon: <SiFirebase className="text-yellow-500" /> },
-      { name: "AWS", icon: <FaAws className="text-orange-500" /> },
-    ],
-  },
-  {
-    title: "Tools & Collaboration",
-    skills: [
-      { name: "Agile", icon: <SiJira className="text-blue-500" /> },
-      { name: "Git", icon: <SiGit className="text-red-500" /> },
-      { name: "GitHub", icon: <SiGithub className="text-gray-800 dark:text-white" /> },
-      { name: "Slack", icon: <FaSlack className="text-purple-500" /> },
-      { name: "Notion", icon: <SiNotion className="text-black dark:text-white" /> },
-    ],
-  },
-];
 
 const rowVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -159,7 +83,9 @@ export default function SkillsPage() {
             <motion.div className="flex flex-wrap justify-center gap-6" variants={rowVariants}>
               {category.skills.map((skill) => (
                 <motion.div key={skill.name} variants={cardVariants} className={skillCardClasses}>
-                  <div className="mb-2 text-5xl">{skill.icon}</div>
+                  <div className="mb-2 text-5xl">
+                    <SkillIcon iconId={skill.iconId} />
+                  </div>
                   <p className="mt-1 text-center text-sm font-medium">{skill.name}</p>
                 </motion.div>
               ))}

@@ -4,35 +4,48 @@
 
 ## Current State
 
-- **R3 complete**, on branch `refactor/cleanup` (stacked on R1/R2):
-  - `lib/projects.ts` is the single source of truth for project data.
-    `Project` gained `summary`, `thumbnail`, and `featured: boolean` — a
-    module-load assertion enforces exactly one true, so moving the spotlight
-    is a flag flip that fails the build if done wrong.
-  - `imageInfos: string[][]` → required `captions: ImageCaption[]`
-    (`{ title, lines }`); the literal `- ` prefixes stay verbatim in the data
-    (rendering unchanged). Detail page reads `.title`/`.lines` directly.
-  - Hub page dropped its local project array; spotlight and cards come from
-    lib via the `featured` flag. Portfolio card title is now lib's canonical
-    "My Portfolio Website" (was "Portfolio Website" locally).
-  - Home carousel rotates `project.thumbnail` — Thayer-approved exception to
-    visual neutrality; John Dungeon and Portfolio slides changed from
-    `images[0]` to `John_5.png` / `code_img.jpg`.
-  - `images`/`captions` remain parallel arrays (index-aligned by convention);
-    merging them is deferred to R9's carousel rework.
-- Three lint suppressions carry roadmap refs: `[slug]` ×2 → R9, Navbar ×1 →
-  R13. Everything else was fixed in place.
-- Lint + build both green after R3.
+- **R4 complete**, on branch `refactor/cleanup` (stacked on R1–R3):
+  - Content data layer is now the pattern, not the exception:
+    `lib/projects.ts`, `lib/experience.ts`, `lib/education.ts`, `lib/skills.ts`.
+  - `lib/experience.ts`: `Experience` type moved from the page; unused optional
+    `link` field dropped (Thayer-approved — no entry used it, page never
+    rendered it). `experiences` array verbatim.
+  - `lib/education.ts`: `Education { school, degree, gpa, courseGroups }`;
+    `CourseGroup { title, iconId, courses }` with `CourseGroupIconId` union
+    (`"laptop-code" | "calculator"`). Degree/GPA no longer hardcoded in JSX
+    (`GPA:` label stays in markup, data holds `"3.59"`); the page's
+    `mathCourses.length > 0` special case is gone — groups render from one
+    `.map()` with `mb-6 last:mb-0` preserving original spacing. In-page
+    `courseGroupIcons: Record<CourseGroupIconId, IconType>` map.
+  - `lib/skills.ts`: `Skill { name, iconId }`, `SkillIconId` union (20 IDs) —
+    a typo'd icon ID now fails the build. Data fully serializable (strings
+    only). `src/components/skill-icon.tsx` holds the
+    `Record<SkillIconId, { icon: IconType; className: string }>` map +
+    `SkillIcon` component; brand colors/classes moved verbatim, so rendered
+    SVGs are identical. Skills page dropped its 20 react-icons imports and
+    the `JSX` type import.
+  - `pageMeta` (eyebrow/title) intentionally stays per-page — matches the R3
+    projects-hub precedent (page chrome, not content).
+- All three pages remain `"use client"` (framer-motion) — server/client split
+  is R8's job.
+- Lint + build both green after R4.
 
 ## What's Next
 
-**Roadmap R4 — extract remaining content to the data layer** (`lib/experience.ts`,
-`lib/education.ts`; `lib/skills.ts` with icon-ID strings mapped to react-icons
-in a component — data stays serializable).
+**Roadmap R5 — extract shared components** — `PageShell`, `PageHeader`,
+`GlassCard`, `TagPill`, `CarouselArrows`; per-page style-string constants die.
 
 Starting pattern for every task: read this file + `progress.md` first, work
 the single roadmap item, run the quality gates, update both files, commit by
 explicit path.
+
+## Known Deferred Items
+
+- Home page content (hero copy, `infoCards`) still hardcoded — deliberately
+  folded into **R8**, which restructures home anyway; note added to R8 in
+  `progress.md`. Also `infoCards` sits inside the component body (convention
+  violation) — same fix, same task.
+- Footer contact links still hardcoded (F1 will touch the footer).
 
 ## Working Agreements in Force
 

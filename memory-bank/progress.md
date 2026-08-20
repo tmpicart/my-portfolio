@@ -13,6 +13,19 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Task Log
 
+- **2026-08-20 — R4 extract remaining content:** `lib/experience.ts`,
+  `lib/education.ts`, `lib/skills.ts` created; skills/education/experience
+  pages now render from lib. `Experience` moved verbatim minus the unused
+  optional `link` field (approved drop). Education became fully data-driven —
+  `Education { school, degree, gpa, courseGroups }`, `CourseGroupIconId`
+  union, degree/GPA out of JSX, `mathCourses.length > 0` special case replaced
+  by one `.map()` over `courseGroups` (`mb-6 last:mb-0` preserves spacing).
+  Skills data is serializable: `SkillIconId` union (20 IDs, typo = build
+  failure) with the icon-ID → react-icons/brand-color map in new
+  `src/components/skill-icon.tsx` (`SkillIcon` component; colors verbatim, so
+  rendered SVGs identical). Skills page shed 20 icon imports + `JSX` import.
+  `pageMeta` stays per-page (R3 hub precedent). Scope decision: home content
+  intentionally NOT extracted — folded into R8. Lint + build both green.
 - **2026-08-20 — R3 consolidate project data:** `lib/projects.ts` now the
   single source of truth — `Project` gained `summary`, `thumbnail`,
   `featured` (module-load assertion pins exactly one true; spotlight is now a
@@ -50,9 +63,8 @@ drives it. Each roadmap item = one future task = one commit.
 - **R1. ~~Repair lint tooling~~** ✅ done 2026-08-19 — see Task Log.
 - **R2. ~~Restructure to standard layout~~** ✅ done 2026-08-19 — see Task Log.
 - **R3. ~~Consolidate project data~~** ✅ done 2026-08-20 — see Task Log.
-- **R4. Extract remaining content to the data layer** — `lib/experience.ts`,
-  `lib/education.ts`; `lib/skills.ts` with icon-ID strings mapped to
-  react-icons in a component (data stays serializable).
+- **R4. ~~Extract remaining content to the data layer~~** ✅ done 2026-08-20
+  — see Task Log.
 - **R5. Extract shared components** — `PageShell`, `PageHeader`, `GlassCard`,
   `TagPill`, `CarouselArrows`; per-page style-string constants die.
 - **R6. Design tokens via Tailwind v4 `@theme`** — palette defined once in
@@ -62,7 +74,10 @@ drives it. Each roadmap item = one future task = one commit.
   usages (all have react-icons equivalents), remove FA CDN `<link>`.
 - **R8. Server/client boundary** — convert the four zero-hook pages to
   Server Components with motion client islands; split home's carousel into a
-  client component. Prerequisite for F2 metadata.
+  client component. Prerequisite for F2 metadata. *(R4 note: also extract
+  home's remaining hardcoded content — hero copy, `infoCards` — to the data
+  layer here, and hoist `infoCards` to module scope; deliberately skipped in
+  R4 since home gets restructured in this task and its FA icons wait on R7.)*
 - **R9. `[slug]` page + modal quality pass** — server shell + client
   carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
   `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
@@ -92,4 +107,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R4**. See `activeContext.md` for the current working snapshot.
+Next task: **R5**. See `activeContext.md` for the current working snapshot.

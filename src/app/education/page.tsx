@@ -1,7 +1,10 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FaLaptopCode, FaCalculator } from "react-icons/fa";
+import type { IconType } from "react-icons";
+import { FaCalculator, FaLaptopCode } from "react-icons/fa";
+
+import { education, type CourseGroupIconId } from "@/lib/education";
 
 type PageMeta = {
   eyebrow: string;
@@ -13,28 +16,10 @@ const pageMeta: PageMeta = {
   title: "Education",
 };
 
-const csCourses = [
-  "Software Engineering",
-  "Web Programming",
-  "Mobile App Development",
-  "Computer Game Development",
-  "Systems Programming",
-  "Data and File Structures",
-  "Computer Science I & II",
-  "Computer Architecture",
-  "Digital Systems Design",
-  "Computer Security",
-  "Principles of Software Testing & QA",
-  "Programming Languages",
-  "Algorithms",
-  "Intro to Computer Forensics",
-  "Cloud Computing Technology & Services",
-];
-
-const mathCourses = [
-  "Discrete Mathematics for Computer Science",
-  "Linear Algebra & Probability for Engineers",
-];
+const courseGroupIcons: Record<CourseGroupIconId, IconType> = {
+  "laptop-code": FaLaptopCode,
+  calculator: FaCalculator,
+};
 
 const glassCardClasses = `
   rounded-[32px] border border-white/15 bg-white/10
@@ -104,31 +89,27 @@ export default function EducationPage() {
 
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="mb-6">
           <motion.h2 variants={cardVariants} className="mb-1 text-lg font-medium text-gray-400 md:text-xl">
-            Central Connecticut State University
+            {education.school}
           </motion.h2>
           <motion.p variants={cardVariants} className="mb-1 text-2xl font-bold leading-snug text-white md:text-3xl">
-            B.S. Computer Science, Cum Laude — Dec 2024
+            {education.degree}
           </motion.p>
           <motion.p variants={cardVariants} className="mb-6 text-sm text-gray-400 md:text-base">
-            GPA: 3.59
+            GPA: {education.gpa}
           </motion.p>
         </motion.div>
 
-        <motion.div variants={cardVariants} className="mb-6">
-          <h3 className="mb-2 flex items-center gap-2 text-xl font-semibold text-[#A673E7]">
-            <FaLaptopCode className="h-5 w-5 text-[#A673E7]" /> Computer Science & Development
-          </h3>
-          <CourseList courses={csCourses} />
-        </motion.div>
-
-        {mathCourses.length > 0 && (
-          <motion.div variants={cardVariants}>
-            <h3 className="mb-2 flex items-center gap-2 text-xl font-semibold text-[#A673E7]">
-              <FaCalculator className="h-5 w-5 text-[#A673E7]" /> Mathematics
-            </h3>
-            <CourseList courses={mathCourses} />
-          </motion.div>
-        )}
+        {education.courseGroups.map((group) => {
+          const GroupIcon = courseGroupIcons[group.iconId];
+          return (
+            <motion.div key={group.title} variants={cardVariants} className="mb-6 last:mb-0">
+              <h3 className="mb-2 flex items-center gap-2 text-xl font-semibold text-[#A673E7]">
+                <GroupIcon className="h-5 w-5 text-[#A673E7]" /> {group.title}
+              </h3>
+              <CourseList courses={group.courses} />
+            </motion.div>
+          );
+        })}
       </motion.div>
     </main>
   );
