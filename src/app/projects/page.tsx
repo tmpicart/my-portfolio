@@ -1,26 +1,13 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
+import GlassCard from "@/components/glass-card";
+import PageHeader from "@/components/page-header";
+import PageShell from "@/components/page-shell";
 import { projects, type Project } from "@/lib/projects";
-
-type PageMeta = {
-  eyebrow: string;
-  title: string;
-};
-
-const pageMeta: PageMeta = {
-  eyebrow: "Project Hub",
-  title: "Projects",
-};
-
-const cardStyle = `
-  group relative flex flex-col overflow-hidden rounded-[36px] border border-white/[0.12]
-  bg-white/[0.08] p-6 backdrop-blur-2xl
-  ring-1 ring-white/[0.05] transition-all duration-300 ease-out
-`;
 
 const projectVariants: Variants = {
   hidden: { opacity: 0, y: 18, scale: 0.99 },
@@ -73,9 +60,10 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
   }[size];
   return (
     <Link href={`/projects/${slug}`} className="block h-full">
-      <motion.div
+      <GlassCard
+        variant="spotlight"
         style={{ zIndex: 0 }}
-        className={`${cardStyle} ${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
+        className={`${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
         variants={projectVariants}
         initial="hidden"
         animate="visible"
@@ -91,7 +79,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
         </h3>
         <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-[#7C4DFF] to-[#A673E7] ${sizeStyles.dividerClass}`} />
         <p className={`${sizeStyles.descClass} text-gray-200`}>{summary}</p>
-      </motion.div>
+      </GlassCard>
     </Link>
   );
 }
@@ -101,22 +89,8 @@ export default function ProjectsPage() {
   const otherProjects = projects.filter((p) => !p.featured);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center overflow-hidden rounded-[44px] border border-white/[0.04] bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)] px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14">
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
-
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative mb-8 text-center"
-      >
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#B8A6FF]">
-          {pageMeta.eyebrow}
-        </p>
-        <h1 className="text-4xl font-bold sm:text-5xl text-white tracking-tight">
-          {pageMeta.title}
-        </h1>
-      </motion.div>
+    <PageShell>
+      <PageHeader eyebrow="Project Hub" title="Projects" />
 
       <div className="w-full max-w-6xl">
         {featuredProject && (
@@ -147,6 +121,6 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 }

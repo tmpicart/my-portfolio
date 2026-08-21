@@ -5,19 +5,17 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { projects } from "@/lib/projects";
 
-const pageMeta = {
-  eyebrow: "About Me",
-};
+import CarouselArrows from "@/components/carousel-arrows";
+import GlassCard from "@/components/glass-card";
+import PageHeader from "@/components/page-header";
+import PageShell from "@/components/page-shell";
+import TagPill from "@/components/tag-pill";
+import { projects } from "@/lib/projects";
 
 const buttonHover = {
   hover: { scale: 1.04, transition: { duration: 0.2 } },
 };
-
-const arrowClass =
-  "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] text-white shadow-lg transition-colors hover:bg-[#A673E7]";
 
 export default function HomePage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -61,46 +59,28 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center overflow-hidden rounded-[44px] border border-white/[0.04] bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)] px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14">
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
+    <PageShell>
+      <PageHeader eyebrow="About Me" title="Hello, I’m Thayer!" />
 
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative mb-8 text-center"
-      >
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#D7BFFF]">
-          {pageMeta.eyebrow}
-        </p>
-        <h1 className="text-4xl font-bold sm:text-5xl">Hello, I’m Thayer!</h1>
-      </motion.div>
-
-      <motion.section
+      <GlassCard
+        variant="hero"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="relative mb-7 flex w-full max-w-6xl flex-col items-center gap-8 overflow-hidden rounded-[44px] border border-white/[0.12] bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.05))] p-8 text-white backdrop-blur-xl sm:p-10 lg:flex-row lg:gap-12 lg:p-12"
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(166,115,231,0.14),_transparent_45%)]" />
 
         <div className="relative flex-1 text-center lg:text-left">
-          <div className="mb-4 inline-flex items-center rounded-full border border-[#A673E7]/40 bg-[#A673E7]/12 px-3 py-1 text-sm font-medium tracking-[0.2em] text-[#E7D4FF] uppercase">
-            Software Engineer
+          <div className="mb-4">
+            <TagPill variant="badge">Software Engineer</TagPill>
           </div>
           <p className="text-lg leading-relaxed text-gray-200 sm:text-xl">
             I like building things that are useful and fun to use. My background is mostly web development, but I&#39;ve branched into mobile and game projects too, and I&#39;m always up for learning whatever platform a problem calls for. I&#39;m happiest when I&#39;m figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I&#39;m into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              Web
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              Mobile
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm text-gray-200">
-              Game Dev
-            </span>
+            <TagPill variant="muted">Web</TagPill>
+            <TagPill variant="muted">Mobile</TagPill>
+            <TagPill variant="muted">Game Dev</TagPill>
           </div>
         </div>
 
@@ -115,14 +95,15 @@ export default function HomePage() {
             />
           </div>
         </div>
-      </motion.section>
+      </GlassCard>
 
       <div className="relative flex w-full max-w-6xl flex-col gap-8 lg:flex-row">
-        <motion.section
+        <GlassCard
+          variant="section"
+          className="flex-1"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="relative flex flex-1 flex-col rounded-[40px] border border-white/[0.08] bg-white/[0.04] p-12 backdrop-blur-xl"
         >
           <div className="mb-4 flex items-center">
             <div className="mr-3 rounded-full bg-[#A673E7]/15 p-3">
@@ -135,20 +116,13 @@ export default function HomePage() {
           </p>
 
           <div className="relative mb-6">
-            <button
-              onClick={() => emblaApi?.scrollPrev()}
-              className={`${arrowClass} left-2 h-10 w-10`}
-              aria-label="Previous project"
-            >
-              <HiChevronLeft className="h-6 w-6" />
-            </button>
-            <button
-              onClick={() => emblaApi?.scrollNext()}
-              className={`${arrowClass} right-2 h-10 w-10`}
-              aria-label="Next project"
-            >
-              <HiChevronRight className="h-6 w-6" />
-            </button>
+            <CarouselArrows
+              size="small"
+              onPrevious={() => emblaApi?.scrollPrev()}
+              onNext={() => emblaApi?.scrollNext()}
+              previousLabel="Previous project"
+              nextLabel="Next project"
+            />
 
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex">
@@ -186,12 +160,13 @@ export default function HomePage() {
               See My Projects
             </motion.button>
           </Link>
-        </motion.section>
+        </GlassCard>
 
         <div className="flex flex-1 flex-col gap-5">
           {infoCards.map((card, index) => (
-            <motion.section
+            <GlassCard
               key={card.title}
+              variant="section"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -199,7 +174,6 @@ export default function HomePage() {
                 ease: "easeOut",
                 delay: 0.5 + index * 0.15,
               }}
-              className="flex flex-col rounded-[40px] border border-white/[0.08] bg-white/[0.04] p-12 backdrop-blur-xl"
             >
               <div className="mb-2 flex items-center">
                 <div className="mr-3 rounded-full bg-[#A673E7]/20 p-2">
@@ -217,10 +191,10 @@ export default function HomePage() {
                   {card.button}
                 </motion.button>
               </Link>
-            </motion.section>
+            </GlassCard>
           ))}
         </div>
       </div>
-    </main>
+    </PageShell>
   );
 }

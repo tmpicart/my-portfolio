@@ -48,5 +48,13 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   pending R7 removal.
 - `scrollbar-thin`/`scrollbar-thumb-*` classes on education page require a
   plugin that was never installed — silently dead CSS (removed in R6).
+- Windows/VS Code quirk (hit repeatedly in R5): write_to_file calls were
+  reverted by stale editor buffers, and truncated paths spawned ghost files
+  (`page.ts`, extension-less artifacts). Recovery: PowerShell
+  `[System.IO.File]::WriteAllText` + artifact cleanup + `git status` check.
+- framer-motion quirk (found R5): `HTMLMotionProps<"div">` widens `children`
+  to `MotionValue | ReactNode`, which `motion.div` rejects as JSX children —
+  re-pin `children?: ReactNode` via `Omit` when spreading motion props (see
+  `glass-card.tsx`).
 - No test framework — deliberate for a static presentation site; revisit if
   interactive behavior with failure modes is ever added.

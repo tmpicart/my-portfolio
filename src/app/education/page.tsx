@@ -4,27 +4,15 @@ import { motion, Variants } from "framer-motion";
 import type { IconType } from "react-icons";
 import { FaCalculator, FaLaptopCode } from "react-icons/fa";
 
+import GlassCard from "@/components/glass-card";
+import PageHeader from "@/components/page-header";
+import PageShell from "@/components/page-shell";
 import { education, type CourseGroupIconId } from "@/lib/education";
-
-type PageMeta = {
-  eyebrow: string;
-  title: string;
-};
-
-const pageMeta: PageMeta = {
-  eyebrow: "Academic Foundation",
-  title: "Education",
-};
 
 const courseGroupIcons: Record<CourseGroupIconId, IconType> = {
   "laptop-code": FaLaptopCode,
   calculator: FaCalculator,
 };
-
-const glassCardClasses = `
-  rounded-[32px] border border-white/15 bg-white/10
-  p-8 backdrop-blur-xl
-`;
 
 const containerVariants: Variants = {
   hidden: {},
@@ -69,24 +57,17 @@ function CourseList({ courses }: { courses: string[] }) {
 
 export default function EducationPage() {
   return (
-  <main className="relative flex min-h-screen w-full flex-col items-center overflow-hidden rounded-[44px] border border-white/[0.04] bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)] px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14">
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
+    <PageShell className="w-full">
+      <PageHeader eyebrow="Academic Foundation" title="Education" />
 
-      <motion.div
-        initial={{ opacity: 0, y: -25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.25, 0.8, 0.25, 1] }}
-        className="relative mb-10 text-center"
+      <GlassCard
+        variant="panel"
+        accentLine
+        className="w-full max-w-6xl"
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
       >
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#D7BFFF]">
-          {pageMeta.eyebrow}
-        </p>
-        <h1 className="text-4xl font-bold sm:text-5xl">{pageMeta.title}</h1>
-        </motion.div>
-
-      <motion.div className={`${glassCardClasses} relative w-full max-w-6xl`} variants={cardVariants} initial="hidden" animate="visible">
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#A673E7]/70 to-transparent" />
-
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="mb-6">
           <motion.h2 variants={cardVariants} className="mb-1 text-lg font-medium text-gray-400 md:text-xl">
             {education.school}
@@ -110,7 +91,7 @@ export default function EducationPage() {
             </motion.div>
           );
         })}
-      </motion.div>
-    </main>
+      </GlassCard>
+    </PageShell>
   );
 }

@@ -4,8 +4,9 @@ import { notFound, useRouter } from "next/navigation";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState, useEffect, use, useCallback } from "react";
-import { HiOutlineArrowsExpand, HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { HiOutlineArrowsExpand } from "react-icons/hi";
 import { motion, Variants } from "framer-motion";
+import CarouselArrows from "@/components/carousel-arrows";
 import { projects } from "@/lib/projects";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -77,8 +78,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     visible: { opacity: 1, y: 0, transition: { duration: 0.36, ease: "easeOut" } },
   };
 
-  const arrowClass = "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-[#40434E] text-white shadow-lg transition-colors hover:bg-[#A673E7]";
-
   return (
     <div className="flex min-h-screen w-full flex-col bg-[#070707] text-white">
       <motion.main
@@ -113,12 +112,13 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             className="relative mb-10 w-full rounded-2xl bg-[#1F1E2E] px-6 py-6 shadow-lg"
             variants={cardVariants}
           >
-            <button onClick={() => emblaApi?.scrollPrev()} className={`${arrowClass} left-4 p-4`} aria-label="Previous slide">
-              <HiChevronLeft className="h-7 w-7" />
-            </button>
-            <button onClick={() => emblaApi?.scrollNext()} className={`${arrowClass} right-4 p-4`} aria-label="Next slide">
-              <HiChevronRight className="h-7 w-7" />
-            </button>
+            <CarouselArrows
+              size="large"
+              onPrevious={() => emblaApi?.scrollPrev()}
+              onNext={() => emblaApi?.scrollNext()}
+              previousLabel="Previous slide"
+              nextLabel="Next slide"
+            />
 
             <div className="overflow-hidden" ref={emblaRef} style={{ maxHeight: 480 }}>
               <div className="flex select-none">
@@ -243,12 +243,13 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 {/* Modal carousel */}
                 <div className="relative flex-grow flex flex-col min-w-0">
 
-                  <button onClick={() => modalEmblaApi?.scrollPrev()} className={`${arrowClass} left-3 p-3`} aria-label="Previous image">
-                    <HiChevronLeft className="h-6 w-6" />
-                  </button>
-                  <button onClick={() => modalEmblaApi?.scrollNext()} className={`${arrowClass} right-3 p-3`} aria-label="Next image">
-                    <HiChevronRight className="h-6 w-6" />
-                  </button>
+                  <CarouselArrows
+                    size="medium"
+                    onPrevious={() => modalEmblaApi?.scrollPrev()}
+                    onNext={() => modalEmblaApi?.scrollNext()}
+                    previousLabel="Previous image"
+                    nextLabel="Next image"
+                  />
 
                   <div className="overflow-hidden flex-1" ref={modalEmblaRef}>
                     <div className="flex h-full">

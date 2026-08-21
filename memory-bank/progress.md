@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-21** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-21 (post-R5)** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -11,9 +11,30 @@ drives it. Each roadmap item = one future task = one commit.
 - Deployed on Vercel from `main`; `refactor/cleanup` is the working branch
 - Content data layer complete (`lib/`: projects, experience, education,
   skills) — all content pages render from it (R3/R4)
+- Shared UI component layer complete (`components/`: PageShell, PageHeader,
+  GlassCard, TagPill, CarouselArrows + existing navbar/footer/skill-icon) —
+  all pages compose from it (R5)
 
 ## Task Log
 
+- **2026-08-21 — R5 extract shared components:** five components created —
+  `PageShell` (shell gradient + sheen overlay; motion-label passthrough for
+  stagger propagation; optional `className`), `PageHeader` (canonical
+  eyebrow/title), `GlassCard` (variant map: panel/timeline/spotlight/hero/
+  section/tile, optional `accentLine`, `HTMLMotionProps<"div">` passthrough
+  with `children` re-pinned to ReactNode for framer-motion typing),
+  `TagPill` (tag/accent/muted/badge), `CarouselArrows` (small/medium/large
+  presets). All five shell pages rebuilt on the pair; home/experience/
+  education/skills adopted GlassCard+TagPill; `[slug]` swapped both arrow
+  pairs to CarouselArrows (page layout untouched — R9 owns it). Killed debt
+  #4, #5 (pageMeta), #11 (cardStyle family). Thayer-approved visual deltas:
+  header canonicalized (one style replacing five drifting ones), skills
+  category cards gained `relative` (accent bars had anchored to the page
+  shell, not the card — bug fix), `<section>` → `<div>` where sections had
+  no accessible name. Tooling note: VS Code dirty-buffer reverts corrupted
+  several write_to_file calls (ghost artifacts `page.ts`, extension-less
+  files); recovered via PowerShell WriteAllText + artifact cleanup.
+  Lint + build both green.
 - **2026-08-21 — Memory bank audit + protocol hardening:** verified all six
   bank files against ground truth (git history/branch, file tree,
   `package.json`, tsconfig alias, source searches for suppressions/FA
@@ -53,7 +74,7 @@ drives it. Each roadmap item = one future task = one commit.
   stay parallel arrays; merge deferred to R9. Lint + build both green.
 - **2026-08-19 — R2 standard-layout restructure:** `git mv` tree into `src/`
   (11 files, history preserved) — `src/app/` routes only, `src/components/` +
-  `src/lib/` siblings, `Navbar.tsx` → `navbar.tsx`; `@/*` alias → `./src/*`;
+  `src/lib` siblings, `Navbar.tsx` → `navbar.tsx`; `@/*` alias → `./src/*`;
   footer extracted to `src/components/footer.tsx` (Server Component, markup
   verbatim, FA icons intact for R7); import convention set: alias across
   `src/` top-level boundaries, relative for colocated files. Windows note:
@@ -79,8 +100,7 @@ drives it. Each roadmap item = one future task = one commit.
 - **R3. ~~Consolidate project data~~** ✅ done 2026-08-20 — see Task Log.
 - **R4. ~~Extract remaining content to the data layer~~** ✅ done 2026-08-20
   — see Task Log.
-- **R5. Extract shared components** — `PageShell`, `PageHeader`, `GlassCard`,
-  `TagPill`, `CarouselArrows`; per-page style-string constants die.
+- **R5. ~~Extract shared components~~** ✅ done 2026-08-21 — see Task Log.
 - **R6. Design tokens via Tailwind v4 `@theme`** — palette defined once in
   `globals.css`; scattered hex literals → semantic classes; delete dead
   `scrollbar-*` classes.
@@ -95,7 +115,13 @@ drives it. Each roadmap item = one future task = one commit.
 - **R9. `[slug]` page + modal quality pass** — server shell + client
   carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
   `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
-  (drop `unoptimized`); remove inline styles.
+  (drop `unoptimized`); remove inline styles. *(R5 note: the three
+  carousels — home, `[slug]` main, `[slug]` modal — were deliberately NOT
+  unified in R5: they differ in autoplay, slide shape, dots, and
+  cross-carousel sync, and the effect-sync between main/modal is exactly
+  what this task replaces. After the redesign, evaluate whether what remains
+  is similar enough to extract into one shared `Carousel` component,
+  composing with R5's `CarouselArrows`.)*
 - **R10. Motion consolidation** — single `lib/motion.ts` variants module;
   variants at module scope; simplify stagger logic; unify hover-variant
   naming.
@@ -121,4 +147,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R5**. See `activeContext.md` for the current working snapshot.
+Next task: **R6**. See `activeContext.md` for the current working snapshot.
