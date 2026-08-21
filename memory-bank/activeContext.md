@@ -1,6 +1,6 @@
 # Active Context
 
-**Snapshot: 2026-08-20** — updated every task per the Memory Bank Protocol.
+**Snapshot: 2026-08-21** — updated every task per the Memory Bank Protocol.
 
 ## Current State
 
@@ -34,6 +34,17 @@
 
 **Roadmap R5 — extract shared components** — `PageShell`, `PageHeader`,
 `GlassCard`, `TagPill`, `CarouselArrows`; per-page style-string constants die.
+
+**2026-08-21 audit note:** verified all six bank files against the repo
+(git history, tree, manifest, source searches). All claims held except
+drift in the stable files — `systemPatterns.md` (route map pre-R2, debt
+register missing R3/R4 kills) and `techContext.md` ("no `src/` yet") —
+both rewritten to current state. `.clinerules` itself had drifted (lint
+"currently broken" though R1 fixed it) and its Memory Bank Protocol was
+expanded per Thayer's request: the bank is the primary context source over
+re-reading files, and `systemPatterns.md`/`techContext.md` must be updated
+whenever structure changes or a roadmap item lands. New debt-register
+entries #12 (home content → R8) and #13 (footer links → F1) recorded.
 
 Starting pattern for every task: read this file + `progress.md` first, work
 the single roadmap item, run the quality gates, update both files, commit by

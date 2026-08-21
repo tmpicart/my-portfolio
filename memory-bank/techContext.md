@@ -4,8 +4,9 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 
 ## Stack
 
-- **Next.js 16** (App Router, no `src/` yet — restructure is roadmap R2)
-- **React 19**, **TypeScript 5** (strict, `@/*` root alias)
+- **Next.js 16** (App Router, `src/` standard layout — landed R2:
+  `src/app` routes with `src/components` + `src/lib` siblings)
+- **React 19**, **TypeScript 5** (strict, `@/*` alias → `./src/*`)
 - **Tailwind CSS 4** via `@tailwindcss/postcss` (v4 style: CSS-first config,
   `@theme` tokens arrive in R6)
 - **framer-motion** (animation), **embla-carousel-react** (carousels),
@@ -41,7 +42,7 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   dependency questions — treat npm as the driver, the lockfile as the
   database it queries).
 
-## Known Quirks (pre-refactor)
+## Known Quirks (remaining)
 
 - Font Awesome 5.15.3 loaded via CDN `<link>` in layout — render-blocking,
   pending R7 removal.

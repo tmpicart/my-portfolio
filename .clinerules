@@ -9,8 +9,7 @@ read anything committed here.
 ## Commands
 - `npm run dev` — dev server
 - `npm run build` — production build
-- `npm run lint` — ESLint check (script currently broken on Next 16; fix is
-  roadmap R1)
+- `npm run lint` — ESLint check (flat config, working — repaired in R1)
 
 ## Code Conventions
 - Server Components by default; `"use client"` only where interactivity demands
@@ -66,7 +65,14 @@ read anything committed here.
 ## Memory Bank Protocol
 - At task start: read `memory-bank/activeContext.md` and
   `memory-bank/progress.md`.
-- Before task completion: update both — what changed, what's next.
+- The bank is the primary context source — consult it before re-reading
+  source files. Read code to do the task at hand, not to rebuild context the
+  bank already holds. If bank and code disagree, the code is ground truth:
+  fix the bank and note the drift.
+- Before task completion: update both — what changed, what's next. Also
+  update `systemPatterns.md` (route map, debt register) and `techContext.md`
+  (stack, quirks) whenever project structure changes or a roadmap item
+  lands — the bank tracks the refactor as it happens, not after.
 
 ## Communication
 - Explain the *why* behind non-obvious decisions; Thayer reviews everything

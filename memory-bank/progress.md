@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-20** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-21** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -9,10 +9,24 @@ drives it. Each roadmap item = one future task = one commit.
   `/projects/[slug]` (carousel + enlarged-image modal), `/skills`,
   `/education`, `/experience`
 - Deployed on Vercel from `main`; `refactor/cleanup` is the working branch
-- Project data layer exists (`lib/projects.ts`) and the `[slug]` page uses it
+- Content data layer complete (`lib/`: projects, experience, education,
+  skills) — all content pages render from it (R3/R4)
 
 ## Task Log
 
+- **2026-08-21 — Memory bank audit + protocol hardening:** verified all six
+  bank files against ground truth (git history/branch, file tree,
+  `package.json`, tsconfig alias, source searches for suppressions/FA
+  CDN/dead classes). Findings: `activeContext`/`progress`/`projectbrief`/
+  `productContext` accurate; stable files had drifted — `systemPatterns.md`
+  route map still showed the pre-R2 layout and the debt register lacked
+  R3/R4 kills (rewritten to current state, entries #12/#13 added);
+  `techContext.md` still said "no `src/` yet" (fixed); `.clinerules` still
+  called lint broken post-R1 (fixed) and its Memory Bank Protocol was
+  expanded per Thayer: bank is primary context over re-reading source
+  files, code is ground truth on disagreement, and `systemPatterns.md` +
+  `techContext.md` update whenever structure changes or a roadmap item
+  lands. No source changes; lint + build green.
 - **2026-08-20 — R4 extract remaining content:** `lib/experience.ts`,
   `lib/education.ts`, `lib/skills.ts` created; skills/education/experience
   pages now render from lib. `Experience` moved verbatim minus the unused
