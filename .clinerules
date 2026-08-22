@@ -53,6 +53,10 @@ read anything committed here.
 - Stay inside a task's stated scope; flag out-of-scope issues instead of
   fixing them unprompted.
 - Never commit secrets; `.env*` stays ignored.
+- File writes go through the harness only (`write_to_file` /
+  `replace_in_file`) — never via shell/PowerShell, to avoid token burn.
+  Verify every edit batch with `git --no-pager diff`; success echoes alone
+  are not proof.
 - Quality gates before declaring done: `npm run lint` + `npm run build` both
   clean. (No test framework — static presentation site; revisit if interactive
   behavior with failure modes is added.)

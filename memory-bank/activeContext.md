@@ -20,11 +20,6 @@
     (`menu`/`menu-hover`/`menu-tray`); `skill-icon.tsx` brand colors stay
     stock palette classes. Visually neutral by construction — every token
     maps the identical hex.
-- Session tooling notes (see techContext quirks): `replace_in_file` reported
-  success 4× without persisting (before and after a Cline update); recovered
-  by switching to full-file `write_to_file` + `git --no-pager diff` checks.
-  Separately, one tool-result message arrived heavily corrupted (garbled/
-  injected text); disk state verified untouched via git before proceeding.
 - Lint + build both green after R6.
 
 ## What's Next
