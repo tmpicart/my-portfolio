@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-21 (post-R6)** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-21 (post-R7)** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -16,9 +16,28 @@ drives it. Each roadmap item = one future task = one commit.
   all pages compose from it (R5)
 - Design token layer complete — `@theme` palette in `globals.css`, semantic
   color utilities across every component/page (R6)
+- Single icon system — react-icons everywhere, FA CDN gone (R7)
 
 ## Task Log
 
+- **2026-08-21 — R7 unify icons:** all 9 remaining Font Awesome `<i>` usages
+  became react-icons components — navbar toggle (`FaTimes`/`FaBars`), footer
+  contacts (`FaLinkedin`/`SiGithub`/`FaEnvelope`; GitHub deliberately uses
+  `SiGithub` so both GitHub icons in the site are the same glyph, Thayer's
+  call), home hero `FaLaptopCode`, and `infoCards` (`fa-*` string classes →
+  `FaBriefcase`/`FaTools`/`FaGraduationCap` component refs, rendered as
+  `<card.icon className>`). FA 5.15.3 CDN `<link>` + now-empty `<head>`
+  removed from layout — render-blocking CSS + webfont requests gone; icons
+  are build-time SVG components. Equivalence verified up front against the
+  installed react-icons (all 20 skill icons + all 9 targets resolve; `fa`
+  pack ships the same FA5 artwork the CDN served). Skills map untouched
+  (`Record<SkillIconId,…>` already guarantees coverage). Zero FA remnants:
+  `fa-`/`fontawesome`/`cdnjs` sweep of `src/` clean. Debt #2 killed. R8
+  note: `infoCards` now holds component refs — ID-ify when home content
+  moves to lib (SkillIcon pattern). Tooling: three more `replace_in_file`
+  false-successes this session (navbar ×1, systemPatterns ×2) — all
+  recovered via full-file `write_to_file` + `git --no-pager diff` ground
+  truth, per the standing safeguard. Lint + build both green.
 - **2026-08-21 — R6 design tokens:** `globals.css` gained a Tailwind v4
   `@theme` block — 15 semantic tokens (accent/deep/vivid/tint/soft,
   canvas/canvas-raised/shell, surface-1/2/3/modal,
@@ -121,14 +140,15 @@ drives it. Each roadmap item = one future task = one commit.
 - **R5. ~~Extract shared components~~** ✅ done 2026-08-21 — see Task Log.
 - **R6. ~~Design tokens via Tailwind v4 `@theme`~~** ✅ done 2026-08-21 —
   see Task Log.
-- **R7. Unify icons on react-icons** — migrate all remaining Font Awesome
-  usages (all have react-icons equivalents), remove FA CDN `<link>`.
+- **R7. ~~Unify icons on react-icons~~** ✅ done 2026-08-21 — see Task Log.
 - **R8. Server/client boundary** — convert the four zero-hook pages to
   Server Components with motion client islands; split home's carousel into a
   client component. Prerequisite for F2 metadata. *(R4 note: also extract
   home's remaining hardcoded content — hero copy, `infoCards` — to the data
   layer here, and hoist `infoCards` to module scope; deliberately skipped in
-  R4 since home gets restructured in this task and its FA icons wait on R7.)*
+  R4 since home gets restructured in this task. R7 note: `infoCards` icons
+  are now component refs — switch to icon IDs, `SkillIcon` pattern, when
+  the data moves.)*
 - **R9. `[slug]` page + modal quality pass** — server shell + client
   carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
   `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
@@ -164,4 +184,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R7**. See `activeContext.md` for the current working snapshot.
+Next task: **R8**. See `activeContext.md` for the current working snapshot.

@@ -1,3 +1,6 @@
+import { FaEnvelope, FaLinkedin } from "react-icons/fa";
+import { SiGithub } from "react-icons/si";
+
 export default function Footer() {
   return (
     <footer className="flex flex-col items-center bg-gradient-to-t from-canvas-raised to-canvas py-6 text-center">
@@ -14,7 +17,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="transition-colors hover:text-accent"
         >
-          <i className="fab fa-linkedin"></i>
+          <FaLinkedin />
         </a>
 
         <a
@@ -23,14 +26,14 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="transition-colors hover:text-accent"
         >
-          <i className="fab fa-github"></i>
+          <SiGithub />
         </a>
 
         <a
           href="mailto:tmpicart@gmail.com"
           className="transition-colors hover:text-accent"
         >
-          <i className="fas fa-envelope"></i>
+          <FaEnvelope />
         </a>
       </div>
     </footer>

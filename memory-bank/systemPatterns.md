@@ -4,19 +4,20 @@ How this codebase is built: current architecture, target patterns, and
 the debt register the refactor roadmap (see `progress.md`) burns down. Conventions
 are enforced by `.clinerules` — this file records the reasoning and the map.
 
-## Route Map (current — post-R6)
+## Route Map (current — post-R7)
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx               # Server ✓ — Navbar + Footer components; FA
-│   │                            #   CDN <link> (→ R7); root metadata; body
-│   │                            #   bg-canvas
+│   ├── layout.tsx               # Server ✓ — Navbar + Footer components; root
+│   │                            #   metadata; body bg-canvas; FA CDN dropped
+│   │                            #   (R7)
 │   ├── globals.css              # Design tokens: @theme palette — 15 semantic
 │   │                            #   colors, single source of truth (R6)
 │   ├── page.tsx                 # "use client" — embla + motion; composes
 │   │                            #   PageShell/PageHeader/GlassCard/TagPill/
-│   │                            #   CarouselArrows; content still hardcoded
+│   │                            #   CarouselArrows; icons → react-icons
+│   │                            #   component refs (R7); content hardcoded
 │   │                            #   (deliberately, → R8)
 │   ├── projects/page.tsx        # "use client", 0 hooks — PageShell + cards
 │   │                            #   via GlassCard variant="spotlight" (R5)
@@ -31,8 +32,9 @@ src/
 │   │                            #   accentLine (R5); dead scrollbar-* classes
 │   │                            #   removed (R6)
 ├── components/
-│   ├── navbar.tsx               # "use client" — legit (menu state, usePathname)
-│   ├── footer.tsx               # Server ✓ — extracted R2; FA icons intact (→ R7)
+│   ├── navbar.tsx               # "use client" — legit (menu state,
+│   │                            #   usePathname); FaTimes/FaBars toggle (R7)
+│   ├── footer.tsx               # Server ✓ — extracted R2; react-icons (R7)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── page-shell.tsx           # "use client" — radial-gradient shell wrapper;
 │   │                            #   motion-label passthrough (R5); gradient
@@ -63,6 +65,11 @@ top-level boundaries; relative imports for colocated files.
   chrome; `GlassCard`/`TagPill`/`CarouselArrows` own the recurring
   presentation patterns via variant maps (same record pattern as
   `skill-icon.tsx`). Pages compose; no page holds style-string constants.
+- **Icons** — ✅ landed R7: single library, react-icons only — `fa` glyphs
+  for UI icons, `si` for brand marks, `hi` for chevrons/expand. FA CDN and
+  all `<i>` tags gone. Skills/education keep the ID → component map
+  pattern (`skill-icon.tsx`); home's `infoCards` hold direct component
+  refs until R8 ID-ifies them into the data layer.
 - **Design tokens** — ✅ landed R6: palette lives once in `globals.css`
   `@theme`; components reference semantic utilities (`bg-accent/15`,
   `text-accent-tint`, `bg-surface-2`), never raw hexes. Remaining literal
@@ -119,7 +126,7 @@ conversion risks render drift — value-identical literals are safer).
 ## Debt Register (current → killed by)
 
 1. ~~Duplicate project data, hub vs `lib/projects.ts`~~ ✅ R3 (2026-08-20)
-2. Dual icon systems (FA CDN + react-icons) → R7
+2. ~~Dual icon systems (FA CDN + react-icons)~~ ✅ R7 (2026-08-21)
 3. All 6 pages `"use client"`; 4 zero-hook pages (hub, skills, education,
    experience) → R8
 4. ~~Copy-pasted page shell + style strings, 5 pages~~ ✅ R5 (2026-08-21)

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const links = [
   { href: "/projects", label: "Projects" },
@@ -34,7 +35,7 @@ export default function Navbar() {
           className="rounded-lg border border-white/10 bg-menu p-2 text-2xl text-white transition hover:border-accent/40 hover:text-accent md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <i className={menuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+          {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
         <div className="hidden items-center space-x-6 md:flex">

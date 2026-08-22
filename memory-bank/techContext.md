@@ -11,8 +11,8 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   design tokens live in `globals.css` `@theme` since R6; no
   `tailwind.config.*` file exists)
 - **framer-motion** (animation), **embla-carousel-react** (carousels),
-  **react-icons** (icons; Font Awesome CDN remains only until R7 migrates
-  the last usages)
+  **react-icons** (sole icon library since R7 — `fa`/`si`/`hi`
+  collections; no CDN, no webfonts)
 
 ## Commands
 
@@ -45,8 +45,6 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 
 ## Known Quirks (remaining)
 
-- Font Awesome 5.15.3 loaded via CDN `<link>` in layout — render-blocking,
-  pending R7 removal.
 - Windows/Cline write quirk: a tool's "success" report can outlive an edit
   that never reached disk. Safeguard (law in `.clinerules`): harness writes
   only (`write_to_file` preferred for full-file rewrites; no shell/PowerShell

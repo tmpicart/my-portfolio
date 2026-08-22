@@ -5,6 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
+import {
+  FaBriefcase,
+  FaGraduationCap,
+  FaLaptopCode,
+  FaTools,
+} from "react-icons/fa";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import GlassCard from "@/components/glass-card";
@@ -35,7 +41,7 @@ export default function HomePage() {
     {
       title: "Experience",
       href: "/experience",
-      icon: "fa-briefcase",
+      icon: FaBriefcase,
       description:
         "See where I've put my development skills into practice and work as part of a team to tackle real-world problems.",
       button: "View My Experience",
@@ -43,7 +49,7 @@ export default function HomePage() {
     {
       title: "Skills",
       href: "/skills",
-      icon: "fa-tools",
+      icon: FaTools,
       description:
         "View the programming languages, frameworks, and tools that help me develop my projects.",
       button: "Check Out My Toolkit",
@@ -51,7 +57,7 @@ export default function HomePage() {
     {
       title: "Education",
       href: "/education",
-      icon: "fa-graduation-cap",
+      icon: FaGraduationCap,
       description:
         "Explore the courses and classes that built my foundation in software design and development.",
       button: "Explore My Studies",
@@ -107,7 +113,7 @@ export default function HomePage() {
         >
           <div className="mb-4 flex items-center">
             <div className="mr-3 rounded-full bg-accent/15 p-3">
-              <i className="fas fa-laptop-code text-3xl text-accent" />
+              <FaLaptopCode className="text-3xl text-accent" />
             </div>
             <h2 className="text-3xl font-semibold sm:text-4xl text-white">See My Projects!</h2>
           </div>
@@ -177,7 +183,7 @@ export default function HomePage() {
             >
               <div className="mb-2 flex items-center">
                 <div className="mr-3 rounded-full bg-accent/20 p-2">
-                  <i className={`fas ${card.icon} text-2xl text-accent`} />
+                  <card.icon className="text-2xl text-accent" />
                 </div>
                 <h2 className="text-2xl font-semibold sm:text-3xl">{card.title}</h2>
               </div>
