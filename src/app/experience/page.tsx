@@ -45,7 +45,7 @@ export default function ExperiencePage() {
               <h2 className="mb-1 text-2xl font-bold md:text-3xl">{experience.company}</h2>
 
               <p className="mb-3 text-lg text-gray-100">
-                <span className="font-semibold text-[#A673E7]">{experience.role}</span>
+                <span className="font-semibold text-accent">{experience.role}</span>
               </p>
 
               <div className="mb-4 flex flex-wrap gap-2">
@@ -59,7 +59,7 @@ export default function ExperiencePage() {
               <ul className="mt-2 space-y-3 text-base leading-relaxed text-gray-300">
                 {experience.description.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#A673E7]" />
+                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
                     <span>{item}</span>
                   </li>
                 ))}

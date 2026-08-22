@@ -1,16 +1,19 @@
 # System Patterns
 
-How this codebase is built: current architecture, target patterns, and the
-debt register the refactor roadmap (see `progress.md`) burns down. Conventions
+How this codebase is built: current architecture, target patterns, and
+the debt register the refactor roadmap (see `progress.md`) burns down. Conventions
 are enforced by `.clinerules` — this file records the reasoning and the map.
 
-## Route Map (current — post-R5)
+## Route Map (current — post-R6)
 
 ```
 src/
 ├── app/
 │   ├── layout.tsx               # Server ✓ — Navbar + Footer components; FA
-│   │                            #   CDN <link> (→ R7); only metadata in site
+│   │                            #   CDN <link> (→ R7); root metadata; body
+│   │                            #   bg-canvas
+│   ├── globals.css              # Design tokens: @theme palette — 15 semantic
+│   │                            #   colors, single source of truth (R6)
 │   ├── page.tsx                 # "use client" — embla + motion; composes
 │   │                            #   PageShell/PageHeader/GlassCard/TagPill/
 │   │                            #   CarouselArrows; content still hardcoded
@@ -25,13 +28,15 @@ src/
 │   ├── experience/page.tsx      # "use client", 0 hooks — GlassCard timeline
 │   │                            #   + TagPill (R5)
 │   └── education/page.tsx       # "use client", 0 hooks — GlassCard panel +
-│   │                            #   accentLine (R5)
+│   │                            #   accentLine (R5); dead scrollbar-* classes
+│   │                            #   removed (R6)
 ├── components/
 │   ├── navbar.tsx               # "use client" — legit (menu state, usePathname)
 │   ├── footer.tsx               # Server ✓ — extracted R2; FA icons intact (→ R7)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── page-shell.tsx           # "use client" — radial-gradient shell wrapper;
-│   │                            #   motion-label passthrough (R5)
+│   │                            #   motion-label passthrough (R5); gradient
+│   │                            #   stops → var(--color-shell) (R6)
 │   ├── page-header.tsx          # "use client" — canonical eyebrow + title (R5)
 │   ├── glass-card.tsx           # "use client" — 6 variant map + accentLine;
 │   │                            #   HTMLMotionProps passthrough (R5)
@@ -58,6 +63,11 @@ top-level boundaries; relative imports for colocated files.
   chrome; `GlassCard`/`TagPill`/`CarouselArrows` own the recurring
   presentation patterns via variant maps (same record pattern as
   `skill-icon.tsx`). Pages compose; no page holds style-string constants.
+- **Design tokens** — ✅ landed R6: palette lives once in `globals.css`
+  `@theme`; components reference semantic utilities (`bg-accent/15`,
+  `text-accent-tint`, `bg-surface-2`), never raw hexes. Remaining literal
+  colors are deliberate one-offs (avatar gradient, `[slug]` inline style →
+  R9) or stock-palette brand colors in `skill-icon.tsx`.
 - **Client/server boundary** — target R8: pages become Server Components;
   client islands cover interactivity only (Navbar, carousels, motion
   wrappers, modal). Enables per-page `metadata` exports (F2). `TagPill` is
@@ -76,28 +86,35 @@ top-level boundaries; relative imports for colocated files.
 - **Motion** — target R10: one shared variants module (`lib/motion.ts`);
   variants at module scope, never inside components.
 
-## Design Tokens (reference)
+## Design Tokens (landed R6)
 
-Canonical definitions land in `globals.css` via Tailwind v4 `@theme` (roadmap
-R6). Until then this table is the map of hexes currently scattered as
-arbitrary values (R5 concentrated many of them into the component variant
-maps — single place to swap when tokens land):
+Palette defined once in `globals.css` via Tailwind v4 `@theme`; Tailwind
+auto-generates utilities from each `--color-*` variable (including opacity
+modifiers and gradient stops). Semantic names were chosen over numeric
+scales (Thayer-approved, R6). Token map:
 
 | Token | Hex | Role |
 |---|---|---|
-| accent | `#A673E7` | buttons, hovers, headings, active states |
-| accent-deep | `#8a57cc`, `#7C4DFF` | button hover, divider gradient |
-| accent-tint | `#D7BFFF`, `#B8A6FF`, `#E7D4FF` | eyebrows, tags, light text |
-| bg-base | `#070707` | body background |
-| bg-panel | `#0b0b0d` | page shell gradient base |
-| surface-1 | `#40434E` | navbar, buttons, carousel arrows |
-| surface-2 | `#1F1E2E` | panels |
-| surface-3 | `#272636` | inner panels |
-| surface-modal | `#1C1B29` | modal background |
-| menu grays | `#4b4e58`, `#5b5f69`, `#2f3138` | mobile menu states |
+| `accent` | `#a673e7` | buttons, hovers, headings, active states |
+| `accent-deep` | `#8a57cc` | button hover |
+| `accent-vivid` | `#7c4dff` | divider gradient start |
+| `accent-tint` | `#d7bfff` | eyebrows, tag text |
+| `accent-soft` | `#e7d4ff` | badge text |
+| `canvas` | `#070707` | body background |
+| `canvas-raised` | `#101010` | footer gradient start |
+| `shell` | `#0b0b0d` | page shell gradient base |
+| `surface-1` | `#40434e` | navbar, buttons, carousel arrows |
+| `surface-2` | `#1f1e2e` | panels |
+| `surface-3` | `#272636` | inner panels, modal info rail |
+| `surface-modal` | `#1c1b29` | modal background |
+| `menu` | `#4b4e58` | mobile menu buttons |
+| `menu-hover` | `#5b5f69` | mobile menu hover |
+| `menu-tray` | `#2f3138` | mobile menu dropdown container |
 
-R5 note: the canonical header eyebrow is `#D7BFFF`; projects previously used
-`#B8A6FF` (drift removed with approval).
+Deliberate non-tokens: experience avatar gradient (`#2c2f36/#1f2128/#3a3e47`,
+single-use decorative), `[slug]` inline `#2a2a3a` (inline-style removal is
+R9's), accent `rgba()` stops inside arbitrary gradients (color-mix()
+conversion risks render drift — value-identical literals are safer).
 
 ## Debt Register (current → killed by)
 
@@ -108,7 +125,7 @@ R5 note: the canonical header eyebrow is `#D7BFFF`; projects previously used
 4. ~~Copy-pasted page shell + style strings, 5 pages~~ ✅ R5 (2026-08-21)
 5. Type drift: `Project` ×2 ✅ R3, local `Experience` ✅ R4; `pageMeta` ×4
    ✅ R5 (PageHeader props)
-6. Dead `scrollbar-*` classes (plugin never installed) → R6
+6. ~~Dead `scrollbar-*` classes (plugin never installed)~~ ✅ R6 (2026-08-21)
 7. `[slug]` modal gaps (dead `exit`, no Escape/scroll-lock/role, inline
    styles, `router.push` back button, `unoptimized` images) → R9
 8. Hooks-order fragility (`notFound()` before hooks in `[slug]`) → R9

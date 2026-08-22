@@ -45,7 +45,7 @@ export default function GlassCard({ variant, accentLine = false, className, chil
       {...motionProps}
     >
       {accentLine && (
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#A673E7]/70 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
       )}
       {children}
     </motion.div>

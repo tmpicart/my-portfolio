@@ -15,7 +15,7 @@ type PageShellProps = {
 const shellClasses = `
   relative flex min-h-screen flex-col items-center overflow-hidden rounded-[44px]
   border border-white/[0.04]
-  bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_#0b0b0d_0%,_#0b0b0d_100%)]
+  bg-[radial-gradient(circle_at_top_left,_rgba(166,115,231,0.16)_0%,_rgba(166,115,231,0.06)_35%,_rgba(18,18,20,0.98)_70%),linear-gradient(180deg,_var(--color-shell)_0%,_var(--color-shell)_100%)]
   px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14
 `;
 

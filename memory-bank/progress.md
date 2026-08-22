@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-21 (post-R5)** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-21 (post-R6)** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -14,9 +14,27 @@ drives it. Each roadmap item = one future task = one commit.
 - Shared UI component layer complete (`components/`: PageShell, PageHeader,
   GlassCard, TagPill, CarouselArrows + existing navbar/footer/skill-icon) —
   all pages compose from it (R5)
+- Design token layer complete — `@theme` palette in `globals.css`, semantic
+  color utilities across every component/page (R6)
 
 ## Task Log
 
+- **2026-08-21 — R6 design tokens:** `globals.css` gained a Tailwind v4
+  `@theme` block — 15 semantic tokens (accent/deep/vivid/tint/soft,
+  canvas/canvas-raised/shell, surface-1/2/3/modal,
+  menu/menu-hover/menu-tray; semantic naming chosen over numeric scales,
+  Thayer-approved). 49 hex literals across 13 files became token utilities
+  (incl. opacity modifiers like `bg-accent/12` and gradients
+  `from-accent-vivid to-accent`); PageShell's gradient stops →
+  `var(--color-shell)`; dead `scrollbar-*` classes deleted from education
+  (debt #6 killed). Deliberate non-tokens: experience avatar gradient,
+  `[slug]` inline `#2a2a3a` (R9 owns inline-style removal); accent rgba()
+  stops inside gradients stay literal (color-mix() conversion risks render
+  drift). Visually neutral — identical hexes behind names. Tooling: session
+  hit `replace_in_file` false-successes (recovered via full-file
+  `write_to_file` + `git --no-pager diff` ground-truth checks) and one
+  heavily corrupted tool-result message (disk verified clean via git before
+  proceeding). Lint + build both green.
 - **2026-08-21 — R5 extract shared components:** five components created —
   `PageShell` (shell gradient + sheen overlay; motion-label passthrough for
   stagger propagation; optional `className`), `PageHeader` (canonical
@@ -101,9 +119,8 @@ drives it. Each roadmap item = one future task = one commit.
 - **R4. ~~Extract remaining content to the data layer~~** ✅ done 2026-08-20
   — see Task Log.
 - **R5. ~~Extract shared components~~** ✅ done 2026-08-21 — see Task Log.
-- **R6. Design tokens via Tailwind v4 `@theme`** — palette defined once in
-  `globals.css`; scattered hex literals → semantic classes; delete dead
-  `scrollbar-*` classes.
+- **R6. ~~Design tokens via Tailwind v4 `@theme`~~** ✅ done 2026-08-21 —
+  see Task Log.
 - **R7. Unify icons on react-icons** — migrate all remaining Font Awesome
   usages (all have react-icons equivalents), remove FA CDN `<link>`.
 - **R8. Server/client boundary** — convert the four zero-hook pages to
@@ -147,4 +164,4 @@ drives it. Each roadmap item = one future task = one commit.
 
 ## Status
 
-Next task: **R6**. See `activeContext.md` for the current working snapshot.
+Next task: **R7**. See `activeContext.md` for the current working snapshot.

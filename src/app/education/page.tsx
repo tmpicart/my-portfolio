@@ -36,7 +36,7 @@ const courseItemVariants: Variants = {
 function CourseList({ courses }: { courses: string[] }) {
   return (
     <motion.div
-      className="flex max-h-96 flex-col space-y-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
+      className="flex max-h-96 flex-col space-y-3 overflow-y-auto pr-2"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -84,8 +84,8 @@ export default function EducationPage() {
           const GroupIcon = courseGroupIcons[group.iconId];
           return (
             <motion.div key={group.title} variants={cardVariants} className="mb-6 last:mb-0">
-              <h3 className="mb-2 flex items-center gap-2 text-xl font-semibold text-[#A673E7]">
-                <GroupIcon className="h-5 w-5 text-[#A673E7]" /> {group.title}
+              <h3 className="mb-2 flex items-center gap-2 text-xl font-semibold text-accent">
+                <GroupIcon className="h-5 w-5 text-accent" /> {group.title}
               </h3>
               <CourseList courses={group.courses} />
             </motion.div>

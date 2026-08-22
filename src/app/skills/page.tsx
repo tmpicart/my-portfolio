@@ -46,7 +46,7 @@ export default function SkillsPage() {
           <GlassCard key={category.title} variant="panel" accentLine variants={rowVariants}>
             <motion.h2
               variants={categoryTitleVariants}
-              className="mb-5 text-center text-3xl font-semibold text-[#A673E7]"
+              className="mb-5 text-center text-3xl font-semibold text-accent"
             >
               {category.title}
             </motion.h2>

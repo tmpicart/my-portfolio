@@ -77,7 +77,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
         <h3 className={`${sizeStyles.titleClass} mt-3 font-bold text-white`}>
           {title}
         </h3>
-        <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-[#7C4DFF] to-[#A673E7] ${sizeStyles.dividerClass}`} />
+        <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-accent-vivid to-accent ${sizeStyles.dividerClass}`} />
         <p className={`${sizeStyles.descClass} text-gray-200`}>{summary}</p>
       </GlassCard>
     </Link>

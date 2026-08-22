@@ -79,7 +79,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-[#070707] text-white">
+    <div className="flex min-h-screen w-full flex-col bg-canvas text-white">
       <motion.main
         className="relative flex w-full flex-1 flex-col items-center px-0 pt-16"
         initial="hidden"
@@ -91,7 +91,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
           {/* Back button */}
           <motion.button
             onClick={() => router.push("/projects")}
-            className="mb-6 rounded-md bg-[#40434E] px-5 py-2 font-semibold shadow-md transition-colors duration-300 hover:bg-[#A673E7]"
+            className="mb-6 rounded-md bg-surface-1 px-5 py-2 font-semibold shadow-md transition-colors duration-300 hover:bg-accent"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0, transition: { duration: 0.36 } }}
           >
@@ -109,7 +109,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
           {/* Main carousel */}
           <motion.div
-            className="relative mb-10 w-full rounded-2xl bg-[#1F1E2E] px-6 py-6 shadow-lg"
+            className="relative mb-10 w-full rounded-2xl bg-surface-2 px-6 py-6 shadow-lg"
             variants={cardVariants}
           >
             <CarouselArrows
@@ -152,7 +152,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                           ))}
                         </div>
                       )}
-                      <div className="self-end flex items-center gap-2 rounded-md bg-[#40434E] px-4 py-2 text-base font-semibold text-white shadow-md pointer-events-auto">
+                      <div className="self-end flex items-center gap-2 rounded-md bg-surface-1 px-4 py-2 text-base font-semibold text-white shadow-md pointer-events-auto">
                         <HiOutlineArrowsExpand className="h-6 w-6" /> Enlarge Image
                       </div>
                     </div>
@@ -168,7 +168,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                   key={index}
                   aria-label={`Go to slide ${index + 1}`}
                   className={`h-4 w-4 rounded-full transition-colors duration-200 ${
-                    index === currentSlide ? "bg-white" : "bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
+                    index === currentSlide ? "bg-white" : "bg-accent/40 hover:bg-accent/80"
                   }`}
                   onClick={() => emblaApi?.scrollTo(index)}
                 />
@@ -178,21 +178,21 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
           {/* Project overview */}
           <motion.div
-            className="w-full mb-12 rounded-xl bg-[#1F1E2E] p-6 shadow-lg space-y-6"
+            className="w-full mb-12 rounded-xl bg-surface-2 p-6 shadow-lg space-y-6"
             variants={cardVariants}
           >
             <p className="text-gray-200 text-lg md:text-xl leading-relaxed">{project.description}</p>
 
             <div className="flex flex-col md:flex-row md:gap-6 gap-4">
               {project.bullets.languages && (
-                <div className="flex-1 bg-[#272636] p-4 rounded-lg shadow-inner">
-                  <h4 className="font-semibold text-[#A673E7] mb-1">Languages</h4>
+                <div className="flex-1 bg-surface-3 p-4 rounded-lg shadow-inner">
+                  <h4 className="font-semibold text-accent mb-1">Languages</h4>
                   <p>{project.bullets.languages.join(", ")}</p>
                 </div>
               )}
               {project.bullets.frameworks && (
-                <div className="flex-1 bg-[#272636] p-4 rounded-lg shadow-inner">
-                  <h4 className="font-semibold text-[#A673E7] mb-1">Frameworks / Libraries</h4>
+                <div className="flex-1 bg-surface-3 p-4 rounded-lg shadow-inner">
+                  <h4 className="font-semibold text-accent mb-1">Frameworks / Libraries</h4>
                   <p>{project.bullets.frameworks.join(", ")}</p>
                 </div>
               )}
@@ -200,7 +200,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
             {project.bullets.features && (
               <div>
-                <h4 className="font-semibold text-[#A673E7] mb-1">Features</h4>
+                <h4 className="font-semibold text-accent mb-1">Features</h4>
                 <ul className="list-disc ml-5 space-y-1">
                   {project.bullets.features.map((feature) => (
                     <li key={feature}>{feature}</li>
@@ -217,7 +217,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#40434E] px-6 py-3 font-semibold shadow-md transition-colors duration-300 hover:bg-[#A673E7] hover:shadow-lg"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-surface-1 px-6 py-3 font-semibold shadow-md transition-colors duration-300 hover:bg-accent hover:shadow-lg"
               >
                 View on GitHub
               </a>
@@ -235,7 +235,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             onClick={closeModal}
           >
             <div
-              className="relative flex flex-col w-full max-w-[90vw] max-h-[90vh] rounded-xl overflow-hidden shadow-xl bg-[#1C1B29]"
+              className="relative flex flex-col w-full max-w-[90vw] max-h-[90vh] rounded-xl overflow-hidden shadow-xl bg-surface-modal"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col md:flex-row flex-1 min-h-0 overflow-hidden">
@@ -280,7 +280,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         aria-label={`Go to image ${index + 1}`}
                         onClick={() => scrollModalTo(index)}
                         className={`rounded-full transition-all duration-200 ${
-                          index === modalSlide ? "h-3 w-3 bg-white" : "h-2.5 w-2.5 bg-[#A673E7]/40 hover:bg-[#A673E7]/80"
+                          index === modalSlide ? "h-3 w-3 bg-white" : "h-2.5 w-2.5 bg-accent/40 hover:bg-accent/80"
                         }`}
                       />
                     ))}
@@ -289,7 +289,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                 {/* Info panel */}
                 {project.captions[modalSlide] && (
-                  <div className="w-full md:w-1/4 md:flex-shrink-0 overflow-y-auto p-4 bg-[#272636] text-gray-200 space-y-2">
+                  <div className="w-full md:w-1/4 md:flex-shrink-0 overflow-y-auto p-4 bg-surface-3 text-gray-200 space-y-2">
                     <h3 className="text-2xl font-bold">{project.captions[modalSlide].title}</h3>
                     {project.captions[modalSlide].lines.map((line) => (
                       <p key={line} className="md:ml-2 text-xl">{line}</p>

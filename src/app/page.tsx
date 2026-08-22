@@ -106,8 +106,8 @@ export default function HomePage() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         >
           <div className="mb-4 flex items-center">
-            <div className="mr-3 rounded-full bg-[#A673E7]/15 p-3">
-              <i className="fas fa-laptop-code text-3xl text-[#A673E7]" />
+            <div className="mr-3 rounded-full bg-accent/15 p-3">
+              <i className="fas fa-laptop-code text-3xl text-accent" />
             </div>
             <h2 className="text-3xl font-semibold sm:text-4xl text-white">See My Projects!</h2>
           </div>
@@ -132,7 +132,7 @@ export default function HomePage() {
                     href={`/projects/${project.slug}`}
                     className="relative flex-[0_0_100%] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]"
                   >
-                    <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-md bg-[#1F1E2E] sm:h-56">
+                    <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-md bg-surface-2 sm:h-56">
                       <Image
                         src={project.thumbnail}
                         alt={project.title}
@@ -155,7 +155,7 @@ export default function HomePage() {
             <motion.button
               variants={buttonHover}
               whileHover="hover"
-              className="w-max rounded-lg bg-[#A673E7] px-4 py-2 transition duration-300 hover:bg-[#8a57cc]"
+              className="w-max rounded-lg bg-accent px-4 py-2 transition duration-300 hover:bg-accent-deep"
             >
               See My Projects
             </motion.button>
@@ -176,8 +176,8 @@ export default function HomePage() {
               }}
             >
               <div className="mb-2 flex items-center">
-                <div className="mr-3 rounded-full bg-[#A673E7]/20 p-2">
-                  <i className={`fas ${card.icon} text-2xl text-[#A673E7]`} />
+                <div className="mr-3 rounded-full bg-accent/20 p-2">
+                  <i className={`fas ${card.icon} text-2xl text-accent`} />
                 </div>
                 <h2 className="text-2xl font-semibold sm:text-3xl">{card.title}</h2>
               </div>
@@ -186,7 +186,7 @@ export default function HomePage() {
                 <motion.button
                   variants={buttonHover}
                   whileHover="hover"
-                  className="mt-3 w-max rounded-lg bg-[#A673E7] px-4 py-2 transition duration-300 hover:bg-[#8a57cc]"
+                  className="mt-3 w-max rounded-lg bg-accent px-4 py-2 transition duration-300 hover:bg-accent-deep"
                 >
                   {card.button}
                 </motion.button>

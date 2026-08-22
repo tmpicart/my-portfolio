@@ -1,45 +1,37 @@
 # Active Context
 
-**Snapshot: 2026-08-21 (post-R5)** — updated every task per the Memory Bank Protocol.
+**Snapshot: 2026-08-21 (post-R6)** — updated every task per the Memory Bank Protocol.
 
 ## Current State
 
-- **R5 complete**, on branch `refactor/cleanup` (stacked on R1–R4):
-  - Five shared components in `src/components/`: `PageShell` (shell gradient
-    wrapper, motion-label passthrough, optional `className`),
-    `PageHeader` (canonical eyebrow + title), `GlassCard` (6 variants:
-    panel/timeline/spotlight/hero/section/tile + optional `accentLine`;
-    props extend `HTMLMotionProps<"div">` so variants/hover flow through;
-    `children` re-pinned to `ReactNode` — HTMLMotionProps widens it to
-    MotionValue which motion.div rejects), `TagPill` (tag/accent/muted/badge),
-    `CarouselArrows` (small/medium/large size presets + aria labels).
-  - All 5 shell pages rebuilt on PageShell/PageHeader; home + experience +
-    education + skills use GlassCard/TagPill; `[slug]` swapped its inline
-    arrow buttons for CarouselArrows (both carousels) — its page-level layout
-    stays untouched for R9.
-  - Debt kills: #4 (copy-pasted shell), #5 (pageMeta x4), #11
-    (`cardStyle`-family constants). All per-page style-string constants and
-    `PageMeta` types are gone.
-  - **Approved visual deltas (Thayer, R5):** header canonicalized — one style
-    (eyebrow `#D7BFFF`, no tracking-tight, `mb-10`, 0.5s fade-up) replacing
-    five drifting variants; skills category cards gained `relative`, fixing
-    accent bars that previously anchored to the page shell top instead of the
-    card; home/skills `<section>` → `<div>` (no accessible name, no outline
-    change). Noted for Thayer's PR review.
-  - Windows/editor note: VS Code dirty-buffer reverts corrupted several
-    write_to_file calls this task (page files reverted; ghost `page.ts`/
-    extension-less artifacts appeared). Fixed by writing via PowerShell
-    `[System.IO.File]::WriteAllText` and deleting artifacts; verify with
-    `git status` before committing in future tasks.
-- All pages remain `"use client"` (framer-motion) — server/client split is
-  R8's job. Lint + build both green after R5.
+- **R6 complete**, on branch `refactor/cleanup` (stacked on R1–R5):
+  - `globals.css` now owns the palette via Tailwind v4 `@theme` — 15 semantic
+    tokens (accent family ×5, backgrounds ×3, surfaces ×4, mobile-menu ×3).
+    Utilities auto-generate (`bg-accent/15`, `text-accent-tint`,
+    `from-accent-vivid to-accent`, …), so opacity modifiers and gradients
+    compose without arbitrary values.
+  - 49 scattered hex literals across 13 files → semantic classes. Post-task
+    grep: only the `globals.css` token definitions + two deliberate one-offs
+    remain (experience avatar gradient; `[slug]` inline `#2a2a3a` → R9).
+    `PageShell`'s linear-gradient stops now use `var(--color-shell)`.
+  - Dead `scrollbar-*` classes deleted from education (debt #6 killed).
+  - Naming decisions (Thayer-approved): semantic names over numeric scales;
+    `#101010` tokenized as `canvas-raised`; menu grays tokenized
+    (`menu`/`menu-hover`/`menu-tray`); `skill-icon.tsx` brand colors stay
+    stock palette classes. Visually neutral by construction — every token
+    maps the identical hex.
+- Session tooling notes (see techContext quirks): `replace_in_file` reported
+  success 4× without persisting (before and after a Cline update); recovered
+  by switching to full-file `write_to_file` + `git --no-pager diff` checks.
+  Separately, one tool-result message arrived heavily corrupted (garbled/
+  injected text); disk state verified untouched via git before proceeding.
+- Lint + build both green after R6.
 
 ## What's Next
 
-**Roadmap R6 — design tokens via Tailwind v4 `@theme`** — palette defined
-once in `globals.css`; scattered hex literals → semantic classes; delete dead
-`scrollbar-*` classes. R5 added more hex literals into component variant
-maps; R6 will absorb them.
+**Roadmap R7 — unify icons on react-icons**: migrate remaining Font Awesome
+usages (navbar toggle, footer contacts, home hero/`infoCards` icons), drop
+the FA CDN `<link>` from layout.
 
 Starting pattern for every task: read this file + `progress.md` first, work
 the single roadmap item, run the quality gates, update both files, commit by
@@ -51,6 +43,8 @@ explicit path.
   folded into **R8**, which restructures home anyway; `infoCards` also still
   sits inside the component body (convention violation) — same fix, same task.
 - Footer contact links still hardcoded (F1 will touch the footer).
+- Experience avatar gradient + `[slug]` inline `#2a2a3a` left as one-off
+  literals by design (R6 scope decision); inline-style removal is R9's.
 
 ## Working Agreements in Force
 
