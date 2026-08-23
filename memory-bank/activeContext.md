@@ -1,22 +1,25 @@
 # Active Context
 
-**Snapshot: 2026-08-22 (post-R8)** — updated every task per the Memory Bank
+**Snapshot: 2026-08-23 (post-R9)** — updated every task per the Memory Bank
 Protocol.
 
 ## Current State
 
-- **R8 complete** on `refactor/cleanup`: five static pages are Server
-  Components with client islands; `[slug]` stays whole-page client until R9.
-- Home content lives in `lib/home.ts` + `home-icon.tsx` ID map; home
-  carousel runs `embla-carousel-autoplay` (wrapper-level pause on
-  hover/focus; plugin `useMemo`'d — React Compiler bans ref-read-in-render).
-- Gates green: lint clean, build green, all 5 static routes prerender.
+- **R9 complete** on `refactor/cleanup`: `[slug]` is a server shell +
+  `ProjectDetail` island; modal has full a11y (focus trap, Escape,
+  scroll-lock, `role="dialog"`); gallery autoplays like home.
+- `lib/projects.ts` now carries `screenshots[]` (src + title + lines);
+  parallel `images`/`captions` arrays are gone.
+- `CarouselDots` shared component (3 consumers); home carousel has dots
+  (approved visual change).
+- Gates green: lint clean, build green, all 4 `[slug]` routes prerender
+  SSG via `generateStaticParams`.
 
 ## What's Next
 
-**R9 — `[slug]` page + modal quality pass** (full scope + carousels note in
-the `progress.md` roadmap): server shell + client islands, modal
-accessibility, inline-style removal. Then R10 (motion consolidation).
+**R10 — Motion consolidation**: one `lib/motion.ts` variants module,
+variants at module scope (already true in R8/R9 islands), simplified
+stagger logic, unified hover-variant naming. Then R11 (assets), F2 (SEO).
 
 Task pattern: Tier-0 reads → single roadmap item → quality gates → bank
 updates + archive append → Task Checkpoint → commit by explicit path.
@@ -24,15 +27,15 @@ updates + archive append → Task Checkpoint → commit by explicit path.
 ## Known Deferred Items
 
 - Footer contact links hardcoded + icon-only links lack `aria-label` → F1.
-- Experience avatar gradient + `[slug]` inline `#2a2a3a` → R9 (inline-style
-  removal).
-- `[slug]` suppressions ×2 (hooks order, exhaustive-deps) → R9; navbar
-  menu-close suppression → R13.
+- Experience avatar gradient stays a deliberate non-token (single-use
+  decorative) → no action.
+- Navbar menu-close suppression → R13.
 
 ## Working Agreements in Force
 
 - `.clinerules` is law; on disagreement it wins and the bank gets corrected.
 - Refactors are visually neutral; exceptions need Thayer's sign-off (R3
-  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior).
+  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior, R9 home
+  dots).
 - One roadmap item = one task = one commit; flag out-of-scope findings.
 - Ask before dependency changes; never push without asking.

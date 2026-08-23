@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 import CarouselArrows from "@/components/carousel-arrows";
+import CarouselDots from "@/components/carousel-dots";
 
 type ProjectCarouselSlide = {
   slug: string;
@@ -23,7 +24,8 @@ const AUTOPLAY_DELAY_MS = 4500;
 
 // Home's featured-projects carousel, extracted in R8 so the home page can be a
 // Server Component. Deliberately home-specific: the [slug] carousels differ in
-// autoplay, dots, and slide markup, and are re-evaluated in R9.
+// autoplay, dots, and slide markup (settled in R9 — three purpose-built
+// carousels, shared CarouselDots/CarouselArrows primitives).
 export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
   // useMemo (not embla's documented useRef pattern) because the React Compiler
   // lint rules forbid reading refs during render when passing the plugin to
@@ -41,6 +43,17 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
     { loop: true, align: "start" },
     [autoplay]
   );
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Dots mirror the active slide; swipes, arrows, and autoplay all fire "select".
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   // Pause/resume on the wrapper (not the plugin's stopOnMouseEnter, which only
   // watches the embla viewport) so the arrow buttons overlaying the carousel
@@ -90,6 +103,15 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
           ))}
         </div>
       </div>
+
+      <CarouselDots
+        count={slides.length}
+        activeIndex={currentSlide}
+        onSelect={(index) => emblaApi?.scrollTo(index)}
+        variant="small"
+        itemLabel="project"
+        className="mt-4"
+      />
     </div>
   );
 }

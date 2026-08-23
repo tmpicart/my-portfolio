@@ -24,6 +24,7 @@
   --color-surface-2: #1f1e2e; /* panels */
   --color-surface-3: #272636; /* inner panels, modal info rail */
   --color-surface-modal: #1c1b29; /* modal background */
+  --color-backdrop: #2a2a3a; /* screenshot letterbox behind object-contain (R9) */
 
   /* Mobile menu states */
   --color-menu: #4b4e58;

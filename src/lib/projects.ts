@@ -1,4 +1,5 @@
-export type ImageCaption = {
+export type ProjectScreenshot = {
+  src: string;
   title: string;
   lines: string[];
 };
@@ -10,8 +11,7 @@ export type Project = {
   description: string;
   thumbnail: string;
   featured: boolean;
-  images: string[];
-  captions: ImageCaption[];
+  screenshots: ProjectScreenshot[];
   bullets: {
     languages?: string[];
     frameworks?: string[];
@@ -29,38 +29,36 @@ export const projects: Project[] = [
       "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally developed over a tight three-week deadline by a team of five, the project earned the highest rating among competing games, with 4.59 stars. I have since taken over development as a solo project to fix bugs, refactor code, enhance gameplay, and expand content.",
     thumbnail: "/images/john/John_5.png",
     featured: false,
-    images: [
-      "/images/john/John_1.png",
-      "/images/john/John_2.png",
-      "/images/john/John_3.png",
-      "/images/john/John_4.png",
-      "/images/john/John_5.png",
-      "/images/john/John_6.png",
-    ],
-    captions: [
+    screenshots: [
       {
+        src: "/images/john/John_1.png",
         title: "Title Screen",
         lines: ["- Start or exit the game; includes death and restart mechanics"],
       },
       {
+        src: "/images/john/John_2.png",
         title: "NPC Interaction",
         lines: ["- Players can talk to NPCs with functional dialogue"],
       },
       {
+        src: "/images/john/John_3.png",
         title: "Shop System & Upgrades",
         lines: ["- Upgrade health and weapons with in-game currency"],
       },
       {
+        src: "/images/john/John_4.png",
         title: "Varied Enemies",
         lines: [
           "- Slimes, necromancers, skeletons, archers, and more; AI controlled with state machines",
         ],
       },
       {
+        src: "/images/john/John_5.png",
         title: "Multi-Phase Boss",
         lines: ["- Sorceress at the dungeon end with varied attacks and a second phase"],
       },
       {
+        src: "/images/john/John_6.png",
         title: "Phase 2",
         lines: ["- Boss attacks intensify with new patterns"],
       },
@@ -88,31 +86,29 @@ export const projects: Project[] = [
       "A tool designed to bridge language barriers by translating medical terms across multiple languages. Developed by a team of three, it won the senior project showcase for that semester. The tool leverages an extensive term database and provides AI-powered fallback translations for any missing entries.",
     thumbnail: "/images/codex/codex_1.png",
     featured: true,
-    images: [
-      "/images/codex/codex_1.png",
-      "/images/codex/codex_2.png",
-      "/images/codex/codex_3.png",
-      "/images/codex/codex_4.png",
-      "/images/codex/codex_5.png",
-    ],
-    captions: [
+    screenshots: [
       {
+        src: "/images/codex/codex_1.png",
         title: "Home Page",
         lines: ["- Select language and enter a term; fuzzy matching ensures accuracy"],
       },
       {
+        src: "/images/codex/codex_2.png",
         title: "Translation",
         lines: ["- 'Tylenol' translated to Ukrainian using the backend database"],
       },
       {
+        src: "/images/codex/codex_3.png",
         title: "AI Translation",
         lines: ["- Fallback AI translation available if no database entry exists"],
       },
       {
+        src: "/images/codex/codex_4.png",
         title: "Mobile Viewing",
         lines: ["- Responsive and mobile-friendly design"],
       },
       {
+        src: "/images/codex/codex_5.png",
         title: "Security",
         lines: ["- Inputs are protected from SQL injection and other vulnerabilities"],
       },
@@ -139,26 +135,24 @@ export const projects: Project[] = [
       "Mobile app to search, view, and save events from TicketMaster via the TicketMaster API, with Firebase authentication and data storage allowing users to log in and save their favorite events.",
     thumbnail: "/images/ticketmaster/TicketMaster_1.png",
     featured: false,
-    images: [
-      "/images/ticketmaster/TicketMaster_1.png",
-      "/images/ticketmaster/TicketMaster_2.png",
-      "/images/ticketmaster/TicketMaster_3.png",
-      "/images/ticketmaster/TicketMaster_4.png",
-    ],
-    captions: [
+    screenshots: [
       {
+        src: "/images/ticketmaster/TicketMaster_1.png",
         title: "User Authentication",
         lines: ["- Users sign up or log in via Google accounts"],
       },
       {
+        src: "/images/ticketmaster/TicketMaster_2.png",
         title: "Main Page",
         lines: ["- Search by city and event type; concise event data display"],
       },
       {
+        src: "/images/ticketmaster/TicketMaster_3.png",
         title: "Favoriting Events",
         lines: ["- Save important events for tracking"],
       },
       {
+        src: "/images/ticketmaster/TicketMaster_4.png",
         title: "Favorite List",
         lines: ["- Favorites stored securely; direct ticket purchase links retained"],
       },
@@ -185,21 +179,19 @@ export const projects: Project[] = [
       "This is my portfolio website built to showcase my projects, skills, education, and experience. Feel free to explore! Check out my GitHub, LinkedIn, or shoot me an email with the links at the bottom of every page.",
     thumbnail: "/images/icons/code_img.jpg",
     featured: false,
-    images: [
-      "/images/portfolio/Portfolio_1.png",
-      "/images/portfolio/Portfolio_2.png",
-      "/images/icons/laptop_img.jpg",
-    ],
-    captions: [
+    screenshots: [
       {
+        src: "/images/portfolio/Portfolio_1.png",
         title: "Vercel Deployment",
         lines: ["- Website is deployed and fully functional via Vercel"],
       },
       {
+        src: "/images/portfolio/Portfolio_2.png",
         title: "Mobile Responsive",
         lines: ["- Mobile support and adaptive/scalable design"],
       },
       {
+        src: "/images/icons/laptop_img.jpg",
         title: "Thanks for Visiting!",
         lines: ["- Thank you for taking the time to view my page!"],
       },

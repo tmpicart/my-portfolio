@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-22** — what works, recent work, and the roadmap that
+**Updated: 2026-08-23** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Full completed-task
 record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 `.clinerules`).
@@ -10,28 +10,30 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - All 6 routes functional and responsive; deployed on Vercel from `main`
 - Content data layer complete (`lib/`) — every page renders from it
 - Shared component layer complete (PageShell, PageHeader, GlassCard,
-  TagPill, CarouselArrows + R8 client islands)
-- Server/client boundary landed (R8): five static pages are Server
-  Components; only `[slug]` remains whole-page client (→ R9)
+  TagPill, CarouselArrows, CarouselDots + client islands)
+- Server/client boundary complete (R8+R9): every page is a Server
+  Component; all 4 `[slug]` routes prerender SSG via `generateStaticParams`
 - Design token layer (`@theme` palette in `globals.css`) across every
   component
 - Single icon system (react-icons; FA CDN gone); icon-ID maps for skills
   and home
-- Home carousel autoplays via `embla-carousel-autoplay` with
-  pause-on-hover/focus (approved behavior change)
+- All three carousels: embla + Autoplay (pause on hover/focus); dots
+  everywhere (home dots added R9, approved)
 
 ## Recent Work
 
-- **2026-08-22 — Bank & workflow audit:** tiered bank reads + sealed
-  `completedTasks.md` archive + Task Checkpoint gate + 5-failure circuit
-  breaker + compression caps added to `.clinerules`; bank slimmed, growth
-  now capped. Lint + build green.
+- **2026-08-23 — R9 [slug] quality pass:** server shell + `ProjectDetail`
+  island (gallery + modal: autoplay, focus trap, `AnimatePresence`,
+  `role="dialog"`, scroll-lock, optimized images); `images`/`captions`
+  merged → `screenshots`; shared `CarouselDots` + home dots (approved);
+  `--color-backdrop` token. Debts #7, #8 dead. Lint + build green.
 - **2026-08-22 — R8 server/client boundary:** five static pages → Server
   Components with client motion/carousel islands; home content →
   `lib/home.ts` + `HomeIcon` map; autoplay plugin added (approved).
   Debts #3, #12 dead. Lint + build green.
-- **2026-08-21 — R7 unify icons:** all FA `<i>` → react-icons; CDN `<link>`
-  removed. Debt #2 dead. Lint + build green.
+- **2026-08-22 — Bank & workflow audit:** tiered bank reads + sealed
+  archive + Task Checkpoint gate + circuit breaker + compression caps;
+  bank slimmed, growth capped. Lint + build green.
 
 ## Roadmap — Refactor (dependency-ordered)
 
@@ -43,21 +45,11 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-21 — **R6** design tokens via Tailwind v4 `@theme`
 - ✅ 2026-08-21 — **R7** icons unified on react-icons
 - ✅ 2026-08-22 — **R8** server/client boundary (pages → RSC + islands)
-- **R9. `[slug]` page + modal quality pass** — server shell + client
-  carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
-  `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
-  (drop `unoptimized`); remove inline styles; merge `images`/`captions`
-  parallel arrays. *(R8 note: the non-magnified main carousel should also
-  cycle via the Autoplay plugin — same pause-on-hover/focus treatment as
-  home, per Thayer. The three carousels were deliberately NOT unified: they
-  differ in autoplay, slide shape, dots, and cross-carousel sync, and the
-  effect-sync between main/modal is exactly what this task replaces. After
-  the redesign, evaluate whether what remains is similar enough to extract
-  into one shared `Carousel` component, composing with R5's
-  `CarouselArrows`.)*
+- ✅ 2026-08-23 — **R9** `[slug]` quality pass (server shell, modal a11y,
+  autoplay, data merge, home dots)
 - **R10. Motion consolidation** — single `lib/motion.ts` variants module;
-  variants at module scope (already true inside all R8 islands); simplify
-  stagger logic; unify hover-variant naming.
+  variants at module scope (already true inside all R8/R9 islands);
+  simplify stagger logic; unify hover-variant naming.
 - **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
   git history) and unused template SVGs after verifying references;
   compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`,
@@ -80,4 +72,4 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Status
 
-Next task: **R9**. See `activeContext.md` for the current working snapshot.
+Next task: **R10**. See `activeContext.md` for the current working snapshot.

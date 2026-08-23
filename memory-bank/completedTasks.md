@@ -82,5 +82,16 @@ confirms all roadmap tasks are complete; do not read it before then.
   bank file. Bank slimmed 35KB → ~19KB, Tier-0 reads now ~7KB and capped.
   `.clineignore` unchanged (working correctly). No source changes; lint +
   build green.
+- **2026-08-23 — R9 [slug] quality pass:** `[slug]` → server shell
+  (`generateStaticParams`, 4 SSG routes) + `ProjectDetail` island with
+  internal GalleryCarousel + EnlargedImageModal sharing one slide-state
+  domain; effect-sync design and both hooks suppressions dead. Modal a11y:
+  `AnimatePresence`, focus trap (Tab wrap) + focus return, Escape,
+  scroll-lock, `role="dialog"`, close button, optimized images. Gallery
+  autoplay (pause hover/focus + while modal open); back button → `Link`.
+  `images`/`captions` merged → `screenshots[]`; shared `CarouselDots`
+  (home + [slug] ×2); home carousel gained dots (approved). New token
+  `--color-backdrop` (#2a2a3a). Settled: three purpose-built carousels,
+  no shared Carousel abstraction. Debts #7, #8 dead. Lint + build green.
 
 <!-- append above -->

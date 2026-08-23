@@ -5,23 +5,25 @@ the debt register the refactor roadmap (see `progress.md`) burns down.
 Conventions are enforced by `.clinerules` — this file records the
 reasoning and the map.
 
-## Route Map (current — post-R8)
+## Route Map (current — post-R9)
 
 ```
 src/
 ├── app/
 │   ├── layout.tsx               # Server ✓ — Navbar + Footer components; root
 │   │                            #   metadata; body bg-canvas
-│   ├── globals.css              # Design tokens: @theme palette — 15 semantic
-│   │                            #   colors, single source of truth (R6)
+│   ├── globals.css              # Design tokens: @theme palette — 16 semantic
+│   │                            #   colors, single source of truth (R6, +R9
+│   │                            #   backdrop)
 │   ├── page.tsx                 # Server ✓ (R8) — composes PageShell/
 │   │                            #   PageHeader/GlassCard/TagPill + client
 │   │                            #   islands (ProjectCarousel, AccentLinkButton,
 │   │                            #   HomeIcon); content from lib/home (R8)
 │   ├── projects/page.tsx        # Server ✓ (R8) — featured/other split stays
 │   │                            #   server-side; ProjectGrid island renders it
-│   ├── projects/[slug]/page.tsx # "use client" — synced carousels + modal;
-│   │                            #   CarouselArrows (R5); all layout debt → R9
+│   ├── projects/[slug]/page.tsx # Server ✓ (R9) — await params → notFound()
+│   │                            #   → generateStaticParams (4 SSG routes);
+│   │                            #   renders ProjectDetail island
 │   ├── skills/page.tsx          # Server ✓ (R8) — SkillsCategories island
 │   ├── experience/page.tsx      # Server ✓ (R8) — ExperienceTimeline island
 │   └── education/page.tsx       # Server ✓ (R8) — EducationPanel island
@@ -40,9 +42,15 @@ src/
 │   │                            #   HTMLMotionProps passthrough (R5)
 │   ├── tag-pill.tsx             # Server-compatible — 4 pill variants (R5)
 │   ├── carousel-arrows.tsx      # "use client" — 3 size presets, aria labels (R5)
+│   ├── carousel-dots.tsx        # "use client" — 3 size variants, aria labels
+│   │                            #   (R9); consumers: home + [slug] ×2
 │   ├── project-carousel.tsx     # "use client" island (R8) — home's featured-
 │   │                            #   projects carousel; embla + Autoplay plugin
-│   │                            #   (pause on hover/focus, resume on leave)
+│   │                            #   (pause on hover/focus) + dots (R9, approved)
+│   ├── project-detail.tsx       # "use client" island (R9) — [slug]'s whole
+│   │                            #   interactive surface: internal
+│   │                            #   GalleryCarousel + EnlargedImageModal share
+│   │                            #   one activeSlide state domain
 │   ├── accent-link-button.tsx   # "use client" (R8) — Link + motion.button CTA
 │   ├── project-grid.tsx         # "use client" island (R8) — hub spotlight card
 │   │                            #   + grid (ProjectCard internal)
@@ -52,7 +60,8 @@ src/
 │                                #   CourseList (internal)
 └── lib/
     ├── projects.ts              # single source of truth: detail + summary +
-    │                            #   thumbnail + featured + captions (R3)
+    │                            #   thumbnail + featured + screenshots
+    │                            #   (src+title+lines merged in R9)
     ├── home.ts                  # HomeContent: hero copy, projects section,
      │                           #   infoCards w/ HomeIconId strings (R8)
     ├── experience.ts            # Experience type + data (R4)
@@ -65,36 +74,41 @@ top-level boundaries; relative imports for colocated files.
 
 ## Target Patterns
 
-- **Data layer** — ✅ fully landed R3/R4/R8: every page renders from typed,
-  serializable TS in `lib/*.ts`; icons are ID strings mapped to react-icons
-  in dedicated components. No page holds content or icon refs.
-- **Component layer** — ✅ landed R5 + R8: `PageShell`/`PageHeader` own page
-  chrome; `GlassCard`/`TagPill`/`CarouselArrows` own recurring patterns;
-  pages compose.
-- **Client/server boundary** — ✅ landed R8: all five static pages are
-  Server Components; motion/interactivity lives in client islands
-  (ProjectCarousel, AccentLinkButton, ProjectGrid, SkillsCategories,
-  ExperienceTimeline, EducationPanel + the R5 shell components).
-  `[slug]` remains whole-page client by design until R9.
+- **Data layer** — ✅ fully landed R3/R4/R8/R9: every page renders from
+  typed, serializable TS in `lib/*.ts`; icons are ID strings mapped to
+  react-icons in dedicated components. No page holds content or icon refs.
+- **Component layer** — ✅ landed R5 + R8 + R9: `PageShell`/`PageHeader`
+  own page chrome; `GlassCard`/`TagPill`/`CarouselArrows`/`CarouselDots`
+  own recurring patterns; pages compose.
+- **Client/server boundary** — ✅ fully landed R8/R9: every page is a
+  Server Component; motion/interactivity lives in client islands.
+  `[slug]`'s shell resolves params + `notFound()` server-side, then hands
+  the typed `Project` to the `ProjectDetail` island.
 - **Icons** — ✅ landed R7/R8: react-icons only; ID → component maps
   (`skill-icon.tsx`, `home-icon.tsx`) keep `lib/` serializable.
-- **Design tokens** — ✅ landed R6: palette lives once in `globals.css`
-  `@theme`; components reference semantic utilities, never raw hexes.
-  Remaining literals are deliberate one-offs (see "Design Tokens" below).
-- **Carousel pattern** — three embla instances. Home's is an island (R8)
-  using `embla-carousel-autoplay` (4500ms, `stopOnInteraction: false`,
-  wrapper-level pause on hover/focus — the plugin's `stopOnMouseEnter` only
-  watches the viewport, missing the overlay arrows). The `[slug]` pair is
-  still glued by the effect-sync R9 replaces; whether a shared `Carousel`
-  scaffold is worth extracting gets evaluated after R9's redesign. The R5
-  decision stands: slide markup and behavior differ too much to unify today.
-- **Modal pattern** — target R9: `AnimatePresence`, Escape + scroll-lock,
-  `role="dialog"`, optimized `next/image` (no `unoptimized`).
+- **Design tokens** — ✅ landed R6 (+R9 `backdrop`): palette lives once
+  in `globals.css` `@theme`; components reference semantic utilities,
+  never raw hexes. Remaining literals are deliberate one-offs (see
+  "Design Tokens" below).
+- **Carousel pattern** — ✅ settled R9: three purpose-built carousels
+  (home / `[slug]` gallery / `[slug]` modal), NOT one shared `Carousel` —
+  rule of three not met and slide markup genuinely differs; knowledge
+  quirks live in `techContext.md`. Shared primitives: `CarouselArrows`
+  (R5) + `CarouselDots` (R9). Home + gallery autoplay (4500ms,
+  `stopOnInteraction: false`, wrapper-level pause on hover/focus — the
+  plugin's `stopOnMouseEnter` only watches the viewport, missing overlay
+  arrows). Gallery/modal sync: modal mounts at `startIndex` =
+  clicked slide; single shared `activeSlide`; on close the gallery jumps
+  to it (no live cross-carousel effect-sync — that design died in R9).
+- **Modal pattern** — ✅ landed R9: `AnimatePresence`-wrapped,
+  `role="dialog"` + `aria-modal`, focus-on-open + focus return + full Tab
+  wrap trap, Escape close, body scroll-lock, close button, optimized
+  `next/image` (no `unoptimized`).
 - **Motion** — target R10: one shared variants module (`lib/motion.ts`);
-  variants at module scope (already true inside every R8 island), unified
-  stagger logic.
+  variants at module scope (already true inside every R8/R9 island),
+  unified stagger logic.
 
-## Design Tokens (landed R6)
+## Design Tokens (landed R6, extended R9)
 
 Palette defined once in `globals.css` via Tailwind v4 `@theme`; Tailwind
 auto-generates utilities from each `--color-*` variable (including opacity
@@ -115,26 +129,28 @@ scales (Thayer-approved, R6). Token map:
 | `surface-2` | `#1f1e2e` | panels |
 | `surface-3` | `#272636` | inner panels, modal info rail |
 | `surface-modal` | `#1c1b29` | modal background |
+| `backdrop` | `#2a2a3a` | screenshot letterbox behind `object-contain` |
 | `menu` | `#4b4e58` | mobile menu buttons |
 | `menu-hover` | `#5b5f69` | mobile menu hover |
 | `menu-tray` | `#2f3138` | mobile menu dropdown container |
 
 Deliberate non-tokens: experience avatar gradient (`#2c2f36/#1f2128/#3a3e47`,
-single-use decorative), `[slug]` inline `#2a2a3a` (inline-style removal is
-R9's), accent `rgba()` stops inside arbitrary gradients (color-mix()
-conversion risks render drift — value-identical literals are safer).
+single-use decorative), accent `rgba()` stops inside arbitrary gradients
+(color-mix() conversion risks render drift — value-identical literals are
+safer).
 
 ## Debt Register (current → killed by)
 
 1. ~~Duplicate project data, hub vs `lib/projects.ts`~~ ✅ R3
 2. ~~Dual icon systems (FA CDN + react-icons)~~ ✅ R7
-3. ~~All 6 pages `"use client"`~~ ✅ R8 (servers + islands; `[slug]` → R9)
+3. ~~All 6 pages `"use client"`~~ ✅ R8/R9 (servers + islands)
 4. ~~Copy-pasted page shell + style strings~~ ✅ R5
 5. ~~Type drift: `Project` ×2, `Experience`, `pageMeta` ×4~~ ✅ R3/R4/R5
 6. ~~Dead `scrollbar-*` classes~~ ✅ R6
-7. `[slug]` modal gaps (dead `exit`, no Escape/scroll-lock/role, inline
-   styles, `router.push` back button, `unoptimized` images) → R9
-8. Hooks-order fragility (`notFound()` before hooks in `[slug]`) → R9
+7. ~~`[slug]` modal gaps (dead `exit`, no Escape/scroll-lock/role, inline
+   styles, `router.push` back button, `unoptimized` images)~~ ✅ R9
+8. ~~Hooks-order fragility (`notFound()` before hooks in `[slug]`)~~ ✅ R9
+   (server-side resolve)
 9. Assets: orphaned `Avatar.png`, unused template SVGs, oversized images → R11
 10. SEO absent (single root metadata only) → F2 (unblocked by R8)
 11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family~~ ✅ R3/R5
