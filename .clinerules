@@ -57,6 +57,9 @@ read anything committed here.
 - Never commit secrets; `.env*` stays ignored.
 - File writes go through the harness only (`write_to_file` /
   `replace_in_file`) — never via shell/PowerShell, to avoid token burn.
+  `replace_in_file` markers must be flush-left (`------- SEARCH` /
+  `=======` / `+++++++ REPLACE`); indented markers silently no-op while
+  reporting success (harness parser quirk, A/B-diagnosed 2026-08-23).
   Verify every edit batch with `git --no-pager diff`; success echoes alone
   are not proof.
 - Quality gates before declaring done: `npm run lint` + `npm run build` both
@@ -64,12 +67,12 @@ read anything committed here.
   behavior with failure modes is added.)
 
 ## Workflow Control
-- **Task Checkpoint (the single gate):** once implementation and bank
-  updates are done and `npm run lint` + `npm run build` are both clean,
-  stop and present a diff summary + task summary. Wait for Thayer's
-  approval before committing; after requested changes, re-present the same
-  checkpoint. A task is not done until its checkpoint is approved and
-  committed.
+- **Task Checkpoint (the single gate):** once implementation is done and
+  `npm run lint` + `npm run build` are both clean, stop and present a
+  diff summary + task summary. Bank updates run only AFTER Thayer approves
+  (so requested changes never invalidate written docs); after requested
+  changes, re-present the same checkpoint. A task is not done until its
+  checkpoint is approved and committed.
 - **Circuit breaker:** after 5 consecutive failures on the same step (or 5
   tool calls with no verifiable progress), stop retrying, list each
   attempt, its error, and a hypothesis, and ask Thayer how to proceed.
