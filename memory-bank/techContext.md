@@ -36,9 +36,13 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 - **`.clinerules`** — always-loaded project law: conventions, guardrails,
   git policy, memory bank protocol. Kept short on purpose (token cost is
   per-message).
-- **`memory-bank/`** — on-demand project ledger (this file). Stable files
-  change rarely; `activeContext.md` + `progress.md` are volatile and updated
-  every task per the protocol.
+- **`memory-bank/`** — tiered ledger (protocol in `.clinerules`): Tier 0
+  reads are `activeContext.md` + `progress.md` every task; this file and
+  `systemPatterns.md` are Tier 1 (on demand); brief/product are Tier 2.
+  `completedTasks.md` is a sealed write-only archive — append via the
+  sentinel, never read until Thayer confirms all roadmap tasks are done.
+  Compression caps keep every file bounded; the bank is primary context
+  over re-reading source files.
 - **`.clineignore`** — blocks Cline tools from reading `node_modules/`,
   `.next/`, and `package-lock.json` (no token value; npm commands answer
   dependency questions — treat npm as the driver, the lockfile as the
