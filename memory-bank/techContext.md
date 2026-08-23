@@ -10,7 +10,8 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 - **Tailwind CSS 4** via `@tailwindcss/postcss` (v4 CSS-first config —
   design tokens live in `globals.css` `@theme` since R6; no
   `tailwind.config.*` file exists)
-- **framer-motion** (animation), **embla-carousel-react** (carousels),
+- **framer-motion** (animation), **embla-carousel-react** +
+  **embla-carousel-autoplay** (carousels + official autoplay plugin, R8),
   **react-icons** (sole icon library since R7 — `fa`/`si`/`hi`
   collections; no CDN, no webfonts)
 
@@ -57,5 +58,15 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   to `MotionValue | ReactNode`, which `motion.div` rejects as JSX children —
   re-pin `children?: ReactNode` via `Omit` when spreading motion props (see
   `glass-card.tsx`).
+- embla/React-Compiler quirks (found R8): (1) embla's documented autoplay
+  pattern (`useRef(Autoplay(...))` + `[ref.current]` in options) trips the
+  `react-hooks` "Cannot access refs during render" rules — build the plugin
+  in `useMemo` instead (stable identity, same behavior). (2) v8.6.0's
+  typings accept `stopOnMouseEnter: boolean` only (no `"retry"`), and the
+  plugin's own hover handling watches just the embla viewport — wrapper-div
+  pause/resume handlers cover overlay arrows too (see
+  `project-carousel.tsx`). (3) `Autoplay.play(jumpOverride)` takes a JUMP
+  override, not a restart flag — `play(true)` makes every subsequent tick
+  `scrollNext(true)` (snap, no animation). Resume with bare `play()`.
 - No test framework — deliberate for a static presentation site; revisit if
   interactive behavior with failure modes is ever added.

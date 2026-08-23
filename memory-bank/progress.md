@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-21 (post-R7)** — what works, what's changing, and the roadmap that
+**Updated: 2026-08-22 (post-R8)** — what works, what's changing, and the roadmap that
 drives it. Each roadmap item = one future task = one commit.
 
 ## What Works (stable, deployed)
@@ -9,17 +9,46 @@ drives it. Each roadmap item = one future task = one commit.
   `/projects/[slug]` (carousel + enlarged-image modal), `/skills`,
   `/education`, `/experience`
 - Deployed on Vercel from `main`; `refactor/cleanup` is the working branch
-- Content data layer complete (`lib/`: projects, experience, education,
-  skills) — all content pages render from it (R3/R4)
+- Content data layer complete (`lib/`: projects, home, experience, education,
+  skills) — every page renders from it (R3/R4/R8)
 - Shared UI component layer complete (`components/`: PageShell, PageHeader,
-  GlassCard, TagPill, CarouselArrows + existing navbar/footer/skill-icon) —
-  all pages compose from it (R5)
+  GlassCard, TagPill, CarouselArrows + R8 client islands) — all pages
+  compose from it (R5/R8)
+- Server/client boundary landed (R8): five static-route pages are Server
+  Components with client motion/carousel islands; only `[slug]` remains a
+  whole-page client component (deliberate, → R9). Prerequisite for F2
+  metadata is clear.
 - Design token layer complete — `@theme` palette in `globals.css`, semantic
   color utilities across every component/page (R6)
-- Single icon system — react-icons everywhere, FA CDN gone (R7)
+- Single icon system — react-icons everywhere, FA CDN gone (R7); icon-ID
+  maps for skills (R4) and home (R8)
+- Home carousel autoplays via `embla-carousel-autoplay` with
+  pause-on-hover/focus (R8, approved behavior change)
 
 ## Task Log
 
+- **2026-08-22 — R8 server/client boundary:** home + the four zero-hook
+  pages (hub, skills, education, experience) became Server Components.
+  Function-based framer-motion variants and gestures can't cross the RSC
+  boundary, so each page's animated body moved into a client island:
+  `project-grid` (hub, spotlight card + grid, featured/other split stays
+  server-side), `skills-categories`, `experience-timeline`,
+  `education-panel` (+ internal CourseList), and home's `project-carousel`
+  + `accent-link-button` (one island replacing 4 identical Link→motion.button
+  CTAs). Home content landed in `lib/home.ts` (`HomeContent`: hero, projects
+  section, infoCards at module scope) with `HomeIconId` → `home-icon.tsx`
+  icon map (SkillIcon pattern) — debts #3, #12 dead. New dep
+  `embla-carousel-autoplay` 8.6.0 (Thayer-approved; matches embla-react
+  8.6.0): 4500ms cadence unchanged, `stopOnInteraction: false`, pause on
+  hover/focus + resume on leave/blur on the wrapper div (plugin's
+  `stopOnMouseEnter` only watches the viewport — would miss the overlay
+  arrows). Plugin instance built via `useMemo`, not embla's documented
+  `useRef` pattern — React Compiler lint rules forbid reading refs during
+  render. Payload-neutral conversion (pages were already 100% client); data
+  selection, layout, and future metadata exports now server-side. Tooling:
+  `replace_in_file` false-success ×2 again (page.tsx import, education
+  icons) — both recovered via full-file `write_to_file` + git/Select-String
+  ground truth. Lint + build green; all 5 static routes prerender.
 - **2026-08-21 — R7 unify icons:** all 9 remaining Font Awesome `<i>` usages
   became react-icons components — navbar toggle (`FaTimes`/`FaBars`), footer
   contacts (`FaLinkedin`/`SiGithub`/`FaEnvelope`; GitHub deliberately uses
@@ -120,7 +149,7 @@ drives it. Each roadmap item = one future task = one commit.
   pre-move paths — cleared `.next/`, rebuilt green. Lint + build both green.
 - **2026-08-19 — Deps hygiene (pre-R1, approved):** in-range bumps for all
   packages (`next` 16.1.6 → 16.3.1, `react` 19.2.8, `tailwind` 4.3.3,
-  `framer-motion` 12.43, `typescript` 5.9.3, `eslint` 9.39.5); all 11 audit
+  `framer-motion` 12.43, `typescript` 5.9.3, `eslint` 9.19.5); all 11 audit
   findings cleared; skills-page icons repaired after react-icons 5.7 renamed/
   removed three `si` icons. No majors.
 - **2026-08-19 — R1 lint repair:** native flat config, `eslint .` script,
@@ -141,27 +170,22 @@ drives it. Each roadmap item = one future task = one commit.
 - **R6. ~~Design tokens via Tailwind v4 `@theme`~~** ✅ done 2026-08-21 —
   see Task Log.
 - **R7. ~~Unify icons on react-icons~~** ✅ done 2026-08-21 — see Task Log.
-- **R8. Server/client boundary** — convert the four zero-hook pages to
-  Server Components with motion client islands; split home's carousel into a
-  client component. Prerequisite for F2 metadata. *(R4 note: also extract
-  home's remaining hardcoded content — hero copy, `infoCards` — to the data
-  layer here, and hoist `infoCards` to module scope; deliberately skipped in
-  R4 since home gets restructured in this task. R7 note: `infoCards` icons
-  are now component refs — switch to icon IDs, `SkillIcon` pattern, when
-  the data moves.)*
+- **R8. ~~Server/client boundary~~** ✅ done 2026-08-22 — see Task Log.
 - **R9. `[slug]` page + modal quality pass** — server shell + client
   carousel/modal islands; fix hooks order; back button → `<Link>`; modal:
   `AnimatePresence`, Escape, scroll-lock, `role="dialog"`, optimized images
-  (drop `unoptimized`); remove inline styles. *(R5 note: the three
-  carousels — home, `[slug]` main, `[slug]` modal — were deliberately NOT
-  unified in R5: they differ in autoplay, slide shape, dots, and
-  cross-carousel sync, and the effect-sync between main/modal is exactly
-  what this task replaces. After the redesign, evaluate whether what remains
-  is similar enough to extract into one shared `Carousel` component,
-  composing with R5's `CarouselArrows`.)*
+  (drop `unoptimized`); remove inline styles. *(R8 note: the non-magnified
+  main carousel should also cycle via the Autoplay plugin — same
+  pause-on-hover/focus treatment as home, per Thayer. The three carousels —
+  home, `[slug]` main, `[slug]` modal — were deliberately NOT unified: they
+  differ in autoplay, slide shape, dots, and cross-carousel sync, and the
+  effect-sync between main/modal is exactly what this task replaces. After
+  the redesign, evaluate whether what remains is similar enough to extract
+  into one shared `Carousel` component, composing with R5's
+  `CarouselArrows`.)*
 - **R10. Motion consolidation** — single `lib/motion.ts` variants module;
-  variants at module scope; simplify stagger logic; unify hover-variant
-  naming.
+  variants at module scope (already true inside all R8 islands); simplify
+  stagger logic; unify hover-variant naming.
 - **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
   git history) and unused template SVGs after verifying references;
   compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`, `John_1.png`);
@@ -178,10 +202,10 @@ drives it. Each roadmap item = one future task = one commit.
 
 - **F1. Resume button** — PDF in `public/`, icon link in footer beside the
   existing contact icons.
-- **F2. SEO implementation** *(after R8)* — per-page `metadata` exports,
-  Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`, `robots.ts`,
-  per-project `generateMetadata` from lib data.
+- **F2. SEO implementation** *(unblocked by R8)* — per-page `metadata`
+  exports, Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`,
+  `robots.ts`, per-project `generateMetadata` from lib data.
 
 ## Status
 
-Next task: **R8**. See `activeContext.md` for the current working snapshot.
+Next task: **R9**. See `activeContext.md` for the current working snapshot.
