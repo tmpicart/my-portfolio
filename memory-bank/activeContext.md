@@ -1,25 +1,25 @@
 # Active Context
 
-**Snapshot: 2026-08-23 (post-R9)** — updated every task per the Memory Bank
-Protocol.
+**Snapshot: 2026-08-23 (post-R9.1)** — updated every task per the Memory
+Bank Protocol.
 
 ## Current State
 
-- **R9 complete** on `refactor/cleanup`: `[slug]` is a server shell +
-  `ProjectDetail` island; modal has full a11y (focus trap, Escape,
-  scroll-lock, `role="dialog"`); gallery autoplays like home.
-- `lib/projects.ts` now carries `screenshots[]` (src + title + lines);
-  parallel `images`/`captions` arrays are gone.
-- `CarouselDots` shared component (3 consumers); home carousel has dots
-  (approved visual change).
-- Gates green: lint clean, build green, all 4 `[slug]` routes prerender
-  SSG via `generateStaticParams`.
+- **R9.1 complete on `refactor/cleanup`** (checkpoint approved): fixed
+  the `[slug]` mount crash — Autoplay `play()` ran before embla init;
+  now guarded on the embla api (pattern shared with the select effect).
+- R9.1 also split the R9 monolith per one-component-per-file:
+  `project-detail.tsx` (composition root) + `gallery-carousel.tsx` +
+  `enlarged-image-modal.tsx`; behavior-neutral, gates green, 4 SSG routes.
+- R9 stands as built: server shell + island, modal a11y,
+  `screenshots[]`, shared `CarouselDots`, home dots (approved).
 
 ## What's Next
 
 **R10 — Motion consolidation**: one `lib/motion.ts` variants module,
 variants at module scope (already true in R8/R9 islands), simplified
-stagger logic, unified hover-variant naming. Then R11 (assets), F2 (SEO).
+stagger logic, unified hover-variant naming — folds in the duplicated
+`sectionVariants` copy left by the R9.1 split. Then R11 (assets), F2.
 
 Task pattern: Tier-0 reads → single roadmap item → quality gates → bank
 updates + archive append → Task Checkpoint → commit by explicit path.
@@ -35,7 +35,6 @@ updates + archive append → Task Checkpoint → commit by explicit path.
 
 - `.clinerules` is law; on disagreement it wins and the bank gets corrected.
 - Refactors are visually neutral; exceptions need Thayer's sign-off (R3
-  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior, R9 home
-  dots).
+  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior, R9 dots).
 - One roadmap item = one task = one commit; flag out-of-scope findings.
 - Ask before dependency changes; never push without asking.

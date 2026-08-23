@@ -47,10 +47,14 @@ src/
 │   ├── project-carousel.tsx     # "use client" island (R8) — home's featured-
 │   │                            #   projects carousel; embla + Autoplay plugin
 │   │                            #   (pause on hover/focus) + dots (R9, approved)
-│   ├── project-detail.tsx       # "use client" island (R9) — [slug]'s whole
-│   │                            #   interactive surface: internal
-│   │                            #   GalleryCarousel + EnlargedImageModal share
-│   │                            #   one activeSlide state domain
+│   ├── project-detail.tsx       # "use client" island (R9, split R9.1) —
+│   │                            #   [slug] composition root: owns the shared
+│   │                            #   activeSlide/modal state for the two below
+│   ├── gallery-carousel.tsx     # "use client" (split R9.1) — [slug] gallery:
+│   │                            #   embla + Autoplay + hover overlay; plugin
+│   │                            #   play()/stop() guarded on embla api
+│   ├── enlarged-image-modal.tsx # "use client" (split R9.1) — [slug] modal:
+│   │                            #   2nd embla, focus trap, Escape, scroll-lock
 │   ├── accent-link-button.tsx   # "use client" (R8) — Link + motion.button CTA
 │   ├── project-grid.tsx         # "use client" island (R8) — hub spotlight card
 │   │                            #   + grid (ProjectCard internal)
@@ -100,6 +104,8 @@ top-level boundaries; relative imports for colocated files.
   arrows). Gallery/modal sync: modal mounts at `startIndex` =
   clicked slide; single shared `activeSlide`; on close the gallery jumps
   to it (no live cross-carousel effect-sync — that design died in R9).
+  Plugin `play()`/`stop()` must be guarded on the embla api — plugin
+  methods throw before init (mount-effect crash, fixed R9.1).
 - **Modal pattern** — ✅ landed R9: `AnimatePresence`-wrapped,
   `role="dialog"` + `aria-modal`, focus-on-open + focus return + full Tab
   wrap trap, Escape close, body scroll-lock, close button, optimized

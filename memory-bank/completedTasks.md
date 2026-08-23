@@ -94,4 +94,14 @@ confirms all roadmap tasks are complete; do not read it before then.
   `--color-backdrop` (#2a2a3a). Settled: three purpose-built carousels,
   no shared Carousel abstraction. Debts #7, #8 dead. Lint + build green.
 
+### R9.1 — 2026-08-23 — [slug] autoplay crash fix + island split
+- Bug: `TypeError ... internalEngine` on every `/projects/[slug]` — Autoplay
+  `play()` called from a mount effect before embla init attached the plugin.
+- Fix: guard the effect on `mainCarouselApi` (embla's readiness signal, same
+  pattern as the select-listener effect); add it to the deps array.
+- Split per one-component-per-file: `project-detail.tsx` (457→~160-line
+  composition root, shared slide/modal state) + `gallery-carousel.tsx` +
+  `enlarged-image-modal.tsx`; behavior-neutral; local `sectionVariants` copy
+  flagged for R10. Gates green; checkpoint approved; single commit (fix +
+  split, one roadmap item).
 <!-- append above -->

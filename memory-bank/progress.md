@@ -22,6 +22,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-23 — R9.1 [slug] crash fix + split:** guarded gallery
+  Autoplay on the embla api (plugin methods throw pre-init); split
+  ProjectDetail → gallery-carousel + enlarged-image-modal (root keeps
+  shared state). Lint + build green.
 - **2026-08-23 — R9 [slug] quality pass:** server shell + `ProjectDetail`
   island (gallery + modal: autoplay, focus trap, `AnimatePresence`,
   `role="dialog"`, scroll-lock, optimized images); `images`/`captions`
@@ -31,9 +35,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   Components with client motion/carousel islands; home content →
   `lib/home.ts` + `HomeIcon` map; autoplay plugin added (approved).
   Debts #3, #12 dead. Lint + build green.
-- **2026-08-22 — Bank & workflow audit:** tiered bank reads + sealed
-  archive + Task Checkpoint gate + circuit breaker + compression caps;
-  bank slimmed, growth capped. Lint + build green.
 
 ## Roadmap — Refactor (dependency-ordered)
 
@@ -47,9 +48,12 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-22 — **R8** server/client boundary (pages → RSC + islands)
 - ✅ 2026-08-23 — **R9** `[slug]` quality pass (server shell, modal a11y,
   autoplay, data merge, home dots)
+- ✅ 2026-08-23 — **R9.1** autoplay pre-init crash guard +
+  one-component-per-file split of the `[slug]` island
 - **R10. Motion consolidation** — single `lib/motion.ts` variants module;
   variants at module scope (already true inside all R8/R9 islands);
-  simplify stagger logic; unify hover-variant naming.
+  simplify stagger logic; unify hover-variant naming; fold in the
+  `sectionVariants` copy left by the R9.1 split.
 - **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
   git history) and unused template SVGs after verifying references;
   compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`,
