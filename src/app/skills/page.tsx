@@ -5,7 +5,7 @@ import { skillCategories } from "@/lib/skills";
 
 export default function SkillsPage() {
   return (
-    <PageShell initial="hidden" animate="visible">
+    <PageShell>
       <PageHeader eyebrow="Core Toolkit" title="Skills" />
 
       <SkillsCategories categories={skillCategories} />

@@ -1,25 +1,25 @@
 # Active Context
 
-**Snapshot: 2026-08-23 (post-R9.1)** — updated every task per the Memory
+**Snapshot: 2026-08-23 (post-R10)** — updated every task per the Memory
 Bank Protocol.
 
 ## Current State
 
-- **R9.1 complete on `refactor/cleanup`** (checkpoint approved): fixed
-  the `[slug]` mount crash — Autoplay `play()` ran before embla init;
-  now guarded on the embla api (pattern shared with the select effect).
-- R9.1 also split the R9 monolith per one-component-per-file:
-  `project-detail.tsx` (composition root) + `gallery-carousel.tsx` +
-  `enlarged-image-modal.tsx`; behavior-neutral, gates green, 4 SSG routes.
-- R9 stands as built: server shell + island, modal a11y,
-  `screenshots[]`, shared `CarouselDots`, home dots (approved).
+- **R10 complete on `refactor/cleanup`** (checkpoint approved): motion
+  lives in `lib/motion.ts` — timing tokens, `staggerContainer`/`fadeUp`/
+  `fadeDown` factories, named variants; every island rewired to it.
+- PageShell is the stagger root on every page (PageHeader fades down
+  first); education/skills/hub retimed to one 0.12 step (Option C,
+  approved); `custom=` function-variant delays eliminated.
+- Hover policy: CSS `duration-200` for color/opacity, framer label
+  variants (`whileHover="hover"`) for transform/spring hovers.
+- 18 files (+1 new), net −102 lines; lint + build green; 12/12 SSG.
 
 ## What's Next
 
-**R10 — Motion consolidation**: one `lib/motion.ts` variants module,
-variants at module scope (already true in R8/R9 islands), simplified
-stagger logic, unified hover-variant naming — folds in the duplicated
-`sectionVariants` copy left by the R9.1 split. Then R11 (assets), F2.
+**R11 — Asset cleanup**: delete orphaned `Avatar.png` and unused template
+SVGs after verifying references; compress/resize `laptop_img.jpg`,
+`pfp.jpg`, `John_1.png`; normalize asset filenames. Then R12, R13, F1–F3.
 
 Task pattern: Tier-0 reads → single roadmap item → quality gates → bank
 updates + archive append → Task Checkpoint → commit by explicit path.
@@ -30,11 +30,13 @@ updates + archive append → Task Checkpoint → commit by explicit path.
 - Experience avatar gradient stays a deliberate non-token (single-use
   decorative) → no action.
 - Navbar menu-close suppression → R13.
+- Reduced-motion support deliberately skipped in R10 → F3.
 
 ## Working Agreements in Force
 
 - `.clinerules` is law; on disagreement it wins and the bank gets corrected.
 - Refactors are visually neutral; exceptions need Thayer's sign-off (R3
-  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior, R9 dots).
+  thumbnails, R5 header/skills, R7 `SiGithub`, R8 pause behavior, R9 dots,
+  R10 entrance retiming + hover sharpening).
 - One roadmap item = one task = one commit; flag out-of-scope findings.
 - Ask before dependency changes; never push without asking.

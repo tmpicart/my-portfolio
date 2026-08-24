@@ -5,7 +5,7 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 // Class strings stay literal per variant — Tailwind's JIT scanner can't see
 // dynamically constructed class names.
 const arrowBase =
-  "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-surface-1 text-white shadow-lg transition-colors hover:bg-accent";
+  "hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 items-center justify-center rounded-full bg-surface-1 text-white shadow-lg transition-colors duration-200 hover:bg-accent";
 
 const arrowSizes = {
   // Home carousel (~40px, inset-2).

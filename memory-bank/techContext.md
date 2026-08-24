@@ -55,6 +55,9 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   the harness parser only honors flush-left markers. Not a filesystem issue
   (`write_to_file` always lands). Law in `.clinerules`: markers flush-left,
   verify every batch with `git --no-pager diff --stat`.
+- Cline editor quirk (found R10): full-file `old_text` must match
+  byte-for-byte — a file without a trailing newline rejects `old_text`
+  that includes one. Prefer fragment edits that don't touch EOF.
 - Terminal is Windows PowerShell — `&&` separators fail ("not a valid
   statement separator"); use `;` instead. `git diff` opens the `less`
   pager; pass `--no-pager` as a **global** flag (before the subcommand —

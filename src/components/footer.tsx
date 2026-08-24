@@ -15,7 +15,7 @@ export default function Footer() {
           href="https://www.linkedin.com/in/tmpicart"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors hover:text-accent"
+          className="transition-colors duration-200 hover:text-accent"
         >
           <FaLinkedin />
         </a>
@@ -24,14 +24,14 @@ export default function Footer() {
           href="https://github.com/tmpicart"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors hover:text-accent"
+          className="transition-colors duration-200 hover:text-accent"
         >
           <SiGithub />
         </a>
 
         <a
           href="mailto:tmpicart@gmail.com"
-          className="transition-colors hover:text-accent"
+          className="transition-colors duration-200 hover:text-accent"
         >
           <FaEnvelope />
         </a>

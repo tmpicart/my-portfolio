@@ -2,30 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 import GlassCard from "@/components/glass-card";
+import { spotlightEntrance, spotlightHover } from "@/lib/motion";
 import type { Project } from "@/lib/projects";
-
-const projectVariants: Variants = {
-  hidden: { opacity: 0, y: 18, scale: 0.99 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1.01,
-    transition: { type: "spring", stiffness: 160, damping: 22, delay: 0.06 + i * 0.06 },
-  }),
-};
-
-const hoverAnimation = {
-  scale: 1.04,
-  rotate: 0.25,
-  y: 0,
-  zIndex: 50,
-  backgroundColor: "rgba(166,115,231,0.22)",
-  borderColor: "rgba(166,115,231,0.55)",
-  transition: { type: "spring" as const, stiffness: 180, damping: 16 },
-};
 
 type ProjectCardProps = Project & { size?: "small" | "medium" | "large" };
 
@@ -62,10 +43,8 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
         variant="spotlight"
         style={{ zIndex: 0 }}
         className={`${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
-        variants={projectVariants}
-        initial="hidden"
-        animate="visible"
-        whileHover={hoverAnimation}
+        whileHover="hover"
+        variants={spotlightHover}
       >
         <div className={`relative w-full overflow-hidden rounded-md ${sizeStyles.imageHeight}`}>
           <div className="flex items-center justify-center w-full h-full">
@@ -87,32 +66,18 @@ type ProjectGridProps = {
   otherProjects: Project[];
 };
 
-// Client island (R8): the hub grid's entrance uses a function-based variant
-// and a whileHover gesture, which can't cross the server/client boundary.
+// Client island (R8): cards inherit the page stagger's variant labels through
+// the island boundary; the hover gesture needs the client runtime.
 export default function ProjectGrid({ featuredProject, otherProjects }: ProjectGridProps) {
   return (
     <div className="w-full max-w-6xl">
-      <motion.div
-        key={featuredProject.slug}
-        variants={projectVariants}
-        custom={0}
-        initial="hidden"
-        animate="visible"
-        className="w-full"
-      >
+      <motion.div key={featuredProject.slug} variants={spotlightEntrance} className="w-full">
         <ProjectCard {...featuredProject} size="large" />
       </motion.div>
 
       <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
-        {otherProjects.map((project, i) => (
-          <motion.div
-            key={project.slug}
-            variants={projectVariants}
-            custom={i + 1}
-            initial="hidden"
-            animate="visible"
-            className="h-full"
-          >
+        {otherProjects.map((project) => (
+          <motion.div key={project.slug} variants={spotlightEntrance} className="h-full">
             <ProjectCard {...project} size="medium" />
           </motion.div>
         ))}

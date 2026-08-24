@@ -1,33 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import type { Variants } from "framer-motion";
 
 import GlassCard from "@/components/glass-card";
 import TagPill from "@/components/tag-pill";
 import type { Experience } from "@/lib/experience";
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, x: -32, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut", delay: i * 0.12 },
-  }),
-};
+import { slideInFromLeft } from "@/lib/motion";
 
 type ExperienceTimelineProps = {
   experiences: Experience[];
 };
 
-// Client island (R8): the staggered entrance relies on a function-based
-// framer-motion variant, which can't cross the server/client boundary.
+// Client island (R8): cards inherit the page stagger's variant labels through
+// the island boundary (labels propagate; function variants wouldn't).
 export default function ExperienceTimeline({ experiences }: ExperienceTimelineProps) {
   return (
     <div className="relative flex w-full max-w-4xl flex-col gap-10">
-      {experiences.map((experience, index) => (
-        <GlassCard key={experience.company} variant="timeline" accentLine custom={index} variants={cardVariants}>
+      {experiences.map((experience) => (
+        <GlassCard key={experience.company} variant="timeline" accentLine variants={slideInFromLeft}>
           <div className="flex h-32 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-gradient-to-br from-[#2c2f36] via-[#1f2128] to-[#3a3e47]">
             <Image
               src={experience.logo}

@@ -5,7 +5,7 @@ import { experiences } from "@/lib/experience";
 
 export default function ExperiencePage() {
   return (
-    <PageShell initial="hidden" animate="visible">
+    <PageShell>
       <PageHeader eyebrow="Career Timeline" title="Work Experience" />
 
       <ExperienceTimeline experiences={experiences} />

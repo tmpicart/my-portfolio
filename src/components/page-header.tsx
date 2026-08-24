@@ -2,23 +2,21 @@
 
 import { motion } from "framer-motion";
 
+import { fadeDown } from "@/lib/motion";
+
 type PageHeaderProps = {
   eyebrow: string;
   title: string;
 };
 
-// Canonical header (R5): eyebrow tint (text-accent-tint), mb-10 spacing, and a
-// 0.5s fade-up. Per-page drift (projects' old tint + tracking-tight,
-// education's 1s y:-25, varying margins) was consolidated with Thayer's
-// approval — R6/R10 can tune the single source if needed.
+// First child of the page stagger — every page opens with the header easing
+// down, then content follows (variant labels propagate from PageShell).
+const headerVariants = fadeDown();
+
+// Canonical header (R5): eyebrow tint (text-accent-tint), mb-10 spacing.
 export default function PageHeader({ eyebrow, title }: PageHeaderProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="relative mb-10 text-center"
-    >
+    <motion.div variants={headerVariants} className="relative mb-10 text-center">
       <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-accent-tint">
         {eyebrow}
       </p>

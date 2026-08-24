@@ -4,12 +4,10 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
-const buttonHover = {
-  hover: { scale: 1.04, transition: { duration: 0.2 } },
-};
+import { liftOnHover } from "@/lib/motion";
 
 const buttonClasses =
-  "w-max rounded-lg bg-accent px-4 py-2 transition duration-300 hover:bg-accent-deep";
+  "w-max rounded-lg bg-accent px-4 py-2 transition-colors duration-200 hover:bg-accent-deep";
 
 type AccentLinkButtonProps = {
   href: string;
@@ -24,7 +22,7 @@ export default function AccentLinkButton({ href, className, children }: AccentLi
   return (
     <Link href={href}>
       <motion.button
-        variants={buttonHover}
+        variants={liftOnHover}
         whileHover="hover"
         className={className ? `${buttonClasses} ${className}` : buttonClasses}
       >

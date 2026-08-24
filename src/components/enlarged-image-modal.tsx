@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { HiX } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
@@ -23,6 +23,13 @@ type EnlargedImageModalProps = {
 // Focus-trap candidates inside the modal dialog.
 const FOCUSABLE_SELECTOR =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+// Overlay fade in/out — labels keep AnimatePresence's exit in the same system.
+const overlayVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 // The [slug] enlarged-view dialog (R9): a second embla carousel plus focus
 // trap, Escape handling, and scroll lock. Mounts fresh on every open, so the
@@ -88,9 +95,10 @@ export default function EnlargedImageModal({
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={overlayVariants}
       onClick={onClose}
     >
       <div
@@ -104,7 +112,7 @@ export default function EnlargedImageModal({
       >
         <button
           aria-label="Close enlarged image view"
-          className="absolute right-3 top-3 z-10 rounded-full bg-surface-1 p-2 text-white shadow-md transition-colors hover:bg-accent"
+          className="absolute right-3 top-3 z-10 rounded-full bg-surface-1 p-2 text-white shadow-md transition-colors duration-200 hover:bg-accent"
           onClick={onClose}
         >
           <HiX className="h-5 w-5" />

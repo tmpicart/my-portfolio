@@ -5,10 +5,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { HiOutlineArrowsExpand } from "react-icons/hi";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
+import { fadeUp } from "@/lib/motion";
 import type { ProjectScreenshot } from "@/lib/projects";
 
 type GalleryCarouselProps = {
@@ -23,13 +24,9 @@ type GalleryCarouselProps = {
 // Matches home's carousel rhythm (R8) so autoplay feels consistent site-wide.
 const AUTOPLAY_DELAY_MS = 4500;
 
-// Local copy of the page's stagger section variant — framer-motion propagates
-// variants by label through the tree, not by object identity, so a copy keeps
-// the carousel in step from its own file. Consolidation: R10 (lib/motion.ts).
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.36, ease: "easeOut" } },
-};
+// Rises with the page stagger alongside its sibling sections — one shared
+// entrance from lib/motion.ts (the R9.1 local copy died with R10).
+const galleryEntrance = fadeUp();
 
 // The [slug] detail gallery (R9): embla + autoplay, hover overlay, and the
 // slide state it shares with the enlarged-image modal via its parent.
@@ -100,7 +97,7 @@ export default function GalleryCarousel({
 
   return (
     <motion.div
-      variants={sectionVariants}
+      variants={galleryEntrance}
       className="relative mb-10 w-full rounded-2xl bg-surface-2 px-6 py-6 shadow-lg"
       onMouseEnter={suspendAutoplay}
       onMouseLeave={resumeAutoplay}

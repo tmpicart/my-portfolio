@@ -104,4 +104,18 @@ confirms all roadmap tasks are complete; do not read it before then.
   `enlarged-image-modal.tsx`; behavior-neutral; local `sectionVariants` copy
   flagged for R10. Gates green; checkpoint approved; single commit (fix +
   split, one roadmap item).
+## R10 — Motion consolidation (2026-08-23)
+
+- Created `lib/motion.ts`: timing tokens, `staggerContainer`/`fadeUp`/
+  `fadeDown` factories, named variants (`slideInFromLeft`,
+  `spotlightEntrance`/`spotlightHover`, `liftOnHover`).
+- PageShell = stagger root on every page; PageHeader first child; all
+  islands rewired (education/skills/hub retimed to one 0.12 step —
+  Option C approved; `custom=` delays eliminated).
+- Hover policy: CSS color/opacity hovers at explicit `duration-200`;
+  framer label variants own transform/spring hovers; vestigial
+  glass-card transitions removed; modal overlay fade to module scope.
+- 18 files (+1 new), net −102 lines; lint + build green; 12/12 SSG.
+- Deferred by choice: reduced-motion support → F3 (added to roadmap).
+
 <!-- append above -->

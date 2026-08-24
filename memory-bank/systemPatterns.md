@@ -35,9 +35,10 @@ src/
 │   ├── home-icon.tsx            # HomeIconId → react-icons (R8, SkillIcon
 │   │                            #   pattern for home's section/info-card icons)
 │   ├── page-shell.tsx           # "use client" — radial-gradient shell wrapper;
-│   │                            #   motion-label passthrough (R5); var(--color-
-│   │                            #   shell) stops (R6)
-│   ├── page-header.tsx          # "use client" — canonical eyebrow + title (R5)
+│   │                            #   stagger root on every page (R10);
+│   │                            #   var(--color-shell) stops (R6)
+│   ├── page-header.tsx          # "use client" — canonical eyebrow + title
+│   │                            #   (R5); first stagger child, every page (R10)
 │   ├── glass-card.tsx           # "use client" — 6 variant map + accentLine;
 │   │                            #   HTMLMotionProps passthrough (R5)
 │   ├── tag-pill.tsx             # Server-compatible — 4 pill variants (R5)
@@ -70,7 +71,8 @@ src/
      │                           #   infoCards w/ HomeIconId strings (R8)
     ├── experience.ts            # Experience type + data (R4)
     ├── education.ts             # Education/CourseGroup + CourseGroupIconId (R4)
-    └── skills.ts                # Skill + SkillIconId union, 20 IDs (R4)
+    ├── skills.ts                # Skill + SkillIconId union, 20 IDs (R4)
+    └── motion.ts                # motion tokens/factories/named variants (R10)
 ```
 
 Import convention (set in R2): `@/*` alias (resolves `./src/*`) across `src/`
@@ -110,9 +112,13 @@ top-level boundaries; relative imports for colocated files.
   `role="dialog"` + `aria-modal`, focus-on-open + focus return + full Tab
   wrap trap, Escape close, body scroll-lock, close button, optimized
   `next/image` (no `unoptimized`).
-- **Motion** — target R10: one shared variants module (`lib/motion.ts`);
-  variants at module scope (already true inside every R8/R9 island),
-  unified stagger logic.
+- **Motion** — ✅ landed R10: `lib/motion.ts` holds timing tokens,
+  `staggerContainer`/`fadeUp`/`fadeDown` factories, and named variants
+  (`slideInFromLeft`, spotlight entrance/hover, `liftOnHover`);
+  PageShell is the stagger root on every page, variants live at module
+  scope, and no `custom=` function variants remain. Hover policy:
+  color/opacity via CSS `duration-200`; transform/spring via framer
+  label variants (`whileHover="hover"`).
 
 ## Design Tokens (landed R6, extended R9)
 

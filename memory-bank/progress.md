@@ -11,6 +11,8 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - Content data layer complete (`lib/`) — every page renders from it
 - Shared component layer complete (PageShell, PageHeader, GlassCard,
   TagPill, CarouselArrows, CarouselDots + client islands)
+- Motion system (`lib/motion.ts`, R10): tokens + factories + named
+  variants; PageShell stagger root on every page; two-tool hover policy
 - Server/client boundary complete (R8+R9): every page is a Server
   Component; all 4 `[slug]` routes prerender SSG via `generateStaticParams`
 - Design token layer (`@theme` palette in `globals.css`) across every
@@ -22,6 +24,11 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-23 — R10 motion consolidation:** `lib/motion.ts` (tokens +
+  staggerContainer/fadeUp/fadeDown + named variants); PageShell = stagger
+  root on every page; education/skills/hub retimed to one 0.12 step
+  (Option C, approved); hover policy pass (CSS 200ms colors, framer
+  springs for transforms). Lint + build green.
 - **2026-08-23 — R9.1 [slug] crash fix + split:** guarded gallery
   Autoplay on the embla api (plugin methods throw pre-init); split
   ProjectDetail → gallery-carousel + enlarged-image-modal (root keeps
@@ -31,10 +38,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   `role="dialog"`, scroll-lock, optimized images); `images`/`captions`
   merged → `screenshots`; shared `CarouselDots` + home dots (approved);
   `--color-backdrop` token. Debts #7, #8 dead. Lint + build green.
-- **2026-08-22 — R8 server/client boundary:** five static pages → Server
-  Components with client motion/carousel islands; home content →
-  `lib/home.ts` + `HomeIcon` map; autoplay plugin added (approved).
-  Debts #3, #12 dead. Lint + build green.
 
 ## Roadmap — Refactor (dependency-ordered)
 
@@ -50,10 +53,9 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   autoplay, data merge, home dots)
 - ✅ 2026-08-23 — **R9.1** autoplay pre-init crash guard +
   one-component-per-file split of the `[slug]` island
-- **R10. Motion consolidation** — single `lib/motion.ts` variants module;
-  variants at module scope (already true inside all R8/R9 islands);
-  simplify stagger logic; unify hover-variant naming; fold in the
-  `sectionVariants` copy left by the R9.1 split.
+- ✅ 2026-08-23 — **R10** motion consolidation (`lib/motion.ts` tokens +
+  factories + named variants; PageShell stagger root; unified stagger +
+  hover naming; hover policy pass)
 - **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
   git history) and unused template SVGs after verifying references;
   compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`,
@@ -73,7 +75,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - **F2. SEO implementation** *(unblocked by R8)* — per-page `metadata`
   exports, Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`,
   `robots.ts`, per-project `generateMetadata` from lib data.
+- **F3. Reduced-motion support** *(deferred by choice during R10)* —
+  `MotionConfig reducedMotion="user"` provider in `layout.tsx` + autoplay
+  gate via `useReducedMotion()` in both carousel islands.
 
 ## Status
 
-Next task: **R10**. See `activeContext.md` for the current working snapshot.
+Next task: **R11**. See `activeContext.md` for the current working snapshot.

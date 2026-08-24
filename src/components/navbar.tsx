@@ -26,13 +26,13 @@ export default function Navbar() {
   return (
     <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-white transition-colors hover:text-accent">
+        <Link href="/" className="text-2xl font-bold text-white transition-colors duration-200 hover:text-accent">
           Home
         </Link>
 
         <button
           aria-label="Toggle navigation menu"
-          className="rounded-lg border border-white/10 bg-menu p-2 text-2xl text-white transition hover:border-accent/40 hover:text-accent md:hidden"
+          className="rounded-lg border border-white/10 bg-menu p-2 text-2xl text-white transition-colors duration-200 hover:border-accent/40 hover:text-accent md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -40,7 +40,7 @@ export default function Navbar() {
 
         <div className="hidden items-center space-x-6 md:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="transition-colors hover:text-accent">
+            <Link key={link.href} href={link.href} className="transition-colors duration-200 hover:text-accent">
               {link.label}
             </Link>
           ))}
@@ -54,7 +54,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="rounded-lg border border-white/10 bg-menu px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-accent/40 hover:bg-menu-hover hover:text-accent"
+              className="rounded-lg border border-white/10 bg-menu px-4 py-3 text-sm font-medium text-white transition-colors duration-200 hover:border-accent/40 hover:bg-menu-hover hover:text-accent"
             >
               {link.label}
             </Link>

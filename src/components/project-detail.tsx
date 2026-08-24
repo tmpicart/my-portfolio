@@ -2,32 +2,20 @@
 
 import Link from "next/link";
 import { useCallback, useState } from "react";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import EnlargedImageModal from "@/components/enlarged-image-modal";
 import GalleryCarousel from "@/components/gallery-carousel";
+import { fadeDown, fadeUp, slideInFromLeft, staggerContainer } from "@/lib/motion";
 import type { Project } from "@/lib/projects";
 
 type ProjectDetailProps = {
   project: Project;
 };
 
-const pageVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.36, ease: "easeOut" } },
-};
-
-// Back link and title animate immediately rather than joining the stagger,
-// matching the pre-R9 entrance exactly.
-const backLinkInitial = { opacity: 0, x: -20 };
-const backLinkAnimate = { opacity: 1, x: 0, transition: { duration: 0.36 } };
-const titleInitial = { opacity: 0, y: -16 };
-const titleAnimate = { opacity: 1, y: 0, transition: { duration: 0.45 } };
+const pageVariants = staggerContainer();
+const sectionVariants = fadeUp();
+const titleVariants = fadeDown();
 
 // The [slug] client island (R9): the server shell hands over a typed Project
 // and this composition root owns the gallery/modal pair and the slide state
@@ -58,17 +46,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       <div className="w-full max-w-[1040px] px-6">
         <Link href="/projects">
           <motion.button
-            initial={backLinkInitial}
-            animate={backLinkAnimate}
-            className="mb-6 rounded-md bg-surface-1 px-5 py-2 font-semibold shadow-md transition-colors duration-300 hover:bg-accent"
+            variants={slideInFromLeft}
+            className="mb-6 rounded-md bg-surface-1 px-5 py-2 font-semibold shadow-md transition-colors duration-200 hover:bg-accent"
           >
             ← Back to Projects
           </motion.button>
         </Link>
 
         <motion.h1
-          initial={titleInitial}
-          animate={titleAnimate}
+          variants={titleVariants}
           className="mb-10 text-center text-4xl font-bold md:text-5xl"
         >
           {title}
@@ -122,7 +108,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-surface-1 px-6 py-3 font-semibold shadow-md transition-colors duration-300 hover:bg-accent hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-surface-1 px-6 py-3 font-semibold shadow-md transition-[background-color,box-shadow] duration-200 hover:bg-accent hover:shadow-lg"
             >
               View on GitHub
             </a>

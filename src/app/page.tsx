@@ -8,6 +8,7 @@ import PageShell from "@/components/page-shell";
 import ProjectCarousel from "@/components/project-carousel";
 import TagPill from "@/components/tag-pill";
 import { home } from "@/lib/home";
+import { durationSlow, fadeUp } from "@/lib/motion";
 import { projects } from "@/lib/projects";
 
 // Minimal slide shape — keeps descriptions, captions, and full image lists out
@@ -18,17 +19,15 @@ const carouselSlides = projects.map(({ slug, title, thumbnail }) => ({
   thumbnail,
 }));
 
+// All home panels share one entrance; PageShell's stagger sequences them.
+const panelEntrance = fadeUp(40, durationSlow);
+
 export default function HomePage() {
   return (
     <PageShell>
       <PageHeader eyebrow={home.hero.eyebrow} title={home.hero.title} />
 
-      <GlassCard
-        variant="hero"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-      >
+      <GlassCard variant="hero" variants={panelEntrance}>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(166,115,231,0.14),_transparent_45%)]" />
 
         <div className="relative flex-1 text-center lg:text-left">
@@ -61,13 +60,7 @@ export default function HomePage() {
       </GlassCard>
 
       <div className="relative flex w-full max-w-6xl flex-col gap-8 lg:flex-row">
-        <GlassCard
-          variant="section"
-          className="flex-1"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-        >
+        <GlassCard variant="section" className="flex-1" variants={panelEntrance}>
           <div className="mb-4 flex items-center">
             <div className="mr-3 rounded-full bg-accent/15 p-3">
               <HomeIcon iconId={home.projects.iconId} className="text-3xl text-accent" />
@@ -84,18 +77,8 @@ export default function HomePage() {
         </GlassCard>
 
         <div className="flex flex-1 flex-col gap-5">
-          {home.infoCards.map((card, index) => (
-            <GlassCard
-              key={card.title}
-              variant="section"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-                delay: 0.5 + index * 0.15,
-              }}
-            >
+          {home.infoCards.map((card) => (
+            <GlassCard key={card.title} variant="section" variants={panelEntrance}>
               <div className="mb-2 flex items-center">
                 <div className="mr-3 rounded-full bg-accent/20 p-2">
                   <HomeIcon iconId={card.iconId} className="text-2xl text-accent" />
