@@ -61,6 +61,9 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - **R12. Naming & consistency audit** — enforce Naming Conventions from
   `.clinerules` across remaining identifiers; final build + lint + visual
   check; README refresh (real stack, working commands, live link).
+  Scope added 2026-08-25: decide navbar-content vs shell-border alignment
+  (nav row flush to max-w-6xl; shell inset 16px by main's `px-4`) and
+  reconcile `[slug]`'s 1040px content column with max-w-6xl elsewhere.
 - **R13. Navbar menu-close pattern** *(added during R1)* — replace the
   effect-based `setMenuOpen(false)` on pathname change with the React
   render-time state-reset pattern; remove the `set-state-in-effect`

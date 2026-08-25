@@ -32,8 +32,8 @@ updates + archive append → Task Checkpoint → commit by explicit path.
 - Navbar menu-close suppression → R13.
 - Reduced-motion support deliberately skipped in R10 → F3.
 - `home.png` doubles as Open Graph image candidate → F2.
-- `[slug]` content column is 1040px vs wider columns elsewhere → R12
-  visual check.
+- Navbar-content vs shell-border alignment (16px `px-4` inset) and
+  `[slug]`'s 1040px column vs max-w-6xl → R12 consistency decisions.
 
 ## Working Agreements in Force
 
