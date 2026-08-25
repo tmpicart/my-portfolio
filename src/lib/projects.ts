@@ -27,38 +27,38 @@ export const projects: Project[] = [
     summary: "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
     description:
       "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally developed over a tight three-week deadline by a team of five, the project earned the highest rating among competing games, with 4.59 stars. I have since taken over development as a solo project to fix bugs, refactor code, enhance gameplay, and expand content.",
-    thumbnail: "/images/john/John_5.png",
+    thumbnail: "/images/john/john-5.png",
     featured: false,
     screenshots: [
       {
-        src: "/images/john/John_1.png",
+        src: "/images/john/john-1.png",
         title: "Title Screen",
         lines: ["- Start or exit the game; includes death and restart mechanics"],
       },
       {
-        src: "/images/john/John_2.png",
+        src: "/images/john/john-2.png",
         title: "NPC Interaction",
         lines: ["- Players can talk to NPCs with functional dialogue"],
       },
       {
-        src: "/images/john/John_3.png",
+        src: "/images/john/john-3.png",
         title: "Shop System & Upgrades",
         lines: ["- Upgrade health and weapons with in-game currency"],
       },
       {
-        src: "/images/john/John_4.png",
+        src: "/images/john/john-4.png",
         title: "Varied Enemies",
         lines: [
           "- Slimes, necromancers, skeletons, archers, and more; AI controlled with state machines",
         ],
       },
       {
-        src: "/images/john/John_5.png",
+        src: "/images/john/john-5.png",
         title: "Multi-Phase Boss",
         lines: ["- Sorceress at the dungeon end with varied attacks and a second phase"],
       },
       {
-        src: "/images/john/John_6.png",
+        src: "/images/john/john-6.png",
         title: "Phase 2",
         lines: ["- Boss attacks intensify with new patterns"],
       },
@@ -84,31 +84,31 @@ export const projects: Project[] = [
       "A web-based tool designed to translate medical terminology from language to language for better accessibility.",
     description:
       "A tool designed to bridge language barriers by translating medical terms across multiple languages. Developed by a team of three, it won the senior project showcase for that semester. The tool leverages an extensive term database and provides AI-powered fallback translations for any missing entries.",
-    thumbnail: "/images/codex/codex_1.png",
+    thumbnail: "/images/codex/codex-1.png",
     featured: true,
     screenshots: [
       {
-        src: "/images/codex/codex_1.png",
+        src: "/images/codex/codex-1.png",
         title: "Home Page",
         lines: ["- Select language and enter a term; fuzzy matching ensures accuracy"],
       },
       {
-        src: "/images/codex/codex_2.png",
+        src: "/images/codex/codex-2.png",
         title: "Translation",
         lines: ["- 'Tylenol' translated to Ukrainian using the backend database"],
       },
       {
-        src: "/images/codex/codex_3.png",
+        src: "/images/codex/codex-3.png",
         title: "AI Translation",
         lines: ["- Fallback AI translation available if no database entry exists"],
       },
       {
-        src: "/images/codex/codex_4.png",
+        src: "/images/codex/codex-4.png",
         title: "Mobile Viewing",
         lines: ["- Responsive and mobile-friendly design"],
       },
       {
-        src: "/images/codex/codex_5.png",
+        src: "/images/codex/codex-5.png",
         title: "Security",
         lines: ["- Inputs are protected from SQL injection and other vulnerabilities"],
       },
@@ -133,26 +133,26 @@ export const projects: Project[] = [
     summary: "A mobile app built to search for events and tickets via the TicketMaster API.",
     description:
       "Mobile app to search, view, and save events from TicketMaster via the TicketMaster API, with Firebase authentication and data storage allowing users to log in and save their favorite events.",
-    thumbnail: "/images/ticketmaster/TicketMaster_1.png",
+    thumbnail: "/images/ticketmaster/ticketmaster-1.png",
     featured: false,
     screenshots: [
       {
-        src: "/images/ticketmaster/TicketMaster_1.png",
+        src: "/images/ticketmaster/ticketmaster-1.png",
         title: "User Authentication",
         lines: ["- Users sign up or log in via Google accounts"],
       },
       {
-        src: "/images/ticketmaster/TicketMaster_2.png",
+        src: "/images/ticketmaster/ticketmaster-2.png",
         title: "Main Page",
         lines: ["- Search by city and event type; concise event data display"],
       },
       {
-        src: "/images/ticketmaster/TicketMaster_3.png",
+        src: "/images/ticketmaster/ticketmaster-3.png",
         title: "Favoriting Events",
         lines: ["- Save important events for tracking"],
       },
       {
-        src: "/images/ticketmaster/TicketMaster_4.png",
+        src: "/images/ticketmaster/ticketmaster-4.png",
         title: "Favorite List",
         lines: ["- Favorites stored securely; direct ticket purchase links retained"],
       },
@@ -177,23 +177,18 @@ export const projects: Project[] = [
     summary: "Learn more about the portfolio site you are currently visiting!",
     description:
       "This is my portfolio website built to showcase my projects, skills, education, and experience. Feel free to explore! Check out my GitHub, LinkedIn, or shoot me an email with the links at the bottom of every page.",
-    thumbnail: "/images/icons/code_img.jpg",
+    thumbnail: "/images/portfolio/home.png",
     featured: false,
     screenshots: [
       {
-        src: "/images/portfolio/Portfolio_1.png",
+        src: "/images/portfolio/portfolio-1.png",
         title: "Vercel Deployment",
         lines: ["- Website is deployed and fully functional via Vercel"],
       },
       {
-        src: "/images/portfolio/Portfolio_2.png",
+        src: "/images/portfolio/mobile.png",
         title: "Mobile Responsive",
         lines: ["- Mobile support and adaptive/scalable design"],
-      },
-      {
-        src: "/images/icons/laptop_img.jpg",
-        title: "Thanks for Visiting!",
-        lines: ["- Thank you for taking the time to view my page!"],
       },
     ],
     bullets: {

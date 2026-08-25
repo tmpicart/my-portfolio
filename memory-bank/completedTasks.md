@@ -118,4 +118,12 @@ confirms all roadmap tasks are complete; do not read it before then.
 - 18 files (+1 new), net −102 lines; lint + build green; 12/12 SSG.
 - Deferred by choice: reduced-motion support → F3 (added to roadmap).
 
+- **2026-08-25 — R11 asset cleanup:** deleted orphaned `Avatar.png`, 5
+  template SVGs, and both stock photos (filler "Thanks for Visiting!" slide
+  dropped; portfolio deck now Vercel + new mobile shot; real home splash as
+  thumbnail). sharp pass (transitive dep): `profile.jpg` 449→37KB (400×600),
+  john/ticketmaster PNGs losslessly re-encoded, `home.png` 2526→1920px
+  (752→211KB); all image paths kebab-case; greybox logo extension corrected
+  to `.jpg` (was JPEG bytes). 26 path refs updated in lib + `page.tsx`.
+  public/: 28→21 files, 8.94→3.29MB. Lint + build green (12/12 SSG).
 <!-- append above -->

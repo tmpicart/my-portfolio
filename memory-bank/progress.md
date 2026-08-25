@@ -24,6 +24,11 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-25 — R11 asset cleanup:** deleted 5 template SVGs, `Avatar.png`,
+  and both stock photos (filler slide dropped; portfolio deck = Vercel +
+  new mobile shot, real splash thumbnail — Thayer's call); sharp compress
+  pass (−5.65 MB, geometry-preserving); kebab-case renames; JPEG-in-.png
+  extension fixed. Lint + build green.
 - **2026-08-23 — R10 motion consolidation:** `lib/motion.ts` (tokens +
   staggerContainer/fadeUp/fadeDown + named variants); PageShell = stagger
   root on every page; education/skills/hub retimed to one 0.12 step
@@ -33,11 +38,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   Autoplay on the embla api (plugin methods throw pre-init); split
   ProjectDetail → gallery-carousel + enlarged-image-modal (root keeps
   shared state). Lint + build green.
-- **2026-08-23 — R9 [slug] quality pass:** server shell + `ProjectDetail`
-  island (gallery + modal: autoplay, focus trap, `AnimatePresence`,
-  `role="dialog"`, scroll-lock, optimized images); `images`/`captions`
-  merged → `screenshots`; shared `CarouselDots` + home dots (approved);
-  `--color-backdrop` token. Debts #7, #8 dead. Lint + build green.
 
 ## Roadmap — Refactor (dependency-ordered)
 
@@ -56,10 +56,8 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-23 — **R10** motion consolidation (`lib/motion.ts` tokens +
   factories + named variants; PageShell stagger root; unified stagger +
   hover naming; hover policy pass)
-- **R11. Asset cleanup** — delete orphaned `Avatar.png` (recoverable from
-  git history) and unused template SVGs after verifying references;
-  compress/resize oversized images (`laptop_img.jpg`, `pfp.jpg`,
-  `John_1.png`); normalize asset filenames.
+- ✅ 2026-08-25 — **R11** asset cleanup (orphans/template SVGs/stock photos
+  deleted; sharp compress pass; kebab-case filenames)
 - **R12. Naming & consistency audit** — enforce Naming Conventions from
   `.clinerules` across remaining identifiers; final build + lint + visual
   check; README refresh (real stack, working commands, live link).
@@ -81,4 +79,4 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Status
 
-Next task: **R11**. See `activeContext.md` for the current working snapshot.
+Next task: **R12**. See `activeContext.md` for the current working snapshot.

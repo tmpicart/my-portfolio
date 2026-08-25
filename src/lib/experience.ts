@@ -19,7 +19,7 @@ export const experiences: Experience[] = [
       "Collaborated effectively in Agile using Slack and Notion, streamlining workflows and delivery.",
     ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Git", "Agile"],
-    logo: "/images/icons/greyboxproject_logo.png",
+    logo: "/images/icons/greyboxproject-logo.jpg",
   },
   {
     company: "Berlin Lions Club",

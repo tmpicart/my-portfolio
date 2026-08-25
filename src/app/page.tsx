@@ -49,7 +49,7 @@ export default function HomePage() {
         <div className="relative flex-shrink-0">
           <div className="relative rounded-full border border-white/20 bg-[radial-gradient(circle_at_bottom_right,_rgba(166,115,231,0.28),_rgba(255,255,255,0.04)_55%,_transparent_70%)] p-2">
             <Image
-              src="/images/icons/pfp.jpg"
+              src="/images/icons/profile.jpg"
               alt="Thayer profile pic"
               width={132}
               height={132}

@@ -119,6 +119,10 @@ top-level boundaries; relative imports for colocated files.
   scope, and no `custom=` function variants remain. Hover policy:
   color/opacity via CSS `duration-200`; transform/spring via framer
   label variants (`whileHover="hover"`).
+- **Assets** — ✅ landed R11: `public/images/**` all kebab-case; raster
+  sources ≤1920px and compressed via sharp (transitive dep — binary image
+  ops through shell-invoked sharp are the sanctioned exception to
+  write-through-harness); no orphan/template/stock assets remain.
 
 ## Design Tokens (landed R6, extended R9)
 
@@ -163,10 +167,12 @@ safer).
    styles, `router.push` back button, `unoptimized` images)~~ ✅ R9
 8. ~~Hooks-order fragility (`notFound()` before hooks in `[slug]`)~~ ✅ R9
    (server-side resolve)
-9. Assets: orphaned `Avatar.png`, unused template SVGs, oversized images → R11
+9. ~~Assets: orphaned `Avatar.png`, unused template SVGs, oversized
+   images~~ ✅ R11 (deleted + sharp compress + kebab-case; stock photos
+   removed by Thayer's call — portfolio deck is 2 real slides now)
 10. SEO absent (single root metadata only) → F2 (unblocked by R8)
-11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family~~ ✅ R3/R5
-    (`pfp.jpg` → R11/R12)
+11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family, `pfp.jpg`~~
+    ✅ R3/R5/R11 (`pfp.jpg` → `profile.jpg`)
 12. ~~Home content hardcoded~~ ✅ R8 (`lib/home.ts` + `HomeIcon` ID map)
 13. Footer contact links hardcoded → F1
 14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
