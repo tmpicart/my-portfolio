@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "John Dungeon",
     summary: "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
     description:
-      "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally developed over a tight three-week deadline by a team of five, the project earned the highest rating among competing games, with 4.59 stars. I have since taken over development as a solo project to fix bugs, refactor code, enhance gameplay, and expand content.",
+      "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally built over a tight three-week deadline by a team of five, the project earned the highest rating among competing games at 4.59 stars. I've since taken over development as a solo project, refactoring the codebase, fixing bugs, and expanding gameplay systems.",
     thumbnail: "/images/john/john-5.png",
     featured: false,
     screenshots: [
@@ -117,12 +117,12 @@ export const projects: Project[] = [
       languages: ["JavaScript", "TypeScript", "SQL"],
       frameworks: ["Next.js", "Tailwind CSS", "FastAPI"],
       features: [
-        "Responsive and mobile-friendly interface",
-        "Gemini API integration",
         "Translates medical terminologies across multiple languages",
         "SQL database contains extensive translations",
+        "Fuzzy-matched search for accurate term lookup",
+        "Gemini API integration with a dedicated backend hook for AI-powered fallback translation",
+        "Responsive and mobile-friendly interface",
         "Improved maintainability and scalability with refactoring to Next.js and Tailwind CSS",
-        "Custom backend hooks for frontend integration, enabling seamless communication with the database and APIs",
       ],
     },
     github: "",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
     title: "TicketMaster Search Mobile",
     summary: "A mobile app built to search for events and tickets via the TicketMaster API.",
     description:
-      "Mobile app to search, view, and save events from TicketMaster via the TicketMaster API, with Firebase authentication and data storage allowing users to log in and save their favorite events.",
+      "Mobile app to search, view, and save events from TicketMaster via the TicketMaster API, with Firebase authentication and Firestore-backed storage allowing users to log in and save their favorite events.",
     thumbnail: "/images/ticketmaster/ticketmaster-1.png",
     featured: false,
     screenshots: [
@@ -161,10 +161,10 @@ export const projects: Project[] = [
       languages: ["Kotlin"],
       frameworks: ["Android SDK", "Retrofit", "Glide", "RecyclerView"],
       features: [
-        "Firebase Authentication & Firestore integration",
-        "User-based data storage and event saving",
-        "Real-time event browsing and updates",
-        "Filter through TicketMaster events via location and keyword",
+        "Firebase Authentication (email/password and Google sign-in)",
+        "Firestore integration for user account and favorited-event data",
+        "Live event browsing via the TicketMaster API",
+        "Filter events by location and keyword",
         "Smooth image loading and rendering",
         "Mobile-first UX design",
       ],
