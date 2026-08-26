@@ -26,7 +26,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer Intern",
     duration: "Jan 2024 – May 2024",
     description: [
-      "Unified two disparate SQL schemas (user and admin accounts) into a single table with consistent permission and field structures, creating one source of truth for user data and access control.",
+      "Unified the user and admin SQL schemas into a single table with consistent permission and field structures, creating one source of truth for user data and access control.",
       "Strengthened credential security by migrating stored passwords from MD5 to SHA-256 hashing via an incremental, zero-downtime rehash triggered on user login.",
       "Identified and resolved critical bugs, improving overall system reliability and user experience.",
     ],
