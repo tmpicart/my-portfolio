@@ -24,6 +24,8 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-26 — R12.1 ProjectCard hoist:** module-scope `cardSizeStyles`
+  (+ derived `CardSize` type); debt #15 closed. Visually neutral.
 - **2026-08-26 — R12 naming & consistency audit:** renames (`summaryClass`,
   `carouselApi`, camelCase constants), BOM + layout-marker hygiene, `z-0`
   swap; motion.main→motion.div (single `<main>`); navbar + `[slug]` unified
@@ -33,11 +35,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   new mobile shot, real splash thumbnail — Thayer's call); sharp compress
   pass (−5.65 MB, geometry-preserving); kebab-case renames; JPEG-in-.png
   extension fixed. Lint + build green.
-- **2026-08-23 — R10 motion consolidation:** `lib/motion.ts` (tokens +
-  staggerContainer/fadeUp/fadeDown + named variants); PageShell = stagger
-  root on every page; education/skills/hub retimed to one 0.12 step
-  (Option C, approved); hover policy pass (CSS 200ms colors, framer
-  springs for transforms). Lint + build green.
 
 ## Roadmap — Refactor (dependency-ordered)
 
@@ -61,11 +58,8 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-26 — **R12** naming & consistency audit (identifier renames,
   landmark fix, README refresh, Thayer-approved 1120px shell-aligned
   column); ProjectCard hoist split out to R12.1 below
-- **R12.1. ProjectCard size-table hoist** *(split from R12)* — move the
-  `sizeStyles` literal from ProjectCard's body to module scope
-  (`cardSizeStyles` with `as const satisfies`, derived `CardSize` type,
-  lookup-only in the body); restores the constants-at-module-scope
-  invariant (debt #15)
+- ✅ 2026-08-26 — **R12.1** ProjectCard size table hoisted to module scope
+  (`cardSizeStyles` + derived `CardSize`; debt #15 closed)
 - **R13. Navbar menu-close pattern** *(added during R1)* — replace the
   effect-based `setMenuOpen(false)` on pathname change with the React
   render-time state-reset pattern; remove the `set-state-in-effect`
@@ -84,5 +78,5 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Status
 
-Next task: **R12.1**, then R13. See `activeContext.md` for the current
+Next task: **R13**, then F1–F3. See `activeContext.md` for the current
 working snapshot.

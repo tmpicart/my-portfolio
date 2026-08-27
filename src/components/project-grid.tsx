@@ -8,35 +8,52 @@ import GlassCard from "@/components/glass-card";
 import { spotlightEntrance, spotlightHover } from "@/lib/motion";
 import type { Project } from "@/lib/projects";
 
-type ProjectCardProps = Project & { size?: "small" | "medium" | "large" };
+// Static per-size hub-card classes, keyed small→large. Lives at module scope
+// (.clinerules: constants don't sit in component bodies) and keeps its class
+// strings literal so Tailwind's JIT scanner sees them.
+const cardSizeStyles = {
+  large: {
+    cardPadding: "p-8",
+    cardHeight: "h-[36rem]",
+    imageHeight: "h-[24rem]",
+    titleClass: "text-4xl",
+    summaryClass: "text-lg",
+    dividerClass: "w-24 sm:w-28",
+  },
+  medium: {
+    cardPadding: "p-6",
+    cardHeight: "h-[28rem]",
+    imageHeight: "h-48",
+    titleClass: "text-2xl",
+    summaryClass: "text-base",
+    dividerClass: "w-20",
+  },
+  small: {
+    cardPadding: "p-6",
+    cardHeight: "h-[24rem]",
+    imageHeight: "h-40",
+    titleClass: "text-2xl",
+    summaryClass: "text-sm",
+    dividerClass: "w-20",
+  },
+} as const satisfies Record<
+  string,
+  {
+    cardPadding: string;
+    cardHeight: string;
+    imageHeight: string;
+    titleClass: string;
+    summaryClass: string;
+    dividerClass: string;
+  }
+>;
+
+type CardSize = keyof typeof cardSizeStyles;
+
+type ProjectCardProps = Project & { size?: CardSize };
 
 function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: ProjectCardProps) {
-  const sizeStyles = {
-    large: {
-      cardPadding: "p-8",
-      cardHeight: "h-[36rem]",
-      imageHeight: "h-[24rem]",
-      titleClass: "text-4xl",
-      summaryClass: "text-lg",
-      dividerClass: "w-24 sm:w-28",
-    },
-    medium: {
-      cardPadding: "p-6",
-      cardHeight: "h-[28rem]",
-      imageHeight: "h-48",
-      titleClass: "text-2xl",
-      summaryClass: "text-base",
-      dividerClass: "w-20",
-    },
-    small: {
-      cardPadding: "p-6",
-      cardHeight: "h-[24rem]",
-      imageHeight: "h-40",
-      titleClass: "text-2xl",
-      summaryClass: "text-sm",
-      dividerClass: "w-20",
-    },
-  }[size];
+  const sizeStyles = cardSizeStyles[size];
   return (
     <Link href={`/projects/${slug}`} className="block h-full">
       <GlassCard

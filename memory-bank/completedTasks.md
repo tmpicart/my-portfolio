@@ -140,4 +140,11 @@ confirms all roadmap tasks are complete; do not read it before then.
 - README refreshed in original voice (stack, commands, live link).
 - Deferred: ProjectCard `sizeStyles` hoist → R12.1. Lint + build green.
 
+## 2026-08-26 — R12.1: ProjectCard Size-Table Hoist
+
+- `sizeStyles` moved from ProjectCard's body to module-scope
+  `cardSizeStyles` (`as const satisfies`, derived `CardSize` type); body
+  keeps the lookup only — constants-at-module-scope invariant restored.
+- Debt #15 closed. Visually neutral; lint + build green (12/12 SSG).
+
 <!-- append above -->

@@ -1,6 +1,6 @@
 # Active Context
 
-**Snapshot: 2026-08-26 (post-R12)** — updated every task per the Memory
+**Snapshot: 2026-08-26 (post-R12.1)** — updated every task per the Memory
 Bank Protocol.
 
 ## Current State
@@ -14,10 +14,12 @@ Bank Protocol.
   `[slug]` share the 1120px edge = max-w-6xl − main's 16px px-4 inset.
 - README refreshed in its original voice: real stack, Getting Started,
   working commands, markdown live link.
+- **R12.1 landed same-day** (checkpoint approved): `sizeStyles` hoisted to
+  module-scope `cardSizeStyles` + derived `CardSize`; debt #15 closed —
+  no body-constant violations remain (sweep had exactly one hit, now zero).
 - Lint + build green (12/12 SSG).
-- **Next: R12.1** — hoist ProjectCard's `sizeStyles` table to module scope
-  (only body-constant violation in src, confirmed by sweep); then R13,
-  F1–F3.
+- **Next: R13** — navbar menu-close render-time reset (removes the
+  `set-state-in-effect` suppression); then F1–F3.
 
 ## Known Deferred Items
 

@@ -182,5 +182,5 @@ safer).
 13. Footer contact links hardcoded → F1
 14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
     `relative`)
-15. `sizeStyles` literal inside ProjectCard's body (per-render realloc;
-    no React Compiler in next.config to absorb it) → R12.1
+15. ~~`sizeStyles` literal inside ProjectCard's body~~ ✅ R12.1
+    (module-scope `cardSizeStyles` + derived `CardSize`)
