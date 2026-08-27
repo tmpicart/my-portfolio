@@ -147,4 +147,14 @@ confirms all roadmap tasks are complete; do not read it before then.
   keeps the lookup only — constants-at-module-scope invariant restored.
 - Debt #15 closed. Visually neutral; lint + build green (12/12 SSG).
 
+- **2026-08-26 — R13** navbar menu-close pattern (`src/components/navbar.tsx`)
+  Render-time pathname reset (guarded prevPathname compare-and-set) replaces
+  the suppressed close-effect — the repo's last lint suppression removed.
+  Review caught two issues: the first-shipped derived openPathname variant
+  hid stale state (back-nav to the opening route resurrected the tray), and
+  same-route logo clicks bypass pathname diffing entirely (now an onClick
+  close). Final shape: render reset + event closes (logo + tray links).
+  Lint + build green (12/12 SSG), visually neutral. Flag carried: toggle
+  aria-expanded → F3.
+
 <!-- append above -->

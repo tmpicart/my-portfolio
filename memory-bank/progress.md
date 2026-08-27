@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-23** — what works, recent work, and the roadmap that
+**Updated: 2026-08-26** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Full completed-task
 record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 `.clinerules`).
@@ -24,18 +24,16 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-26 — R13 navbar menu-close:** render-time pathname reset replaces
+  the suppressed close-effect (zero suppressions repo-wide); derived
+  openPathname variant rejected in review (tray resurrected on back-nav);
+  Home-logo same-route close added.
 - **2026-08-26 — R12.1 ProjectCard hoist:** module-scope `cardSizeStyles`
   (+ derived `CardSize` type); debt #15 closed. Visually neutral.
 - **2026-08-26 — R12 naming & consistency audit:** renames (`summaryClass`,
   `carouselApi`, camelCase constants), BOM + layout-marker hygiene, `z-0`
   swap; motion.main→motion.div (single `<main>`); navbar + `[slug]` unified
   on the 1120px shell column (Thayer-approved); README refreshed. Gates green.
-- **2026-08-25 — R11 asset cleanup:** deleted 5 template SVGs, `Avatar.png`,
-  and both stock photos (filler slide dropped; portfolio deck = Vercel +
-  new mobile shot, real splash thumbnail — Thayer's call); sharp compress
-  pass (−5.65 MB, geometry-preserving); kebab-case renames; JPEG-in-.png
-  extension fixed. Lint + build green.
-
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -60,10 +58,9 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   column); ProjectCard hoist split out to R12.1 below
 - ✅ 2026-08-26 — **R12.1** ProjectCard size table hoisted to module scope
   (`cardSizeStyles` + derived `CardSize`; debt #15 closed)
-- **R13. Navbar menu-close pattern** *(added during R1)* — replace the
-  effect-based `setMenuOpen(false)` on pathname change with the React
-  render-time state-reset pattern; remove the `set-state-in-effect`
-  suppression in `src/components/navbar.tsx`.
+- ✅ 2026-08-26 — **R13** navbar menu-close render-time reset (`prevPathname`
+  guard replaces suppressed effect; zero suppressions remain; logo same-route
+  close added; derived openPathname variant rejected in review)
 
 ## Roadmap — Features
 
@@ -78,5 +75,5 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Status
 
-Next task: **R13**, then F1–F3. See `activeContext.md` for the current
+Next task: **F1**, then F2–F3. See `activeContext.md` for the current
 working snapshot.

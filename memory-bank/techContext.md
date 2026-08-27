@@ -22,8 +22,8 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 - `npm run start` — serve the production build locally
 - `npm run lint` — **repaired 2026-08-19 (R1)**: native ESLint 9 flat config
   (`eslint-config-next/core-web-vitals` + `/typescript`, no FlatCompat) with
-  `eslint .` script. One known suppression carries a roadmap ref: Navbar
-  menu-close → R13 (the `[slug]` hooks ×2 suppressions died with R9).
+  `eslint .` script. Zero lint suppressions since R13 (menu-close landed
+  2026-08-26; the `[slug]` hooks ×2 died with R9).
 
 ## Deployment & Branches
 

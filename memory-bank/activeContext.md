@@ -1,31 +1,30 @@
 # Active Context
 
-**Snapshot: 2026-08-26 (post-R12.1)** — updated every task per the Memory
+**Snapshot: 2026-08-26 (post-R13)** — updated every task per the Memory
 Bank Protocol.
 
 ## Current State
 
-- **R12 complete on `refactor/cleanup`** (checkpoint approved): naming
-  audit landed — abbreviations gone (`project`, `index`, `summaryClass`,
-  `carouselApi`), camelCase constants, BOM/layout-marker hygiene, inline
-  z-index → `z-0`; `motion.main` → `motion.div` in PageShell + ProjectDetail
-  (layout owns the single `<main>`).
-- Shell-aligned column (Thayer-approved exception): navbar row + tray and
-  `[slug]` share the 1120px edge = max-w-6xl − main's 16px px-4 inset.
-- README refreshed in its original voice: real stack, Getting Started,
-  working commands, markdown live link.
-- **R12.1 landed same-day** (checkpoint approved): `sizeStyles` hoisted to
-  module-scope `cardSizeStyles` + derived `CardSize`; debt #15 closed —
-  no body-constant violations remain (sweep had exactly one hit, now zero).
-- Lint + build green (12/12 SSG).
-- **Next: R13** — navbar menu-close render-time reset (removes the
-  `set-state-in-effect` suppression); then F1–F3.
+- **R13 complete on `refactor/cleanup`** (checkpoint approved): tray closes
+  on any navigation via guarded render-time pathname reset (React docs
+  "adjust state when a prop changes"); the suppressed effect is gone —
+  zero lint suppressions repo-wide; gates green (12/12 SSG), visually neutral.
+- Same-route logo tap now closes the tray too (onClick close on the Home
+  link — client-side `/`→`/` navigation is invisible to pathname diffing).
+- Detour recorded: derived `openPathname` variant passed its isolated checks
+  but retained stale state — back-navigation to the route named in state
+  resurrected the open tray. Lesson: destroy stale state, don't mask it.
+- R12/R12.1 stable beneath: naming audit, shell-aligned 1120px column,
+  `cardSizeStyles` hoist (debt #15 closed).
+- **Next: F1** resume button (PDF in `public/`, footer icon link), then
+  F2 SEO, F3 reduced-motion.
 
 ## Known Deferred Items
 
 - Footer contact links hardcoded + icon-only links lack `aria-label` → F1.
 - Experience avatar gradient stays a deliberate non-token → no action.
-- Navbar menu-close suppression → R13.
+- Navbar toggle button lacks `aria-expanded` disclosure state → F3 a11y
+  follow-up (flagged during R13 review, out of scope there).
 - Reduced-motion support deliberately skipped in R10 → F3.
 - `home.png` doubles as Open Graph image candidate → F2.
 - R12 accepted names (documented judgment calls, not violations):

@@ -29,7 +29,9 @@ src/
 │   └── education/page.tsx       # Server ✓ (R8) — EducationPanel island
 ├── components/
 │   ├── navbar.tsx               # "use client" — legit (menu state,
-│   │                            #   usePathname); FaTimes/FaBars toggle (R7)
+│   │                            #   usePathname); FaTimes/FaBars toggle (R7);
+│   │                            #   tray-close = render-time pathname reset
+│   │                            #   + onClick closes, never an effect (R13)
 │   ├── footer.tsx               # Server ✓ — extracted R2; react-icons (R7)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── home-icon.tsx            # HomeIconId → react-icons (R8, SkillIcon
@@ -128,6 +130,9 @@ top-level boundaries; relative imports for colocated files.
   one site column — navbar row/tray and `[slug]` content share the
   1120px edge (max-w-6xl − main's 16px `px-4` inset; Thayer-approved
   visual exception).
+- **Menu-close** — ✅ landed R13: tray closes on any navigation via a
+  guarded render-time pathname reset + onClick on every nav affordance
+  (logo included — same-route clicks bypass pathname diffing); no effect.
 
 ## Design Tokens (landed R6, extended R9)
 
