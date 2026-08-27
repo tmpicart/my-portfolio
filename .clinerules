@@ -1,0 +1,120 @@
+# Cline Rules — Portfolio Website
+
+Next.js 16 (App Router) + React 19 + TypeScript 5 + Tailwind CSS 4 portfolio
+for Thayer (github.com/tmpicart). Deployed on Vercel from main; pushes to main
+auto-deploy. Work happens on feature/refactor branches; main stays the stable
+line. The repo is public and doubles as a work sample — assume recruiters may
+read anything committed here.
+
+## Commands
+- `npm run dev` — dev server
+- `npm run build` — production build
+- `npm run lint` — ESLint check (flat config, working — repaired in R1)
+- Shell is PowerShell: chain commands with `;` (never `&&`), and pass
+  `--no-pager` to `git diff`/`git log`.
+
+## Code Conventions
+- Server Components by default; `"use client"` only where interactivity demands
+  it (state, effects, framer-motion, embla) — small client islands, not
+  whole-page clients.
+- Styling: Tailwind utility classes only; no inline `style` objects except
+  values utilities genuinely can't express.
+- Animation: framer-motion. Carousels: embla-carousel-react.
+- Icons: react-icons. Do not add new Font Awesome `<i>` usages; remaining
+  ones are scheduled for migration.
+- TypeScript: no `any`. Model data with explicit interfaces (pattern:
+  `Project` in `lib/projects.ts`).
+- Content lives in the `lib/` data layer as typed TS; pages render from it —
+  never hardcode content in components.
+- `next/image` for images, `next/link` for internal navigation. Always.
+
+## Naming Conventions
+- Files: kebab-case (`page-shell.tsx`). Components/exports: PascalCase.
+- Functions/variables: camelCase; booleans read as predicates (`isOpen`).
+- Hooks: `use` prefix. No abbreviations (`pfp` → `profile`); names describe
+  role, not type (`modalCarouselApi`, not `emblaApi2`).
+
+## File Organization
+- Top-to-bottom: `"use client"` → imports (external, then internal) → types →
+  module constants/data → variants → internal components → default export.
+- Constants live at module scope, never inside a component body (avoids
+  per-render reallocation).
+- One component per file once extracted to `components/`; page files export
+  only the page.
+
+## Comments
+- Explain why, not what — names and structure carry the "what."
+- Keep intent comments on non-obvious logic; delete redundant JSX section
+  markers once components are extracted.
+- No commented-out code; no TODOs without a roadmap reference.
+
+## Guardrails
+- Ask before installing, removing, or updating any dependency.
+- Visual identity is settled: dark theme, `#A673E7` accent, glassmorphism.
+  Refactors must be visually neutral — change structure, not appearance.
+- Stay inside a task's stated scope; flag out-of-scope issues instead of
+  fixing them unprompted.
+- Never commit secrets; `.env*` stays ignored.
+- File writes go through the harness only (`write_to_file` /
+  `replace_in_file`) — never via shell/PowerShell, to avoid token burn.
+  `replace_in_file` markers must be flush-left (`------- SEARCH` /
+  `=======` / `+++++++ REPLACE`); indented markers silently no-op while
+  reporting success (harness parser quirk, A/B-diagnosed 2026-08-23).
+  Verify every edit batch with `git --no-pager diff`; success echoes alone
+  are not proof.
+- Quality gates before declaring done: `npm run lint` + `npm run build` both
+  clean. (No test framework — static presentation site; revisit if interactive
+  behavior with failure modes is added.)
+
+## Workflow Control
+- **Task Checkpoint (the single gate):** once implementation is done and
+  `npm run lint` + `npm run build` are both clean, stop and present a
+  diff summary + task summary. Bank updates run only AFTER Thayer approves
+  (so requested changes never invalidate written docs); after requested
+  changes, re-present the same checkpoint. A task is not done until its
+  checkpoint is approved and committed.
+- **Circuit breaker:** after 5 consecutive failures on the same step (or 5
+  tool calls with no verifiable progress), stop retrying, list each
+  attempt, its error, and a hypothesis, and ask Thayer how to proceed.
+  Never rerun a failed command verbatim — change something first. Any
+  success resets the count.
+
+## Git
+- Commit only after Task Checkpoint approval, with a conventional-style
+  message; add files by explicit path only — never `git add -A`.
+- Never push without asking. Never force-push. Never commit directly to main.
+
+## Memory Bank Protocol
+- Tier 0, read at task start: `activeContext.md` + `progress.md`. Read
+  nothing else unless the task requires it.
+- Tier 1, on demand: `systemPatterns.md` (architecture, routes, components,
+  debt); `techContext.md` (commands, tooling, quirks).
+- Tier 2, rarely: `projectbrief.md` / `productContext.md` (goals, audience).
+- Never re-read a file already in context; never attempt paths blocked by
+  `.clineignore` — ask Thayer instead.
+- The bank is the primary context source — consult it before re-reading
+  source files. Read code to do the task at hand, not to rebuild context the
+  bank already holds. If bank and code disagree, the code is ground truth:
+  fix the bank and note the drift.
+- `completedTasks.md` is a sealed archive: at every task end, append the
+  full task entry by editing above the `<!-- append above -->` sentinel (no
+  read required). NEVER read it without Thayer's explicit confirmation
+  that all roadmap tasks are complete. New entries ≤15 lines;
+  step-by-step narrative stays in git history, not the archive.
+- Update `activeContext.md` + `progress.md` every task; `systemPatterns.md`
+  and `techContext.md` whenever structure or tooling changes or a roadmap
+  item lands.
+- Compression caps (enforced at every write): `progress.md` Recent Work ≤3
+  entries × ≤4 lines, What Works as one-liners, pending roadmap items in
+  full but completed items as `✅ <date> — <one line>`;
+  `activeContext.md` ≤40 lines with Current State ≤6 bullets;
+  `systemPatterns.md` killed debts one line each and landed-pattern status
+  ≤2 lines; `techContext.md` quirks deleted when obsolete. One fact, one
+  home: what happened → progress, how it's built → systemPatterns, tooling
+  quirks → techContext, current focus → activeContext — no duplication.
+
+## Communication
+- Explain the *why* behind non-obvious decisions; Thayer reviews everything
+  like a PR and is learning agentic workflows through this project.
+- Committed files use professional, recruiter-safe language.
+- Don't re-explain context the memory bank already holds — link/update it.

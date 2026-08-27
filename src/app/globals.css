@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/*
+  Design tokens (R6) — the palette's single source of truth. Tailwind v4
+  generates utilities from these variables (bg-accent, text-accent-tint,
+  border-accent/40, from-accent-vivid, …). Values are the pre-R6 hexes, so
+  the token migration is visually neutral by construction.
+*/
+@theme {
+  /* Accent family — buttons, hovers, headings, active states. */
+  --color-accent: #a673e7;
+  --color-accent-deep: #8a57cc; /* button hover */
+  --color-accent-vivid: #7c4dff; /* divider gradient start */
+  --color-accent-tint: #d7bfff; /* eyebrows, tag text */
+  --color-accent-soft: #e7d4ff; /* badge text */
+
+  /* Backgrounds */
+  --color-canvas: #070707; /* body */
+  --color-canvas-raised: #101010; /* footer gradient start */
+  --color-shell: #0b0b0d; /* page shell gradient base */
+
+  /* Surfaces */
+  --color-surface-1: #40434e; /* navbar, buttons, carousel arrows */
+  --color-surface-2: #1f1e2e; /* panels */
+  --color-surface-3: #272636; /* inner panels, modal info rail */
+  --color-surface-modal: #1c1b29; /* modal background */
+  --color-backdrop: #2a2a3a; /* screenshot letterbox behind object-contain (R9) */
+
+  /* Mobile menu states */
+  --color-menu: #4b4e58;
+  --color-menu-hover: #5b5f69;
+  --color-menu-tray: #2f3138;
+}
