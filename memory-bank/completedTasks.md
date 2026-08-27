@@ -157,4 +157,15 @@ confirms all roadmap tasks are complete; do not read it before then.
   Lint + build green (12/12 SSG), visually neutral. Flag carried: toggle
   aria-expanded → F3.
 
+### 2026-08-27 — Git upkeep: purge, phase merge, feat branch open
+- filter-repo purged leaked full-resume blobs (`public/files/Resume-Thayer
+  Picart.pdf`) from all history; branches force-pushed; messages/dates/trees
+  verified byte-identical vs mirror backup (backup deleted after sign-off).
+- 19 local `refs/cline/checkpoints/*` shadow refs deleted; orphaned-commit
+  GitHub gc left to natural cleanup (ticket declined, risk accepted).
+- R1–R13 merged to `main` via `--no-ff` merge `31eda54` — refactored site
+  deployed to Vercel for the first time; gates green (12/12 SSG).
+- Opened `feat/portfolio-features`; `21a9880` adds redacted
+  `public/resume.pdf` (F1 asset only, no button). `refactor/cleanup`
+  deleted local+origin. Next: F1 button, then F2 SEO, F3 reduced-motion.
 <!-- append above -->

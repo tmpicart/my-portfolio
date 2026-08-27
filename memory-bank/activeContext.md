@@ -1,23 +1,21 @@
 # Active Context
 
-**Snapshot: 2026-08-26 (post-R13)** — updated every task per the Memory
+**Snapshot: 2026-08-27 (post git-upkeep)** — updated every task per the Memory
 Bank Protocol.
 
 ## Current State
 
-- **R13 complete on `refactor/cleanup`** (checkpoint approved): tray closes
-  on any navigation via guarded render-time pathname reset (React docs
-  "adjust state when a prop changes"); the suppressed effect is gone —
-  zero lint suppressions repo-wide; gates green (12/12 SSG), visually neutral.
-- Same-route logo tap now closes the tray too (onClick close on the Home
-  link — client-side `/`→`/` navigation is invisible to pathname diffing).
-- Detour recorded: derived `openPathname` variant passed its isolated checks
-  but retained stale state — back-navigation to the route named in state
-  resurrected the open tray. Lesson: destroy stale state, don't mask it.
-- R12/R12.1 stable beneath: naming audit, shell-aligned 1120px column,
-  `cardSizeStyles` hoist (debt #15 closed).
-- **Next: F1** resume button (PDF in `public/`, footer icon link), then
-  F2 SEO, F3 reduced-motion.
+- **History purged** (filter-repo): leaked full-resume blobs removed from all
+  reachable history; branches force-pushed; messages/dates/trees verified
+  byte-identical vs mirror backup (backup now deleted). Orphaned commits on
+  GitHub left for natural gc — raw URLs may 200 until then (accepted risk).
+- **Refactor phase deployed**: `--no-ff` merge `31eda54` brought R1–R13 to
+  `main`; Vercel serves the refactored site for the first time. Gates green.
+- **`feat/portfolio-features` opened** from merged main (unpushed — Thayer
+  publishes it); first commit `21a9880` adds redacted `public/resume.pdf`.
+  `refactor/cleanup` deleted (local + origin) — fully merged, zero loss.
+- **Next: F1** footer resume button (+ aria-labels, contact links → lib),
+  then F2 SEO, F3 reduced-motion — all on `feat/portfolio-features`.
 
 ## Known Deferred Items
 
