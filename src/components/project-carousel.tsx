@@ -20,7 +20,7 @@ type ProjectCarouselProps = {
 };
 
 // Matches the pre-R8 hand-rolled interval so the carousel's rhythm is unchanged.
-const AUTOPLAY_DELAY_MS = 4500;
+const autoplayDelayMs = 4500;
 
 // Home's featured-projects carousel, extracted in R8 so the home page can be a
 // Server Component. Deliberately home-specific: the [slug] carousels differ in
@@ -33,13 +33,13 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
   const autoplay = useMemo(
     () =>
       Autoplay({
-        delay: AUTOPLAY_DELAY_MS,
+        delay: autoplayDelayMs,
         // A user swipe shouldn't permanently kill autoplay.
         stopOnInteraction: false,
       }),
     []
   );
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  const [carouselRef, carouselApi] = useEmblaCarousel(
     { loop: true, align: "start" },
     [autoplay]
   );
@@ -47,13 +47,13 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
 
   // Dots mirror the active slide; swipes, arrows, and autoplay all fire "select".
   useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
+    if (!carouselApi) return;
+    const onSelect = () => setCurrentSlide(carouselApi.selectedScrollSnap());
+    carouselApi.on("select", onSelect);
     return () => {
-      emblaApi.off("select", onSelect);
+      carouselApi.off("select", onSelect);
     };
-  }, [emblaApi]);
+  }, [carouselApi]);
 
   // Pause/resume on the wrapper (not the plugin's stopOnMouseEnter, which only
   // watches the embla viewport) so the arrow buttons overlaying the carousel
@@ -72,13 +72,13 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
     >
       <CarouselArrows
         size="small"
-        onPrevious={() => emblaApi?.scrollPrev()}
-        onNext={() => emblaApi?.scrollNext()}
+        onPrevious={() => carouselApi?.scrollPrev()}
+        onNext={() => carouselApi?.scrollNext()}
         previousLabel="Previous project"
         nextLabel="Next project"
       />
 
-      <div className="overflow-hidden" ref={emblaRef}>
+      <div className="overflow-hidden" ref={carouselRef}>
         <div className="flex">
           {slides.map((slide) => (
             <Link
@@ -107,7 +107,7 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
       <CarouselDots
         count={slides.length}
         activeIndex={currentSlide}
-        onSelect={(index) => emblaApi?.scrollTo(index)}
+        onSelect={(index) => carouselApi?.scrollTo(index)}
         variant="small"
         itemLabel="project"
         className="mt-4"

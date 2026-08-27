@@ -25,7 +25,9 @@ export default function Navbar() {
 
   return (
     <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
-      <div className="mx-auto flex max-w-6xl items-center justify-between">
+      {/* One column with every page shell: max-w-6xl minus main's 16px px-4
+          inset puts nav content on the shells' border edge. */}
+      <div className="mx-auto flex max-w-[1120px] items-center justify-between">
         <Link href="/" className="text-2xl font-bold text-white transition-colors duration-200 hover:text-accent">
           Home
         </Link>
@@ -48,7 +50,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="mx-auto mt-3 flex max-w-6xl flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden">
+        <div className="mx-auto mt-3 flex max-w-[1120px] flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden">
           {links.map((link) => (
             <Link
               key={link.href}

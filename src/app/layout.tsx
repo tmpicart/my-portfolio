@@ -12,10 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-canvas text-white antialiased caret-transparent">
-
         <Navbar />
-
-        {/* Main Content */}
         <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-12 md:pt-16">
           {children}
         </main>

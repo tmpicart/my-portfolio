@@ -123,6 +123,11 @@ top-level boundaries; relative imports for colocated files.
   sources ≤1920px and compressed via sharp (transitive dep — binary image
   ops through shell-invoked sharp are the sanctioned exception to
   write-through-harness); no orphan/template/stock assets remain.
+- **Layout invariants** — ✅ settled R12: exactly one `<main>` per page
+  (root layout owns it; PageShell/ProjectDetail render `motion.div`);
+  one site column — navbar row/tray and `[slug]` content share the
+  1120px edge (max-w-6xl − main's 16px `px-4` inset; Thayer-approved
+  visual exception).
 
 ## Design Tokens (landed R6, extended R9)
 
@@ -177,3 +182,5 @@ safer).
 13. Footer contact links hardcoded → F1
 14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
     `relative`)
+15. `sizeStyles` literal inside ProjectCard's body (per-render realloc;
+    no React Compiler in next.config to absorb it) → R12.1

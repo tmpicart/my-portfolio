@@ -21,7 +21,7 @@ type EnlargedImageModalProps = {
 };
 
 // Focus-trap candidates inside the modal dialog.
-const FOCUSABLE_SELECTOR =
+const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 // Overlay fade in/out — labels keep AnimatePresence's exit in the same system.
@@ -76,7 +76,7 @@ export default function EnlargedImageModal({
         return;
       }
       if (event.key !== "Tab") return;
-      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(focusableSelector);
       if (!focusable || focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

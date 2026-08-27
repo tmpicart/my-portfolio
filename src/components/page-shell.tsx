@@ -24,7 +24,7 @@ const shellClasses = `
 
 export default function PageShell({ children, className }: PageShellProps) {
   return (
-    <motion.main
+    <motion.div
       initial="hidden"
       animate="visible"
       variants={shellVariants}
@@ -32,6 +32,6 @@ export default function PageShell({ children, className }: PageShellProps) {
     >
       <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
       {children}
-    </motion.main>
+    </motion.div>
   );
 }

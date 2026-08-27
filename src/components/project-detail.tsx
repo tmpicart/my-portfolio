@@ -37,13 +37,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
-    <motion.main
-      className="relative flex w-full flex-1 flex-col items-center px-0 pt-16"
+    <motion.div
+      className="relative flex w-full flex-1 flex-col items-center pt-16"
       initial="hidden"
       animate="visible"
       variants={pageVariants}
     >
-      <div className="w-full max-w-[1040px] px-6">
+      {/* One site column: max-w-6xl minus main's 16px px-4 inset — the
+          shell-border edge every page shares, including the navbar row. */}
+      <div className="w-full max-w-[1120px] px-6">
         <Link href="/projects">
           <motion.button
             variants={slideInFromLeft}
@@ -128,6 +130,6 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           />
         )}
       </AnimatePresence>
-    </motion.main>
+    </motion.div>
   );
 }

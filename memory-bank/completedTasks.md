@@ -126,4 +126,18 @@ confirms all roadmap tasks are complete; do not read it before then.
   (752→211KB); all image paths kebab-case; greybox logo extension corrected
   to `.jpg` (was JPEG bytes). 26 path refs updated in lib + `page.tsx`.
   public/: 28→21 files, 8.94→3.29MB. Lint + build green (12/12 SSG).
+## 2026-08-26 — R12: Naming & Consistency Audit
+
+- Renames: `(p)`→`(project)`, `(i)`→`(index)` (+paired key),
+  `descClass`→`summaryClass`, `emblaApi`→`carouselApi`,
+  `AUTOPLAY_DELAY_MS`→`autoplayDelayMs`, `FOCUSABLE_SELECTOR`→
+  `focusableSelector`.
+- Hygiene: BOM off projects page; layout section marker gone; inline
+  zIndex → Tailwind `z-0`.
+- Landmarks: motion.main→motion.div in PageShell + ProjectDetail.
+- Geometry (Thayer-approved): navbar row/tray + `[slug]` column unified
+  on the shared 1120px shell-border edge.
+- README refreshed in original voice (stack, commands, live link).
+- Deferred: ProjectCard `sizeStyles` hoist → R12.1. Lint + build green.
+
 <!-- append above -->

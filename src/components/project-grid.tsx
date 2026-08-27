@@ -17,7 +17,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
       cardHeight: "h-[36rem]",
       imageHeight: "h-[24rem]",
       titleClass: "text-4xl",
-      descClass: "text-lg",
+      summaryClass: "text-lg",
       dividerClass: "w-24 sm:w-28",
     },
     medium: {
@@ -25,7 +25,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
       cardHeight: "h-[28rem]",
       imageHeight: "h-48",
       titleClass: "text-2xl",
-      descClass: "text-base",
+      summaryClass: "text-base",
       dividerClass: "w-20",
     },
     small: {
@@ -33,7 +33,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
       cardHeight: "h-[24rem]",
       imageHeight: "h-40",
       titleClass: "text-2xl",
-      descClass: "text-sm",
+      summaryClass: "text-sm",
       dividerClass: "w-20",
     },
   }[size];
@@ -41,8 +41,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
     <Link href={`/projects/${slug}`} className="block h-full">
       <GlassCard
         variant="spotlight"
-        style={{ zIndex: 0 }}
-        className={`${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
+        className={`z-0 ${sizeStyles.cardPadding} ${sizeStyles.cardHeight}`}
         whileHover="hover"
         variants={spotlightHover}
       >
@@ -55,7 +54,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
           {title}
         </h3>
         <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-accent-vivid to-accent ${sizeStyles.dividerClass}`} />
-        <p className={`${sizeStyles.descClass} text-gray-200`}>{summary}</p>
+        <p className={`${sizeStyles.summaryClass} text-gray-200`}>{summary}</p>
       </GlassCard>
     </Link>
   );

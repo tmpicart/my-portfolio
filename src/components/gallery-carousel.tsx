@@ -22,7 +22,7 @@ type GalleryCarouselProps = {
 };
 
 // Matches home's carousel rhythm (R8) so autoplay feels consistent site-wide.
-const AUTOPLAY_DELAY_MS = 4500;
+const autoplayDelayMs = 4500;
 
 // Rises with the page stagger alongside its sibling sections — one shared
 // entrance from lib/motion.ts (the R9.1 local copy died with R10).
@@ -44,7 +44,7 @@ export default function GalleryCarousel({
   const autoplay = useMemo(
     () =>
       Autoplay({
-        delay: AUTOPLAY_DELAY_MS,
+        delay: autoplayDelayMs,
         // A user swipe shouldn't permanently kill autoplay.
         stopOnInteraction: false,
       }),

@@ -48,8 +48,8 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
             </div>
 
             <ul className="mt-2 space-y-3 text-base leading-relaxed text-gray-300">
-              {experience.description.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
+              {experience.description.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
                   <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
                   <span>{item}</span>
                 </li>
