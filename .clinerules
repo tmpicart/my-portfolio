@@ -71,8 +71,9 @@ read anything committed here.
   `npm run lint` + `npm run build` are both clean, stop and present a
   diff summary + task summary. Bank updates run only AFTER Thayer approves
   (so requested changes never invalidate written docs); after requested
-  changes, re-present the same checkpoint. A task is not done until its
-  checkpoint is approved and committed.
+  changes, re-present the same checkpoint. Post-approval, bank sync and
+  task code land together in a single combined commit. A task is not done
+  until its checkpoint is approved and committed.
 - **Circuit breaker:** after 5 consecutive failures on the same step (or 5
   tool calls with no verifiable progress), stop retrying, list each
   attempt, its error, and a hypothesis, and ask Thayer how to proceed.
@@ -80,8 +81,12 @@ read anything committed here.
   success resets the count.
 
 ## Git
-- Commit only after Task Checkpoint approval, with a conventional-style
-  message; add files by explicit path only — never `git add -A`.
+- Commit only after Task Checkpoint approval: one combined commit per task
+  (task code + memory-bank sync), conventional-style message; add files by
+  explicit path only — never `git add -A`.
+- Commit messages: conventional `type(scope): imperative subject` (≤72
+  chars); body lists specifics and ends with a `Roadmap: <ID>` line (IDs
+  never appear in subjects).
 - Never push without asking. Never force-push. Never commit directly to main.
 
 ## Memory Bank Protocol
