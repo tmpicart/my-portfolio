@@ -43,6 +43,8 @@ export default function Navbar() {
 
         <button
           aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           className="rounded-lg border border-white/10 bg-menu p-2 text-2xl text-white transition-colors duration-200 hover:border-accent/40 hover:text-accent md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -59,7 +61,10 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="mx-auto mt-3 flex max-w-[1120px] flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden">
+        <div
+          id="mobile-navigation"
+          className="mx-auto mt-3 flex max-w-[1120px] flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden"
+        >
           {links.map((link) => (
             <Link
               key={link.href}

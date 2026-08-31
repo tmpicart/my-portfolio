@@ -1,30 +1,25 @@
 # Active Context
 
-**Snapshot: 2026-08-31 (post-F2)** — updated every task per the Memory
+**Snapshot: 2026-08-31 (post-F3)** — updated every task per the Memory
 Bank Protocol.
 
 ## Current State
 
-- **F2 landed** on `feat/portfolio-features`: full metadata
-  layer (root foundation + 4 static pages + `[slug]` generateMetadata
-  from lib data), `metadataBase` (env-backed URL — future domain = one
-  env var), `sitemap.ts`, `robots.ts`, `next/og` 1200×630 OG card
-  derived from `lib/home.ts` hero copy. No photo — discrimination
-  concern (standing rule).
-- F1 resume button landed (footer, `lib/contact.ts`).
-- R1–R13 + F1 deployed on `main`; F2 rides the next feat-branch push
-  (push/merge = Thayer's call, never automatic).
-- **Next: F3** reduced-motion (`MotionConfig reducedMotion="user"` in
-  layout + `useReducedMotion()` autoplay gate in both carousel islands).
-- Navbar toggle lacks `aria-expanded` disclosure state → F3 a11y
-  follow-up (flagged R13).
+- **Roadmap complete** — R1–R13 + F1–F3 all landed. F3 rides
+  `feat/portfolio-features` (push/merge = Thayer's call, never automatic).
+- F3: `MotionConfig reducedMotion="user"` in layout + `useReducedMotion()`
+  autoplay gates in both carousel islands + navbar `aria-expanded` a11y.
+- `useReducedMotion()` is mount-time-only in framer 12.43 — mid-session OS
+  toggles need a reload (quirk noted in techContext).
+- **Queued (approved):** hovered project cards overlay the navbar
+  (`spotlightHover.zIndex` 50→10), then floating glass footer card.
+- Flagged, unfixed: navbar (z-50) ↔ modal overlay (z-50) tie survives on
+  DOM order; deliberate scale would be cards 10 < chrome 50 < modal 60.
 - Resume-link navbar/hero variant parked — revisit if footer feels weak.
 
 ## Known Deferred Items
 
 - Experience avatar gradient stays a deliberate non-token → no action.
-- `home.png` is portfolio-project content only now (OG default is the
-  generated card).
 - R12 accepted names (judgment calls, not violations): `featured`,
   `accentLine`, `InfoCard.button`.
 

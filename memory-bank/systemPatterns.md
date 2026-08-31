@@ -12,7 +12,8 @@ src/
 ├── app/
 │   ├── layout.tsx               # Server ✓ — Navbar + Footer components; root
 │   │                            #   metadata foundation (F2: metadataBase,
-│   │                            #   title template, canonicals, OG/Twitter)
+│   │                            #   title template, canonicals, OG/Twitter);
+│   │                            #   MotionConfig reducedMotion="user" (F3)
 │   ├── sitemap.ts               # F2 — 9 URLs from lib data + siteUrl
 │   ├── robots.ts                # F2 — allow-all + sitemap pointer
 │   ├── opengraph-image.tsx      # F2 — next/og 1200×630 card (lib/home copy)
@@ -35,7 +36,8 @@ src/
 │   ├── navbar.tsx               # "use client" — legit (menu state,
 │   │                            #   usePathname); FaTimes/FaBars toggle (R7);
 │   │                            #   tray-close = render-time pathname reset
-│   │                            #   + onClick closes, never an effect (R13)
+│   │                            #   + onClick closes, never an effect (R13);
+│   │                            #   aria-expanded disclosure (F3)
 │   ├── footer.tsx               # Server ✓ — renders lib/contactLinks; aria-labels + resume (F1)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── home-icon.tsx            # HomeIconId → react-icons (R8, SkillIcon
@@ -124,7 +126,9 @@ top-level boundaries; relative imports for colocated files.
   PageShell is the stagger root on every page, variants live at module
   scope, and no `custom=` function variants remain. Hover policy:
   color/opacity via CSS `duration-200`; transform/spring via framer
-  label variants (`whileHover="hover"`).
+  label variants (`whileHover="hover"`). F3: layout wraps main in
+  `MotionConfig reducedMotion="user"`; `useReducedMotion()` gates
+  autoplay in both islands (home's resume callback checks it too).
 - **Assets** — ✅ landed R11: `public/images/**` all kebab-case; raster
   sources ≤1920px and compressed via sharp (transitive dep — binary image
   ops through shell-invoked sharp are the sanctioned exception to

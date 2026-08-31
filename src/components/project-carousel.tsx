@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { useReducedMotion } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
@@ -45,6 +46,10 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Mount-time read of the OS preference; null (pre-mount) means motion
+  // allowed — it settles before autoplay's first tick.
+  const prefersReducedMotion = useReducedMotion();
+
   // Dots mirror the active slide; swipes, arrows, and autoplay all fire "select".
   useEffect(() => {
     if (!carouselApi) return;
@@ -55,12 +60,23 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
     };
   }, [carouselApi]);
 
+  // Reduced-motion users get a static carousel. The effect stops autoplay at
+  // init (guarded on the embla api — plugin methods throw before it attaches,
+  // the R9.1 crash guard); the resume path must check the preference too, or
+  // a hover-exit would restart autoplay behind the user's back.
+  useEffect(() => {
+    if (!carouselApi) return;
+    if (prefersReducedMotion === true) autoplay.stop();
+  }, [carouselApi, prefersReducedMotion, autoplay]);
+
   // Pause/resume on the wrapper (not the plugin's stopOnMouseEnter, which only
   // watches the embla viewport) so the arrow buttons overlaying the carousel
   // are covered too. play() takes NO argument here — its boolean form is a
   // jump override, and play(true) would make every tick snap instead of slide.
   const pauseAutoplay = useCallback(() => autoplay.stop(), [autoplay]);
-  const resumeAutoplay = useCallback(() => autoplay.play(), [autoplay]);
+  const resumeAutoplay = useCallback(() => {
+    if (!prefersReducedMotion) autoplay.play();
+  }, [autoplay, prefersReducedMotion]);
 
   return (
     <div

@@ -81,6 +81,10 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   `autoplay.play()`/`autoplay.stop()`. (5) A modal carousel that must open
   on a chosen slide should take `startIndex` at mount (component keyed by
   open state) — scroll-on-open effects need suppressions.
+- framer-motion quirk (found F3): `useReducedMotion()` reads the media
+  query once at mount (upstream TODO for live updates) — mid-session OS
+  toggles and DevTools emulation need a reload; returns `boolean | null`
+  (null = pre-mount = motion allowed; gates settle before the first tick).
 - Git-upkeep quirks (2026-08-27): harness writes `refs/cline/checkpoints/*`
   shadow refs per session — inflate `rev-list --all --count`, can capture
   untracked-file blobs; delete post-session (`for-each-ref refs/cline` →

@@ -189,4 +189,15 @@ confirms all roadmap tasks are complete; do not read it before then.
   rejected on discrimination concern; bar → focus line; gap 28→16.
 - Gates green; 15/15 static routes.
 
+- **2026-08-31 — F3: reduced-motion support (final roadmap item).**
+  `MotionConfig reducedMotion="user"` wraps main in layout — all framer
+  consumers render inside it (Navbar/Footer are CSS-only). Autoplay gates:
+  gallery folds the preference into R9's single gate; home adds an
+  api-guarded stop effect + preference-checked resume callback (closes
+  the hover-exit restart leak). Navbar R13 follow-up: `aria-expanded` +
+  `aria-controls`/`mobile-navigation` id on toggle ↔ tray. Verified: lint
+  clean, 15/15 static, SSR `aria-expanded="false"` present. Limits: hook
+  reads at mount (reload applies OS toggles); embla user-initiated slide
+  stays smooth (out of scope).
+
 <!-- append above -->

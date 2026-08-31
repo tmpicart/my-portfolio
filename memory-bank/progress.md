@@ -21,9 +21,15 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   and home
 - All three carousels: embla + Autoplay (pause on hover/focus); dots
   everywhere (home dots added R9, approved)
+- Reduced-motion site-wide (F3): MotionConfig "user" provider + autoplay
+  gates on both carousel islands
 
 ## Recent Work
 
+- **2026-08-31 — F3 reduced-motion:** `MotionConfig reducedMotion="user"`
+  in layout; `useReducedMotion()` autoplay gates in both carousel islands
+  (home resume-path leak closed); navbar `aria-expanded` disclosure.
+  Gates green, 15/15 static.
 - **2026-08-31 — F2 SEO implementation:** `lib/site.ts` (env-backed
   `siteUrl`); root + 4 static-page metadata + `[slug]` `generateMetadata`;
   `sitemap.ts`, `robots.ts`; `next/og` 1200×630 card from `lib/home.ts`
@@ -32,10 +38,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   footer renders four data-driven links — resume `FaFilePdf` opens
   `Thayer-Picart-Resume.pdf` new-tab — plus aria-labels on all icon-only
   footer links; divider variant rejected in review. Gates green.
-- **2026-08-27 — Git upkeep:** filter-repo purge of leaked resume blobs from
-  all history (force-push; messages/dates/trees verified vs mirror backup);
-  R1–R13 merged to `main` and deployed; `feat/portfolio-features` opened
-  with F1 asset commit `21a9880`; `refactor/cleanup` + backup deleted.
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -72,11 +74,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-31 — **F2** SEO implementation (root + per-page metadata,
   OG/Twitter cards, `metadataBase`, `sitemap.ts`, `robots.ts`, per-project
   `generateMetadata`, generated OG card)
-- **F3. Reduced-motion support** *(deferred by choice during R10)* —
-  `MotionConfig reducedMotion="user"` provider in `layout.tsx` + autoplay
-  gate via `useReducedMotion()` in both carousel islands.
+- ✅ 2026-08-31 — **F3** reduced-motion (`MotionConfig reducedMotion="user"`
+  + `useReducedMotion()` autoplay gates; navbar `aria-expanded` follow-up)
 
 ## Status
 
-Next task: **F3** reduced-motion on `feat/portfolio-features`. See
-`activeContext.md` for the current working snapshot.
+Roadmap complete (R1–R13 + F1–F3). Queued (approved): navbar-overlay
+z-fix, then floating glass footer card. Push/merge = Thayer's call.
