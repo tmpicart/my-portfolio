@@ -137,7 +137,10 @@ top-level boundaries; relative imports for colocated files.
   (root layout owns it; PageShell/ProjectDetail render `motion.div`);
   one site column — navbar row/tray and `[slug]` content share the
   1120px edge (max-w-6xl − main's 16px `px-4` inset; Thayer-approved
-  visual exception).
+  visual exception). Z ladder (2026-08-31, lives in `globals.css`):
+  z-0 resting / z-10 raised+in-panel / z-20 controls / z-40 navbar
+  chrome / z-50 modal overlay — all stock utilities, documented in one
+  comment; 30 reserved for a future layer.
 - **Menu-close** — ✅ landed R13: tray closes on any navigation via a
   guarded render-time pathname reset + onClick on every nav affordance
   (logo included — same-route clicks bypass pathname diffing); no effect.

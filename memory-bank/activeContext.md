@@ -12,11 +12,8 @@ Bank Protocol.
 - `useReducedMotion()` is mount-time-only in framer 12.43 — mid-session OS
   toggles need a reload (quirk noted in techContext).
 - Navbar-overlay fix landed (`spotlightHover.zIndex` 50→10, gates green).
-- Floating glass footer card rejected in review (implemented, reverted
-  pre-commit) — Thayer prefers the full-bleed strip; footer stays as-is.
-- Flagged, unfixed: navbar (z-50) ↔ modal overlay (z-50) tie survives on
-  DOM order; deliberate scale would be cards 10 < chrome 50 < modal 60.
-- Resume-link navbar/hero variant parked — revisit if footer feels weak.
+- Footer settled: full-bleed strip stays (floating card rejected in
+  review); resume-link navbar/hero variant parked — revisit if it feels weak.
 
 ## Known Deferred Items
 

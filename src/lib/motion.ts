@@ -67,9 +67,10 @@ export const spotlightEntrance: Variants = {
 
 /**
  * Hub-card hover — accent tint identity kept; consumed via whileHover="hover".
- * zIndex must stay below the navbar's z-50: cards carry no isolating ancestor,
- * so the hover z participates in the root stacking context — at 50 it tied
- * the navbar and won on DOM order, painting cards over the fixed bar.
+ * zIndex must stay in the raised layer of the z scale (see globals.css): cards
+ * carry no isolating ancestor, so this z participates in the root stacking
+ * context — at 50 it once tied the navbar and won on DOM order, painting
+ * cards over the fixed bar.
  */
 export const spotlightHover: Variants = {
   hover: {

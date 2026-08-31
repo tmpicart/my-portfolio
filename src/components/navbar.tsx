@@ -27,7 +27,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
+    <nav className="fixed left-0 top-0 z-40 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
       {/* One column with every page shell: max-w-6xl minus main's 16px px-4
           inset puts nav content on the shells' border edge. */}
       <div className="mx-auto flex max-w-[1120px] items-center justify-between">

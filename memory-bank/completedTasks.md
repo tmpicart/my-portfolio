@@ -200,4 +200,18 @@ confirms all roadmap tasks are complete; do not read it before then.
   reads at mount (reload applies OS toggles); embla user-initiated slide
   stays smooth (out of scope).
 
+- **2026-08-31 — Z-layer convention (z ladder).** `globals.css` now owns
+  stacking: documented scale (z-0 resting / z-10 raised / z-20 controls /
+  z-chrome 40 / z-overlay 50; 30 reserved) via `@utility` named utilities
+  (z has no @theme namespace in Tailwind 4.3). Navbar → z-chrome, modal →
+  z-overlay: the flagged navbar/modal z-50 tie resolved by construction.
+  Micro stacking (cards z-0, hover 10 via framer, arrows z-20) stays
+  stock; motion.ts comment points at the ladder. Verified in build CSS.
+
+- **2026-08-31 — Z ladder rework: stock z-40/z-50.** Review follow-up:
+  dropped the z-chrome/z-overlay @utility indirection — two single-
+  consumer layers earn no custom classes. The ladder comment in
+  globals.css remains the source of truth; navbar z-40 < modal z-50
+  stands; verified in build CSS.
+
 <!-- append above -->
