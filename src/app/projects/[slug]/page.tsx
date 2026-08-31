@@ -5,15 +5,12 @@ import ProjectDetail from "@/components/project-detail";
 import { projects } from "@/lib/projects";
 import { siteName } from "@/lib/site";
 
-// All four project pages prerender at build time, same as the static routes.
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-// Metadata derives from the lib data layer, so each project page gets a
-// bespoke title, description, and screenshot-based preview card with zero
-// duplication. openGraph fields are set explicitly because a page-level
-// openGraph object replaces the layout's (shallow merge).
+// openGraph is restated in full because a page-level openGraph object
+// replaces (not merges with) the layout's.
 export async function generateMetadata({
   params,
 }: {
@@ -43,8 +40,6 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  // Resolves before any client code mounts, so no hook can run after an early
-  // return — the pre-R9 hooks-order fragility is gone by construction.
   const project = projects.find((candidate) => candidate.slug === slug);
   if (!project) notFound();
 

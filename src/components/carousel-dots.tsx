@@ -1,16 +1,12 @@
 "use client";
 
-// Class strings stay literal per variant — Tailwind's JIT scanner can't see
-// dynamically constructed class names. `transition-all` (not -colors) because
-// the medium variant animates size, not just color.
+// Literal class strings (JIT scanner); `transition-all` because the medium
+// dot animates size, not just color.
 const dotBase = "rounded-full transition-all duration-200";
 
 const dotVariants = {
-  // Home carousel.
   small: { gap: "gap-2", active: "h-2.5 w-2.5 bg-white", inactive: "h-2.5 w-2.5 bg-accent/40 hover:bg-accent/80" },
-  // [slug] modal carousel (active dot grows).
   medium: { gap: "gap-2", active: "h-3 w-3 bg-white", inactive: "h-2.5 w-2.5 bg-accent/40 hover:bg-accent/80" },
-  // [slug] main carousel.
   large: { gap: "gap-3", active: "h-4 w-4 bg-white", inactive: "h-4 w-4 bg-accent/40 hover:bg-accent/80" },
 } as const satisfies Record<string, { gap: string; active: string; inactive: string }>;
 
@@ -23,12 +19,9 @@ type CarouselDotsProps = {
   variant: CarouselDotVariant;
   /** Noun used in the aria labels, e.g. "slide" → "Go to slide 2". */
   itemLabel: string;
-  /** Appended to the row container (e.g. margins above/below the row). */
   className?: string;
 };
 
-// Shared dot row for the three carousels (home + [slug] gallery + [slug]
-// modal), extracted in R9 alongside R5's CarouselArrows.
 export default function CarouselDots({ count, activeIndex, onSelect, variant, itemLabel, className }: CarouselDotsProps) {
   const { gap, active, inactive } = dotVariants[variant];
   return (

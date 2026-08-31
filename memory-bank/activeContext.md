@@ -1,31 +1,30 @@
 # Active Context
 
-**Snapshot: 2026-08-31 (post-features-merge)** — updated every task per
+**Snapshot: 2026-08-31 (post-master-audit)** — updated every task per
 the Memory Bank Protocol.
 
 ## Current State
 
-- **Roadmap complete + merged** — refactor (R1–R13, merge `31eda54`) and
-  features (F1–F3 + z-fix/z-ladder follow-ups) both folded into `main`;
-  Vercel deploy on push, Thayer's call.
-- `feat/portfolio-features` retires (local + origin) after push approval —
-  precedent: `refactor/cleanup` deletion post-merge.
-- F1–F3 substance: footer resume/contact (`lib/contact.ts`), SEO layer
-  (sitemap, robots, OG image, per-page metadata), reduced-motion site-wide.
-- Reduced-motion quirk (framer 12.43 mount-time-only) lives in techContext
-  — one fact, one home.
+- **Roadmap complete + deployed** — R1–R13 and F1–F3 merged to `main`
+  (tip `7d028f9`, pushed, live on Vercel). `main` is the only branch;
+  feature branches are cut per task and retired post-merge.
+- **Master quality audit applied** — code comments cut to constraint-only,
+  Tailwind v4 utilities aligned, dead code pruned, README refreshed, bank
+  condensed to caps, `completedTasks.md` renewed for Cycle 2.
+- Nothing queued — new work needs a new roadmap.
 
 ## Known Deferred Items
 
 - Experience avatar gradient stays a deliberate non-token → no action.
-- R12 accepted names (judgment calls, not violations): `featured`,
+- Accepted names (judgment calls, not violations): `featured`,
   `accentLine`, `InfoCard.button`.
 - Footer full-bleed strip stays (floating card rejected in review);
-  resume-link navbar/hero variant parked — revisit if footer feels weak.
+  resume-link navbar/hero variant parked — revisit if the footer needs
+  strengthening.
 
 ## Working Agreements in Force
 
 - `.clinerules` is law; on disagreement it wins and the bank gets corrected.
-- Refactors visually neutral; exceptions need Thayer's sign-off.
+- Refactors visually neutral; exceptions need approval.
 - One roadmap item = one task = one commit; flag out-of-scope findings.
 - Ask before dependency changes; never push without asking.

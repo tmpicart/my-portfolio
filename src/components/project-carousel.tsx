@@ -9,6 +9,7 @@ import { useReducedMotion } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
+import { autoplayDelayMs } from "@/lib/motion";
 
 type ProjectCarouselSlide = {
   slug: string;
@@ -20,24 +21,11 @@ type ProjectCarouselProps = {
   slides: ProjectCarouselSlide[];
 };
 
-// Matches the pre-R8 hand-rolled interval so the carousel's rhythm is unchanged.
-const autoplayDelayMs = 4500;
-
-// Home's featured-projects carousel, extracted in R8 so the home page can be a
-// Server Component. Deliberately home-specific: the [slug] carousels differ in
-// autoplay, dots, and slide markup (settled in R9 — three purpose-built
-// carousels, shared CarouselDots/CarouselArrows primitives).
 export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
-  // useMemo (not embla's documented useRef pattern) because the React Compiler
-  // lint rules forbid reading refs during render when passing the plugin to
-  // useEmblaCarousel. A stable instance also avoids carousel re-inits.
+  // useMemo instead of embla's documented useRef pattern — the React
+  // Compiler lint rules forbid reading refs during render.
   const autoplay = useMemo(
-    () =>
-      Autoplay({
-        delay: autoplayDelayMs,
-        // A user swipe shouldn't permanently kill autoplay.
-        stopOnInteraction: false,
-      }),
+    () => Autoplay({ delay: autoplayDelayMs, stopOnInteraction: false }),
     []
   );
   const [carouselRef, carouselApi] = useEmblaCarousel(
@@ -46,11 +34,9 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Mount-time read of the OS preference; null (pre-mount) means motion
-  // allowed — it settles before autoplay's first tick.
+  // null (pre-mount) counts as motion allowed — hence === true below.
   const prefersReducedMotion = useReducedMotion();
 
-  // Dots mirror the active slide; swipes, arrows, and autoplay all fire "select".
   useEffect(() => {
     if (!carouselApi) return;
     const onSelect = () => setCurrentSlide(carouselApi.selectedScrollSnap());
@@ -60,19 +46,17 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
     };
   }, [carouselApi]);
 
-  // Reduced-motion users get a static carousel. The effect stops autoplay at
-  // init (guarded on the embla api — plugin methods throw before it attaches,
-  // the R9.1 crash guard); the resume path must check the preference too, or
-  // a hover-exit would restart autoplay behind the user's back.
+  // Plugin methods throw before embla init, so guard calls on the api; the
+  // resume path must re-check the preference or a hover-exit restarts
+  // autoplay against the user's setting.
   useEffect(() => {
     if (!carouselApi) return;
     if (prefersReducedMotion === true) autoplay.stop();
   }, [carouselApi, prefersReducedMotion, autoplay]);
 
-  // Pause/resume on the wrapper (not the plugin's stopOnMouseEnter, which only
-  // watches the embla viewport) so the arrow buttons overlaying the carousel
-  // are covered too. play() takes NO argument here — its boolean form is a
-  // jump override, and play(true) would make every tick snap instead of slide.
+  // Wrapper-level pause covers the overlay arrows (stopOnMouseEnter watches
+  // only the viewport); play() takes no arg — its boolean form is a jump
+  // override that makes every tick snap.
   const pauseAutoplay = useCallback(() => autoplay.stop(), [autoplay]);
   const resumeAutoplay = useCallback(() => {
     if (!prefersReducedMotion) autoplay.play();
@@ -110,7 +94,7 @@ export default function ProjectCarousel({ slides }: ProjectCarouselProps) {
                   height={900}
                   className="max-h-full max-w-full object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent" />
               </div>
               <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-white sm:text-base">
                 {slide.title}

@@ -13,8 +13,6 @@ const courseGroupIcons: Record<CourseGroupIconId, IconType> = {
   calculator: FaCalculator,
 };
 
-// The panel rises slowly; its contents stagger at the site interval — header
-// lines, course groups, and each group's course list (lib/motion.ts).
 const panelEntrance = fadeUp(20, durationSlow);
 const contentStagger = staggerContainer();
 const itemEntrance = fadeUp();
@@ -42,8 +40,6 @@ type EducationPanelProps = {
   education: Education;
 };
 
-// Client island (R8): nested stagger through variant propagation needs the
-// client runtime; the page keeps layout and data selection on the server.
 export default function EducationPanel({ education }: EducationPanelProps) {
   return (
     <GlassCard

@@ -106,16 +106,13 @@ top-level boundaries; relative imports for colocated files.
   "Design Tokens" below).
 - **Carousel pattern** — ✅ settled R9: three purpose-built carousels
   (home / `[slug]` gallery / `[slug]` modal), NOT one shared `Carousel` —
-  rule of three not met and slide markup genuinely differs; knowledge
-  quirks live in `techContext.md`. Shared primitives: `CarouselArrows`
-  (R5) + `CarouselDots` (R9). Home + gallery autoplay (4500ms,
-  `stopOnInteraction: false`, wrapper-level pause on hover/focus — the
-  plugin's `stopOnMouseEnter` only watches the viewport, missing overlay
-  arrows). Gallery/modal sync: modal mounts at `startIndex` =
-  clicked slide; single shared `activeSlide`; on close the gallery jumps
-  to it (no live cross-carousel effect-sync — that design died in R9).
-  Plugin `play()`/`stop()` must be guarded on the embla api — plugin
-  methods throw before init (mount-effect crash, fixed R9.1).
+  rule of three not met and slide markup genuinely differs. Shared
+  primitives: `CarouselArrows` + `CarouselDots`. Autoplay rhythm is one
+  constant in `lib/motion.ts` (4500ms, `stopOnInteraction: false`);
+  hover/focus pause sits on the wrapper so overlay arrows are covered.
+  Gallery/modal sync: modal mounts at the clicked slide (`startIndex`);
+  both share one `activeSlide` and sync on close only — no live
+  cross-carousel sync. Plugin/API quirks live in `techContext.md`.
 - **Modal pattern** — ✅ landed R9: `AnimatePresence`-wrapped,
   `role="dialog"` + `aria-modal`, focus-on-open + focus return + full Tab
   wrap trap, Escape close, body scroll-lock, close button, optimized
@@ -136,11 +133,9 @@ top-level boundaries; relative imports for colocated files.
 - **Layout invariants** — ✅ settled R12: exactly one `<main>` per page
   (root layout owns it; PageShell/ProjectDetail render `motion.div`);
   one site column — navbar row/tray and `[slug]` content share the
-  1120px edge (max-w-6xl − main's 16px `px-4` inset; Thayer-approved
-  visual exception). Z ladder (2026-08-31, lives in `globals.css`):
-  z-0 resting / z-10 raised+in-panel / z-20 controls / z-40 navbar
-  chrome / z-50 modal overlay — all stock utilities, documented in one
-  comment; 30 reserved for a future layer.
+  1120px edge (max-w-6xl − main's 16px `px-4` inset; approved
+  exception). Z ladder (z-0/10/20/40/50; 30 reserved) is documented
+  once in `globals.css` — that comment is its single home.
 - **Menu-close** — ✅ landed R13: tray closes on any navigation via a
   guarded render-time pathname reset + onClick on every nav affordance
   (logo included — same-route clicks bypass pathname diffing); no effect.
@@ -150,7 +145,7 @@ top-level boundaries; relative imports for colocated files.
 Palette defined once in `globals.css` via Tailwind v4 `@theme`; Tailwind
 auto-generates utilities from each `--color-*` variable (including opacity
 modifiers and gradient stops). Semantic names were chosen over numeric
-scales (Thayer-approved, R6). Token map:
+scales (approved, R6). Token map:
 
 | Token | Hex | Role |
 |---|---|---|
@@ -176,28 +171,12 @@ single-use decorative), accent `rgba()` stops inside arbitrary gradients
 (color-mix() conversion risks render drift — value-identical literals are
 safer).
 
-## Debt Register (current → killed by)
+## Debt Register
 
-1. ~~Duplicate project data, hub vs `lib/projects.ts`~~ ✅ R3
-2. ~~Dual icon systems (FA CDN + react-icons)~~ ✅ R7
-3. ~~All 6 pages `"use client"`~~ ✅ R8/R9 (servers + islands)
-4. ~~Copy-pasted page shell + style strings~~ ✅ R5
-5. ~~Type drift: `Project` ×2, `Experience`, `pageMeta` ×4~~ ✅ R3/R4/R5
-6. ~~Dead `scrollbar-*` classes~~ ✅ R6
-7. ~~`[slug]` modal gaps (dead `exit`, no Escape/scroll-lock/role, inline
-   styles, `router.push` back button, `unoptimized` images)~~ ✅ R9
-8. ~~Hooks-order fragility (`notFound()` before hooks in `[slug]`)~~ ✅ R9
-   (server-side resolve)
-9. ~~Assets: orphaned `Avatar.png`, unused template SVGs, oversized
-   images~~ ✅ R11 (deleted + sharp compress + kebab-case; stock photos
-   removed by Thayer's call — portfolio deck is 2 real slides now)
-10. ~~SEO absent (single root metadata only)~~ ✅ F2 (full metadata
-    layer, sitemap/robots, generated OG card)
-11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family, `pfp.jpg`~~
-    ✅ R3/R5/R11 (`pfp.jpg` → `profile.jpg`)
-12. ~~Home content hardcoded~~ ✅ R8 (`lib/home.ts` + `HomeIcon` ID map)
-13. ~~Footer contact links hardcoded~~ ✅ F1 (`lib/contact.ts` + footer icon map)
-14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
-    `relative`)
-15. ~~`sizeStyles` literal inside ProjectCard's body~~ ✅ R12.1
-    (module-scope `cardSizeStyles` + derived `CardSize`)
+Zero open. Killed (details in git history): duplicate project data (R3) ·
+dual icon systems (R7) · all pages client (R8/R9) · copy-pasted shells
+(R5) · type drift (R3/R4/R5) · dead scrollbar classes (R6) · `[slug]`
+modal gaps (R9) · hooks-order fragility (R9) · asset waste (R11) · SEO
+absent (F2) · naming stragglers (R3/R5/R11) · hardcoded home (R8) ·
+hardcoded footer links (F1) · accent-bar anchoring (R5) · in-body
+sizeStyles (R12.1).

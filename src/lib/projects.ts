@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "John Dungeon",
     summary: "A top-down dungeon crawler inspired by classic Zelda and old school fantasy games.",
     description:
-      "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally built over a tight three-week deadline by a team of five, the project earned the highest rating among competing games at 4.59 stars. I've since taken over development as a solo project, refactoring the codebase, fixing bugs, and expanding gameplay systems.",
+      "A top-down dungeon crawler inspired by classic Zelda games, featuring custom-drawn sprites, varied enemies, and an intense two-phase boss fight. Originally built over a tight three-week deadline by a team of five, the project earned the highest rating among competing games at 4.59 stars. I’ve since taken over development as a solo project, refactoring the codebase, fixing bugs, and expanding gameplay systems.",
     thumbnail: "/images/john/john-5.png",
     featured: false,
     screenshots: [
@@ -95,7 +95,7 @@ export const projects: Project[] = [
       {
         src: "/images/codex/codex-2.png",
         title: "Translation",
-        lines: ["- 'Tylenol' translated to Ukrainian using the backend database"],
+        lines: ["- ‘Tylenol’ translated to Ukrainian using the backend database"],
       },
       {
         src: "/images/codex/codex-3.png",
@@ -205,8 +205,8 @@ export const projects: Project[] = [
   },
 ];
 
-// The hub's spotlight card is driven by this flag — enforce the one-true invariant
-// at module load so a bad edit fails the build, not the page.
+// Exactly one featured project — enforced at module load so a bad edit
+// fails the build, not the page.
 if (projects.filter((project) => project.featured).length !== 1) {
   throw new Error(
     "lib/projects.ts: exactly one project must be marked featured: true"

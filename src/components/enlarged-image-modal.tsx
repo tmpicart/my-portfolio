@@ -20,20 +20,15 @@ type EnlargedImageModalProps = {
   onClose: () => void;
 };
 
-// Focus-trap candidates inside the modal dialog.
 const focusableSelector =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-// Overlay fade in/out — labels keep AnimatePresence's exit in the same system.
 const overlayVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   exit: { opacity: 0 },
 };
 
-// The [slug] enlarged-view dialog (R9): a second embla carousel plus focus
-// trap, Escape handling, and scroll lock. Mounts fresh on every open, so the
-// initial slide arrives via embla's startIndex, not a scroll-on-open effect.
 export default function EnlargedImageModal({
   projectTitle,
   screenshots,
@@ -57,7 +52,6 @@ export default function EnlargedImageModal({
     };
   }, [modalCarouselApi, onSlideChange]);
 
-  // Move focus into the dialog and lock background scroll while it's open.
   useEffect(() => {
     dialogRef.current?.focus();
     const previousOverflow = document.body.style.overflow;
@@ -67,8 +61,8 @@ export default function EnlargedImageModal({
     };
   }, []);
 
-  // Escape closes; Tab wraps inside the dialog so keyboard focus can't reach
-  // the inert page behind the overlay (the promise aria-modal="true" makes).
+  // Escape closes; Tab wraps inside so focus can't reach the page behind
+  // the overlay.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {

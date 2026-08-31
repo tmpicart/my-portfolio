@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
 /*
-  Design tokens (R6) — the palette's single source of truth. Tailwind v4
+  Design tokens — the palette's single source of truth. Tailwind v4
   generates utilities from these variables (bg-accent, text-accent-tint,
-  border-accent/40, from-accent-vivid, …). Values are the pre-R6 hexes, so
-  the token migration is visually neutral by construction.
+  border-accent/40, …).
 */
 @theme {
   /* Accent family — buttons, hovers, headings, active states. */
@@ -24,7 +23,7 @@
   --color-surface-2: #1f1e2e; /* panels */
   --color-surface-3: #272636; /* inner panels, modal info rail */
   --color-surface-modal: #1c1b29; /* modal background */
-  --color-backdrop: #2a2a3a; /* screenshot letterbox behind object-contain (R9) */
+  --color-backdrop: #2a2a3a; /* screenshot letterbox behind object-contain */
 
   /* Mobile menu states */
   --color-menu: #4b4e58;
@@ -34,8 +33,7 @@
 
 /*
   Z-layer scale — the site's only sanctioned stacking values, all stock
-  Tailwind utilities (nothing here earns a custom class). 30 stays free so
-  a future layer can slot in.
+  Tailwind utilities. 30 stays free for a future layer.
 
     z-0   resting positioned panels (project cards' hover base)
     z-10  raised/hover content + in-panel overlays (framer's spotlightHover

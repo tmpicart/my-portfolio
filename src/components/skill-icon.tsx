@@ -22,8 +22,8 @@ import {
 
 import type { SkillIconId } from "@/lib/skills";
 
-// Brand colors are presentation, so they live with the icon mapping —
-// lib/skills.ts stays serializable (icon IDs only).
+// Icon components and brand colors live here so lib/skills.ts stays
+// serializable (icon IDs only).
 const skillIcons: Record<SkillIconId, { icon: IconType; className: string }> = {
   python: { icon: SiPython, className: "text-blue-500" },
   java: { icon: FaJava, className: "text-red-600" },
@@ -34,7 +34,7 @@ const skillIcons: Record<SkillIconId, { icon: IconType; className: string }> = {
   css: { icon: SiCss, className: "text-blue-400" },
   tailwind: { icon: SiTailwindcss, className: "text-teal-400" },
   bootstrap: { icon: SiBootstrap, className: "text-purple-600" },
-  nextjs: { icon: SiNextdotjs, className: "text-black dark:text-white" },
+  nextjs: { icon: SiNextdotjs, className: "text-white" },
   fastapi: { icon: SiFastapi, className: "text-green-500" },
   django: { icon: SiDjango, className: "text-green-700" },
   sql: { icon: SiMysql, className: "text-blue-600" },
@@ -42,9 +42,9 @@ const skillIcons: Record<SkillIconId, { icon: IconType; className: string }> = {
   aws: { icon: FaAws, className: "text-orange-500" },
   agile: { icon: SiJira, className: "text-blue-500" },
   git: { icon: SiGit, className: "text-red-500" },
-  github: { icon: SiGithub, className: "text-gray-800 dark:text-white" },
+  github: { icon: SiGithub, className: "text-white" },
   slack: { icon: FaSlack, className: "text-purple-500" },
-  notion: { icon: SiNotion, className: "text-black dark:text-white" },
+  notion: { icon: SiNotion, className: "text-white" },
 };
 
 export function SkillIcon({ iconId }: { iconId: SkillIconId }) {

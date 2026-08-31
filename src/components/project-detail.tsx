@@ -17,9 +17,7 @@ const pageVariants = staggerContainer();
 const sectionVariants = fadeUp();
 const titleVariants = fadeDown();
 
-// The [slug] client island (R9): the server shell hands over a typed Project
-// and this composition root owns the gallery/modal pair and the slide state
-// they share (lifted here so either can drive the active slide).
+// Owns the gallery/modal pair and the active-slide state they share.
 export default function ProjectDetail({ project }: ProjectDetailProps) {
   const { title, description, screenshots, bullets, github } = project;
   const [activeSlide, setActiveSlide] = useState(0);
@@ -43,8 +41,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       animate="visible"
       variants={pageVariants}
     >
-      {/* One site column: max-w-6xl minus main's 16px px-4 inset — the
-          shell-border edge every page shares, including the navbar row. */}
+      {/* max-w-6xl minus main's 16px inset — the site-wide column edge. */}
       <div className="w-full max-w-[1120px] px-6">
         <Link href="/projects">
           <motion.button
@@ -104,7 +101,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           )}
         </motion.div>
 
-        {github && github.trim() !== "" && (
+        {github.trim() !== "" && (
           <motion.div className="mb-12 flex justify-center" variants={sectionVariants}>
             <a
               href={github}

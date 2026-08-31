@@ -1,6 +1,6 @@
 # Project Brief
 
-A deployed portfolio website presenting Thayer's software engineering work —
+A deployed portfolio website presenting the owner's software engineering work —
 projects, skills, education, and experience — in a fast, professional, easily
 scannable format.
 

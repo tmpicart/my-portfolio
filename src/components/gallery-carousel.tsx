@@ -9,7 +9,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
-import { fadeUp } from "@/lib/motion";
+import { autoplayDelayMs, fadeUp } from "@/lib/motion";
 import type { ProjectScreenshot } from "@/lib/projects";
 
 type GalleryCarouselProps = {
@@ -21,15 +21,8 @@ type GalleryCarouselProps = {
   onOpenModal: (index: number) => void;
 };
 
-// Matches home's carousel rhythm (R8) so autoplay feels consistent site-wide.
-const autoplayDelayMs = 4500;
-
-// Rises with the page stagger alongside its sibling sections — one shared
-// entrance from lib/motion.ts (the R9.1 local copy died with R10).
 const galleryEntrance = fadeUp();
 
-// The [slug] detail gallery (R9): embla + autoplay, hover overlay, and the
-// slide state it shares with the enlarged-image modal via its parent.
 export default function GalleryCarousel({
   projectTitle,
   screenshots,
@@ -38,16 +31,10 @@ export default function GalleryCarousel({
   onSlideChange,
   onOpenModal,
 }: GalleryCarouselProps) {
-  // useMemo (not embla's documented useRef pattern) because the React Compiler
-  // lint rules forbid reading refs during render when passing the plugin to
-  // useEmblaCarousel. A stable instance also avoids carousel re-inits.
+  // useMemo instead of embla's documented useRef pattern — the React
+  // Compiler lint rules forbid reading refs during render.
   const autoplay = useMemo(
-    () =>
-      Autoplay({
-        delay: autoplayDelayMs,
-        // A user swipe shouldn't permanently kill autoplay.
-        stopOnInteraction: false,
-      }),
+    () => Autoplay({ delay: autoplayDelayMs, stopOnInteraction: false }),
     []
   );
   const [mainCarouselRef, mainCarouselApi] = useEmblaCarousel(
@@ -58,8 +45,7 @@ export default function GalleryCarousel({
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const wasModalOpenRef = useRef(false);
 
-  // Mount-time read of the OS preference; null (pre-mount) means motion
-  // allowed — it settles before autoplay's first tick.
+  // null (pre-mount) counts as motion allowed.
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -71,25 +57,18 @@ export default function GalleryCarousel({
     };
   }, [mainCarouselApi, onSlideChange]);
 
-  // One gate for autoplay: suspended while the user hovers/focuses the
-  // carousel (wrapper-level so the overlay arrows count too — see R8), while
-  // the modal covers it, or while the user prefers reduced motion. play()
-  // takes NO argument — its boolean form is a jump override that would make
-  // every tick snap instead of slide.
+  // Wrapper-level suspend covers the overlay arrows; play() takes no arg —
+  // its boolean form is a jump override that makes every tick snap.
   const isAutoplayRunning =
     !isAutoplaySuspended && !isModalOpen && !prefersReducedMotion;
-  // Guard on the embla api: plugin methods throw until embla initializes and
-  // attaches the plugin. Home's carousel avoids this by only calling them from
-  // DOM event handlers, which by definition fire post-mount.
+  // Plugin methods throw until embla init — guard on the api.
   useEffect(() => {
     if (!mainCarouselApi) return;
     if (isAutoplayRunning) autoplay.play();
     else autoplay.stop();
   }, [isAutoplayRunning, autoplay, mainCarouselApi]);
 
-  // When the modal closes, land on the slide the user last viewed and return
-  // focus there. While the modal is open the main carousel stays put behind
-  // the overlay — syncing live was the effect-driven design R9 replaced.
+  // On modal close, sync to the last-viewed slide and restore focus there.
   useEffect(() => {
     if (wasModalOpenRef.current && !isModalOpen) {
       mainCarouselApi?.scrollTo(activeSlide, true);
@@ -147,10 +126,8 @@ export default function GalleryCarousel({
                 className="max-h-[480px] max-w-full rounded-md bg-backdrop object-contain"
               />
 
-              {/* Hover tint */}
               <div className="absolute inset-0 rounded-md bg-black/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              {/* Hover info */}
               <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <div className="max-w-[60%] space-y-1 text-gray-200">
                   <h3 className="text-2xl font-bold">{screenshot.title}</h3>

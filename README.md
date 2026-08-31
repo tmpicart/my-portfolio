@@ -26,9 +26,13 @@ Then open http://localhost:3000 in your browser. For a production build use `npm
 
 - Fully responsive design
 - Organized sections for projects, skills, education, experience and contact information
-- Clean and modern UI using Tailwind CSS
-- Built with Next.js and TypeScript for maintainable and scalable code
-- Animated page transitions and autoplaying project carousels
+- Project pages with screenshots, tech breakdowns, and image galleries
+- Animated page entrances and autoplaying project carousels
+- Per-page SEO metadata, a sitemap, and social preview cards
+
+## Project Structure
+
+Page content lives in `src/lib` as typed data files, so updating a project or skill is just a data edit. Shared UI (cards, carousels, the page shell) lives in `src/components`, and routes live in `src/app`.
 
 ## Deployment
 

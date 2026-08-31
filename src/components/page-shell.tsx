@@ -7,12 +7,8 @@ import { staggerContainer } from "@/lib/motion";
 
 type PageShellProps = {
   children: ReactNode;
-  /** Appended to the base shell classes (e.g. education's `w-full`). */
-  className?: string;
 };
 
-// Every page's stagger root: children carrying entrance variants (PageHeader
-// first, then content) cascade at the site interval (see lib/motion.ts).
 const shellVariants = staggerContainer();
 
 const shellClasses = `
@@ -22,13 +18,13 @@ const shellClasses = `
   px-6 pt-6 pb-12 mt-8 sm:mt-10 lg:mt-12 text-white sm:px-8 lg:px-14
 `;
 
-export default function PageShell({ children, className }: PageShellProps) {
+export default function PageShell({ children }: PageShellProps) {
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={shellVariants}
-      className={className ? `${shellClasses} ${className}` : shellClasses}
+      className={shellClasses}
     >
       <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)]" />
       {children}
