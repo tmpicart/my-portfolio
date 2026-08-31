@@ -9,11 +9,8 @@ type PageHeaderProps = {
   title: string;
 };
 
-// First child of the page stagger — every page opens with the header easing
-// down, then content follows (variant labels propagate from PageShell).
 const headerVariants = fadeDown();
 
-// Canonical header (R5): eyebrow tint (text-accent-tint), mb-10 spacing.
 export default function PageHeader({ eyebrow, title }: PageHeaderProps) {
   return (
     <motion.div variants={headerVariants} className="relative mb-10 text-center">

@@ -2,17 +2,13 @@ import { ImageResponse } from "next/og";
 
 import { home } from "@/lib/home";
 
-// Branded link-preview card — the default og:image (and twitter:image
-// fallback) for every page that doesn't override with its own screenshots.
-// Copy derives from the hero in lib/home (badge, focus areas) over the
-// design tokens (globals.css: canvas, accent-tint), so the card auto-syncs
-// with the site and can never drift from its voice.
+// Default og:image / twitter card — copy derives from lib/home so it
+// stays in sync with the hero.
 export const alt = "Thayer Picart — Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Satori (the OG renderer) has no Tailwind pipeline here — inline style
-// objects are the only way to express these values, per the styling exception.
+// Satori has no Tailwind pipeline — inline styles are the only option here.
 export default function OpenGraphImage() {
   return new ImageResponse(
     (

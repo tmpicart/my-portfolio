@@ -35,14 +35,14 @@ export const home: HomeContent = {
     title: "Hello, I’m Thayer!",
     badge: "Software Engineer",
     intro:
-      "I like building things that are useful and fun to use. My background is mostly web development, but I've branched into mobile and game projects too, and I'm always up for learning whatever platform a problem calls for. I'm happiest when I'm figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I'm into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.",
+      "I like building things that are useful and fun to use. My background is mostly web development, but I’ve branched into mobile and game projects too, and I’m always up for learning whatever platform a problem calls for. I’m happiest when I’m figuring out how pieces fit together and refining something messy into something that feels clean and reliable. Outside of work I’m into game dev and D&D, which is part of why I care so much about how something feels to use, not just how it works.",
     focusAreas: ["Web", "Mobile", "Game Dev"],
   },
   projects: {
     iconId: "laptop-code",
     title: "See My Projects!",
     description:
-      "Here are some of the things I've worked on, each highlighting different skills developed along the way. Explore the technologies behind them, browse images showing their design, or visit my GitHub and dive into the code.",
+      "Here are some of the things I’ve worked on, each highlighting different skills developed along the way. Explore the technologies behind them, browse images showing their design, or visit my GitHub and dive into the code.",
     button: "See My Projects",
   },
   infoCards: [
@@ -51,7 +51,7 @@ export const home: HomeContent = {
       href: "/experience",
       iconId: "briefcase",
       description:
-        "See where I've put my development skills into practice and work as part of a team to tackle real-world problems.",
+        "See where I’ve put my development skills into practice and work as part of a team to tackle real-world problems.",
       button: "View My Experience",
     },
     {

@@ -8,9 +8,7 @@ import GlassCard from "@/components/glass-card";
 import { spotlightEntrance, spotlightHover } from "@/lib/motion";
 import type { Project } from "@/lib/projects";
 
-// Static per-size hub-card classes, keyed small→large. Lives at module scope
-// (.clinerules: constants don't sit in component bodies) and keeps its class
-// strings literal so Tailwind's JIT scanner sees them.
+// Class strings stay literal for Tailwind's JIT scanner.
 const cardSizeStyles = {
   large: {
     cardPadding: "p-8",
@@ -70,7 +68,7 @@ function ProjectCard({ title, summary, thumbnail, slug, size = "medium" }: Proje
         <h3 className={`${sizeStyles.titleClass} mt-3 font-bold text-white`}>
           {title}
         </h3>
-        <div className={`my-3 h-0.5 rounded bg-gradient-to-r from-accent-vivid to-accent ${sizeStyles.dividerClass}`} />
+        <div className={`my-3 h-0.5 rounded bg-linear-to-r from-accent-vivid to-accent ${sizeStyles.dividerClass}`} />
         <p className={`${sizeStyles.summaryClass} text-gray-200`}>{summary}</p>
       </GlassCard>
     </Link>
@@ -82,8 +80,6 @@ type ProjectGridProps = {
   otherProjects: Project[];
 };
 
-// Client island (R8): cards inherit the page stagger's variant labels through
-// the island boundary; the hover gesture needs the client runtime.
 export default function ProjectGrid({ featuredProject, otherProjects }: ProjectGridProps) {
   return (
     <div className="w-full max-w-6xl">

@@ -11,14 +11,12 @@ type ExperienceTimelineProps = {
   experiences: Experience[];
 };
 
-// Client island (R8): cards inherit the page stagger's variant labels through
-// the island boundary (labels propagate; function variants wouldn't).
 export default function ExperienceTimeline({ experiences }: ExperienceTimelineProps) {
   return (
     <div className="relative flex w-full max-w-4xl flex-col gap-10">
       {experiences.map((experience) => (
         <GlassCard key={experience.company} variant="timeline" accentLine variants={slideInFromLeft}>
-          <div className="flex h-32 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-gradient-to-br from-[#2c2f36] via-[#1f2128] to-[#3a3e47]">
+          <div className="flex h-32 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-linear-to-br from-[#2c2f36] via-[#1f2128] to-[#3a3e47]">
             <Image
               src={experience.logo}
               alt={`${experience.company} logo`}

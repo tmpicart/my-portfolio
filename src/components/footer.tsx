@@ -4,8 +4,6 @@ import { SiGithub } from "react-icons/si";
 
 import { contactLinks, type ContactIconId } from "@/lib/contact";
 
-// Component refs are presentation, so they live in this map — lib/contact.ts
-// stays serializable (icon IDs only). Same pattern as home-icon.tsx.
 const contactIcons: Record<ContactIconId, IconType> = {
   linkedin: FaLinkedin,
   github: SiGithub,

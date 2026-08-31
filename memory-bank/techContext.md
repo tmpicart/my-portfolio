@@ -20,16 +20,15 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 - `npm run dev` — dev server
 - `npm run build` — production build (this is the real quality gate today)
 - `npm run start` — serve the production build locally
-- `npm run lint` — **repaired 2026-08-19 (R1)**: native ESLint 9 flat config
-  (`eslint-config-next/core-web-vitals` + `/typescript`, no FlatCompat) with
-  `eslint .` script. Zero lint suppressions since R13 (menu-close landed
-  2026-08-26; the `[slug]` hooks ×2 died with R9).
+- `npm run lint` — native ESLint 9 flat config (`eslint-config-next/
+  core-web-vitals` + `/typescript`, no FlatCompat) with `eslint .`.
+  Zero suppressions repo-wide.
 
 ## Deployment & Branches
 
 - **Vercel** auto-deploys from `main`: https://tmpicart-portfolio.vercel.app
-- Work happens on branches (current: `feat/portfolio-features`, cut from
-  the R1–R13 merge); `main` stays the stable, deployed line.
+- Work happens on short-lived feature branches cut from `main` and
+  retired post-merge; `main` is the stable, deployed line.
 
 ## AI Tooling (Cline workflow)
 
@@ -40,7 +39,7 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   reads are `activeContext.md` + `progress.md` every task; this file and
   `systemPatterns.md` are Tier 1 (on demand); brief/product are Tier 2.
   `completedTasks.md` is a sealed write-only archive — append via the
-  sentinel, never read until Thayer confirms all roadmap tasks are done.
+  sentinel, never read until the roadmap is confirmed complete.
   Compression caps keep every file bounded; the bank is primary context
   over re-reading source files.
 - **`.clineignore`** — blocks Cline tools from reading `node_modules/`,
@@ -50,8 +49,8 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 
 ## Known Quirks (remaining)
 
-- Cline `replace_in_file` quirk (root-caused 2026-08-23, A/B test): indented
-  diff markers (`  ------- SEARCH`) silently no-op while reporting success —
+- Cline `replace_in_file` quirk: indented diff markers
+  (`  ------- SEARCH`) silently no-op while reporting success —
   the harness parser only honors flush-left markers. Not a filesystem issue
   (`write_to_file` always lands). Law in `.clinerules`: markers flush-left,
   verify every batch with `git --no-pager diff --stat`.

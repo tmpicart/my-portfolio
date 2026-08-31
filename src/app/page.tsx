@@ -11,15 +11,14 @@ import { home } from "@/lib/home";
 import { durationSlow, fadeUp } from "@/lib/motion";
 import { projects } from "@/lib/projects";
 
-// Minimal slide shape — keeps descriptions, captions, and full image lists out
-// of the carousel island's client payload.
+// Projection keeps descriptions and captions out of the carousel's client
+// payload.
 const carouselSlides = projects.map(({ slug, title, thumbnail }) => ({
   slug,
   title,
   thumbnail,
 }));
 
-// All home panels share one entrance; PageShell's stagger sequences them.
 const panelEntrance = fadeUp(40, durationSlow);
 
 export default function HomePage() {
@@ -50,7 +49,7 @@ export default function HomePage() {
           <div className="relative rounded-full border border-white/20 bg-[radial-gradient(circle_at_bottom_right,_rgba(166,115,231,0.28),_rgba(255,255,255,0.04)_55%,_transparent_70%)] p-2">
             <Image
               src="/images/icons/profile.jpg"
-              alt="Thayer profile pic"
+              alt="Thayer's profile photo"
               width={132}
               height={132}
               className="rounded-full border border-white/15 object-cover"
@@ -59,7 +58,7 @@ export default function HomePage() {
         </div>
       </GlassCard>
 
-      <div className="relative flex w-full max-w-6xl flex-col gap-8 lg:flex-row">
+      <div className="flex w-full flex-col gap-8 lg:flex-row">
         <GlassCard variant="section" className="flex-1" variants={panelEntrance}>
           <div className="mb-4 flex items-center">
             <div className="mr-3 rounded-full bg-accent/15 p-3">

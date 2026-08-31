@@ -1,7 +1,7 @@
 # Cline Rules — Portfolio Website
 
 Next.js 16 (App Router) + React 19 + TypeScript 5 + Tailwind CSS 4 portfolio
-for Thayer (github.com/tmpicart). Deployed on Vercel from main; pushes to main
+(github.com/tmpicart). Deployed on Vercel from main; pushes to main
 auto-deploy. Work happens on feature/refactor branches; main stays the stable
 line. The repo is public and doubles as a work sample — assume recruiters may
 read anything committed here.
@@ -20,8 +20,7 @@ read anything committed here.
 - Styling: Tailwind utility classes only; no inline `style` objects except
   values utilities genuinely can't express.
 - Animation: framer-motion. Carousels: embla-carousel-react.
-- Icons: react-icons. Do not add new Font Awesome `<i>` usages; remaining
-  ones are scheduled for migration.
+- Icons: react-icons only — no Font Awesome, no CDN icon fonts.
 - TypeScript: no `any`. Model data with explicit interfaces (pattern:
   `Project` in `lib/projects.ts`).
 - Content lives in the `lib/` data layer as typed TS; pages render from it —
@@ -44,8 +43,9 @@ read anything committed here.
 
 ## Comments
 - Explain why, not what — names and structure carry the "what."
-- Keep intent comments on non-obvious logic; delete redundant JSX section
-  markers once components are extracted.
+- A comment earns its line by preventing a mistake: a constraint someone
+  would break, a gotcha, a deliberate deviation from a documented pattern.
+  History, rationale, and architecture narration belong in the memory bank.
 - No commented-out code; no TODOs without a roadmap reference.
 
 ## Guardrails
@@ -59,9 +59,8 @@ read anything committed here.
   `replace_in_file`) — never via shell/PowerShell, to avoid token burn.
   `replace_in_file` markers must be flush-left (`------- SEARCH` /
   `=======` / `+++++++ REPLACE`); indented markers silently no-op while
-  reporting success (harness parser quirk, A/B-diagnosed 2026-08-23).
-  Verify every edit batch with `git --no-pager diff`; success echoes alone
-  are not proof.
+  reporting success. Verify every edit batch with `git --no-pager diff`;
+  success echoes alone are not proof.
 - Quality gates before declaring done: `npm run lint` + `npm run build` both
   clean. (No test framework — static presentation site; revisit if interactive
   behavior with failure modes is added.)
@@ -69,14 +68,14 @@ read anything committed here.
 ## Workflow Control
 - **Task Checkpoint (the single gate):** once implementation is done and
   `npm run lint` + `npm run build` are both clean, stop and present a
-  diff summary + task summary. Bank updates run only AFTER Thayer approves
+  diff summary + task summary. Bank updates run only AFTER checkpoint approval
   (so requested changes never invalidate written docs); after requested
   changes, re-present the same checkpoint. Post-approval, bank sync and
   task code land together in a single combined commit. A task is not done
   until its checkpoint is approved and committed.
 - **Circuit breaker:** after 5 consecutive failures on the same step (or 5
   tool calls with no verifiable progress), stop retrying, list each
-  attempt, its error, and a hypothesis, and ask Thayer how to proceed.
+  attempt, its error, and a hypothesis, and ask how to proceed.
   Never rerun a failed command verbatim — change something first. Any
   success resets the count.
 
@@ -96,14 +95,14 @@ read anything committed here.
   debt); `techContext.md` (commands, tooling, quirks).
 - Tier 2, rarely: `projectbrief.md` / `productContext.md` (goals, audience).
 - Never re-read a file already in context; never attempt paths blocked by
-  `.clineignore` — ask Thayer instead.
+  `.clineignore` — ask instead.
 - The bank is the primary context source — consult it before re-reading
   source files. Read code to do the task at hand, not to rebuild context the
   bank already holds. If bank and code disagree, the code is ground truth:
   fix the bank and note the drift.
 - `completedTasks.md` is a sealed archive: at every task end, append the
   full task entry by editing above the `<!-- append above -->` sentinel (no
-  read required). NEVER read it without Thayer's explicit confirmation
+  read required). NEVER read it without explicit confirmation
   that all roadmap tasks are complete. New entries ≤15 lines;
   step-by-step narrative stays in git history, not the archive.
 - Update `activeContext.md` + `progress.md` every task; `systemPatterns.md`
@@ -119,7 +118,7 @@ read anything committed here.
   quirks → techContext, current focus → activeContext — no duplication.
 
 ## Communication
-- Explain the *why* behind non-obvious decisions; Thayer reviews everything
-  like a PR and is learning agentic workflows through this project.
+- Explain the *why* behind non-obvious decisions — every change gets
+  reviewed like a PR.
 - Committed files use professional, recruiter-safe language.
 - Don't re-explain context the memory bank already holds — link/update it.

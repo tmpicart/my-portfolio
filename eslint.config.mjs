@@ -1,6 +1,5 @@
-// Native ESLint 9 flat config. `eslint-config-next` ships flat-config arrays
-// directly (no FlatCompat) since Next 16 — keep this file aligned with what
-// create-next-app scaffolds.
+// ESLint 9 flat config — eslint-config-next ships flat arrays directly
+// (no FlatCompat) since Next 16.
 import { defineConfig, globalIgnores } from "eslint/config";
 import coreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";

@@ -13,7 +13,7 @@ export const experiences: Experience[] = [
     role: "Software Engineer Intern",
     duration: "Aug 2024 – Dec 2024",
     description: [
-      "Built a responsive, mobile-friendly web app for translating medical terminology across multiple languages as part of a 3-person team; project won the department's senior showcase.",
+      "Built a responsive, mobile-friendly web app for translating medical terminology across multiple languages as part of a 3-person team; project won the department’s senior showcase.",
       "Designed and implemented an AI-powered fallback translation system using the Gemini API, including backend integration to handle cases with no direct database match.",
       "Migrated the application to Next.js, TypeScript, and Tailwind CSS, improving maintainability and scalability.",
       "Collaborated in an Agile environment using Slack and Notion to coordinate sprints and streamline delivery.",

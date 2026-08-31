@@ -35,8 +35,8 @@ looks twice.
 - **Featured-project spotlight** — the projects hub deliberately renders one
   project as a large "featured" card. This is intentional design, not
   inconsistency: exactly one project carries `featured: true` in the data
-  layer, and Thayer moves that flag when a new flagship project deserves the
-  spotlight.
+  layer, and the owner moves that flag when a new flagship project deserves
+  the spotlight.
 - **Mobile is a first-class path** — recruiters frequently open links on
   phones; carousels, the image modal, and the navbar menu must work
   touch-first.

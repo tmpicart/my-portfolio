@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  // Self-canonical for every route from one declaration: "./" resolves
-  // against each page's own URL (the documented metadataBase pattern).
+  // "./" resolves against each page's own URL — self-canonical everywhere
+  // from one declaration.
   alternates: {
     canonical: "./",
   },
@@ -28,17 +28,14 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen bg-canvas text-white antialiased caret-transparent">
+      <body className="flex flex-col min-h-screen bg-canvas text-white antialiased">
         <Navbar />
         <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-12 md:pt-16">
-          {/* One provider covers every framer animation — they all live inside
-              main (Navbar/Footer are CSS-only). "user" honors the OS setting:
-              transform/layout motion jumps to its end state, opacity/color
-              still animate. */}
+          {/* One provider covers every animation (all motion lives inside
+              main); "user" honors the OS reduced-motion preference. */}
           <MotionConfig reducedMotion="user">{children}</MotionConfig>
         </main>
 

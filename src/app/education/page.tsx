@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function EducationPage() {
   return (
-    <PageShell className="w-full">
+    <PageShell>
       <PageHeader eyebrow="Academic Foundation" title="Education" />
 
       <EducationPanel education={education} />
