@@ -24,6 +24,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-31 — F2 SEO implementation:** `lib/site.ts` (env-backed
+  `siteUrl`); root + 4 static-page metadata + `[slug]` `generateMetadata`;
+  `sitemap.ts`, `robots.ts`; `next/og` 1200×630 card from `lib/home.ts`
+  hero copy. Gates green, 15/15 static. Photo rejected (discrimination).
 - **2026-08-31 — F1 resume button:** new `lib/contact.ts` (`ContactLink`);
   footer renders four data-driven links — resume `FaFilePdf` opens
   `Thayer-Picart-Resume.pdf` new-tab — plus aria-labels on all icon-only
@@ -32,9 +36,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   all history (force-push; messages/dates/trees verified vs mirror backup);
   R1–R13 merged to `main` and deployed; `feat/portfolio-features` opened
   with F1 asset commit `21a9880`; `refactor/cleanup` + backup deleted.
-- **2026-08-26 — R13 navbar menu-close:** render-time pathname reset replaces
-  the suppressed close-effect (zero suppressions repo-wide); Home-logo
-  same-route close added; derived openPathname variant rejected in review.
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -68,14 +69,14 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 ## Roadmap — Features
 
 - ✅ 2026-08-31 — **F1** footer resume button (aria-labels, contact links → `lib/contact.ts`, PDF renamed `Thayer-Picart-Resume.pdf`)
-- **F2. SEO implementation** *(unblocked by R8)* — per-page `metadata`
-  exports, Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`,
-  `robots.ts`, per-project `generateMetadata` from lib data.
+- ✅ 2026-08-31 — **F2** SEO implementation (root + per-page metadata,
+  OG/Twitter cards, `metadataBase`, `sitemap.ts`, `robots.ts`, per-project
+  `generateMetadata`, generated OG card)
 - **F3. Reduced-motion support** *(deferred by choice during R10)* —
   `MotionConfig reducedMotion="user"` provider in `layout.tsx` + autoplay
   gate via `useReducedMotion()` in both carousel islands.
 
 ## Status
 
-Next task: **F2** SEO on `feat/portfolio-features`, then F3. See
+Next task: **F3** reduced-motion on `feat/portfolio-features`. See
 `activeContext.md` for the current working snapshot.

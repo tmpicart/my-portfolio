@@ -11,7 +11,11 @@ reasoning and the map.
 src/
 ├── app/
 │   ├── layout.tsx               # Server ✓ — Navbar + Footer components; root
-│   │                            #   metadata; body bg-canvas
+│   │                            #   metadata foundation (F2: metadataBase,
+│   │                            #   title template, canonicals, OG/Twitter)
+│   ├── sitemap.ts               # F2 — 9 URLs from lib data + siteUrl
+│   ├── robots.ts                # F2 — allow-all + sitemap pointer
+│   ├── opengraph-image.tsx      # F2 — next/og 1200×630 card (lib/home copy)
 │   ├── globals.css              # Design tokens: @theme palette — 16 semantic
 │   │                            #   colors, single source of truth (R6, +R9
 │   │                            #   backdrop)
@@ -180,7 +184,8 @@ safer).
 9. ~~Assets: orphaned `Avatar.png`, unused template SVGs, oversized
    images~~ ✅ R11 (deleted + sharp compress + kebab-case; stock photos
    removed by Thayer's call — portfolio deck is 2 real slides now)
-10. SEO absent (single root metadata only) → F2 (unblocked by R8)
+10. ~~SEO absent (single root metadata only)~~ ✅ F2 (full metadata
+    layer, sitemap/robots, generated OG card)
 11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family, `pfp.jpg`~~
     ✅ R3/R5/R11 (`pfp.jpg` → `profile.jpg`)
 12. ~~Home content hardcoded~~ ✅ R8 (`lib/home.ts` + `HomeIcon` ID map)

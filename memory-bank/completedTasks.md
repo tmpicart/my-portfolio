@@ -177,4 +177,16 @@ confirms all roadmap tasks are complete; do not read it before then.
   R11 kebab-case exception: recruiter-facing filename). Divider variant
   built, then rejected in review — flat uniform 4 chosen. Debt #13 dead.
   Gates green (lint + build, 12/12 SSG).
+## F2 — SEO implementation (2026-08-31)
+
+- `lib/site.ts` (env-backed `siteUrl` → future domain = one env var);
+  root metadata foundation (metadataBase, title default + template,
+  per-route canonicals, OG/Twitter defaults).
+- 4 static-page metadata exports; `[slug]` `generateMetadata` (title,
+  summary, thumbnail) from lib data; `sitemap.ts` (9 URLs); `robots.ts`.
+- `opengraph-image.tsx`: `next/og` 1200×630 card, copy derived from
+  `lib/home.ts` (badge / name / focus areas). 7 design rounds; photo
+  rejected on discrimination concern; bar → focus line; gap 28→16.
+- Gates green; 15/15 static routes.
+
 <!-- append above -->
