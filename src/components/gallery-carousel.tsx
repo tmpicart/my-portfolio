@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { HiOutlineArrowsExpand } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import CarouselArrows from "@/components/carousel-arrows";
 import CarouselDots from "@/components/carousel-dots";
@@ -58,6 +58,10 @@ export default function GalleryCarousel({
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const wasModalOpenRef = useRef(false);
 
+  // Mount-time read of the OS preference; null (pre-mount) means motion
+  // allowed — it settles before autoplay's first tick.
+  const prefersReducedMotion = useReducedMotion();
+
   useEffect(() => {
     if (!mainCarouselApi) return;
     const onSelect = () => onSlideChange(mainCarouselApi.selectedScrollSnap());
@@ -68,10 +72,12 @@ export default function GalleryCarousel({
   }, [mainCarouselApi, onSlideChange]);
 
   // One gate for autoplay: suspended while the user hovers/focuses the
-  // carousel (wrapper-level so the overlay arrows count too — see R8) or while
-  // the modal covers it. play() takes NO argument — its boolean form is a jump
-  // override that would make every tick snap instead of slide.
-  const isAutoplayRunning = !isAutoplaySuspended && !isModalOpen;
+  // carousel (wrapper-level so the overlay arrows count too — see R8), while
+  // the modal covers it, or while the user prefers reduced motion. play()
+  // takes NO argument — its boolean form is a jump override that would make
+  // every tick snap instead of slide.
+  const isAutoplayRunning =
+    !isAutoplaySuspended && !isModalOpen && !prefersReducedMotion;
   // Guard on the embla api: plugin methods throw until embla initializes and
   // attaches the plugin. Home's carousel avoids this by only calling them from
   // DOM event handlers, which by definition fire post-mount.

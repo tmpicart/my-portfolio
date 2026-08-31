@@ -28,8 +28,8 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
 ## Deployment & Branches
 
 - **Vercel** auto-deploys from `main`: https://tmpicart-portfolio.vercel.app
-- Refactor/feature work happens on branches (current: `refactor/cleanup`);
-  `main` stays the stable, deployed line.
+- Work happens on branches (current: `feat/portfolio-features`, cut from
+  the R1–R13 merge); `main` stays the stable, deployed line.
 
 ## AI Tooling (Cline workflow)
 
@@ -81,5 +81,15 @@ Stack, tooling, and workflow facts. "How to build, check, and ship."
   `autoplay.play()`/`autoplay.stop()`. (5) A modal carousel that must open
   on a chosen slide should take `startIndex` at mount (component keyed by
   open state) — scroll-on-open effects need suppressions.
+- framer-motion quirk (found F3): `useReducedMotion()` reads the media
+  query once at mount (upstream TODO for live updates) — mid-session OS
+  toggles and DevTools emulation need a reload; returns `boolean | null`
+  (null = pre-mount = motion allowed; gates settle before the first tick).
+- Git-upkeep quirks (2026-08-27): harness writes `refs/cline/checkpoints/*`
+  shadow refs per session — inflate `rev-list --all --count`, can capture
+  untracked-file blobs; delete post-session (`for-each-ref refs/cline` →
+  `update-ref -d`) + `git gc --prune=now`. `git filter-repo` (pip) removes
+  `origin` by design — re-add before push. Harness may run batched shell
+  commands CONCURRENTLY — chain dependent git ops in one command string.
 - No test framework — deliberate for a static presentation site; revisit if
   interactive behavior with failure modes is ever added.

@@ -65,13 +65,19 @@ export const spotlightEntrance: Variants = {
   visible: { opacity: 1, y: 0, scale: 1, transition: springEntrance },
 };
 
-/** Hub-card hover — accent tint identity kept; consumed via whileHover="hover". */
+/**
+ * Hub-card hover — accent tint identity kept; consumed via whileHover="hover".
+ * zIndex must stay in the raised layer of the z scale (see globals.css): cards
+ * carry no isolating ancestor, so this z participates in the root stacking
+ * context — at 50 it once tied the navbar and won on DOM order, painting
+ * cards over the fixed bar.
+ */
 export const spotlightHover: Variants = {
   hover: {
     scale: 1.04,
     rotate: 0.25,
     y: 0,
-    zIndex: 50,
+    zIndex: 10,
     backgroundColor: "rgba(166,115,231,0.22)",
     borderColor: "rgba(166,115,231,0.55)",
     transition: springHover,

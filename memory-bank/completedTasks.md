@@ -157,4 +157,61 @@ confirms all roadmap tasks are complete; do not read it before then.
   Lint + build green (12/12 SSG), visually neutral. Flag carried: toggle
   aria-expanded → F3.
 
+### 2026-08-27 — Git upkeep: purge, phase merge, feat branch open
+- filter-repo purged leaked full-resume blobs (`public/files/Resume-Thayer
+  Picart.pdf`) from all history; branches force-pushed; messages/dates/trees
+  verified byte-identical vs mirror backup (backup deleted after sign-off).
+- 19 local `refs/cline/checkpoints/*` shadow refs deleted; orphaned-commit
+  GitHub gc left to natural cleanup (ticket declined, risk accepted).
+- R1–R13 merged to `main` via `--no-ff` merge `31eda54` — refactored site
+  deployed to Vercel for the first time; gates green (12/12 SSG).
+- Opened `feat/portfolio-features`; `21a9880` adds redacted
+  `public/resume.pdf` (F1 asset only, no button). `refactor/cleanup`
+  deleted local+origin. Next: F1 button, then F2 SEO, F3 reduced-motion.
+### 2026-08-31 — F1 footer resume button
+- New `lib/contact.ts` (`ContactLink`: href/iconId/ariaLabel/opensInNewTab);
+  footer renders four data-driven links — resume `FaFilePdf` opens
+  `/Thayer-Picart-Resume.pdf` in a new tab (inline viewer has native
+  download/print). aria-labels on all icon-only footer links; tagline
+  updated. `public/resume.pdf` renamed `Thayer-Picart-Resume.pdf` (approved
+  R11 kebab-case exception: recruiter-facing filename). Divider variant
+  built, then rejected in review — flat uniform 4 chosen. Debt #13 dead.
+  Gates green (lint + build, 12/12 SSG).
+## F2 — SEO implementation (2026-08-31)
+
+- `lib/site.ts` (env-backed `siteUrl` → future domain = one env var);
+  root metadata foundation (metadataBase, title default + template,
+  per-route canonicals, OG/Twitter defaults).
+- 4 static-page metadata exports; `[slug]` `generateMetadata` (title,
+  summary, thumbnail) from lib data; `sitemap.ts` (9 URLs); `robots.ts`.
+- `opengraph-image.tsx`: `next/og` 1200×630 card, copy derived from
+  `lib/home.ts` (badge / name / focus areas). 7 design rounds; photo
+  rejected on discrimination concern; bar → focus line; gap 28→16.
+- Gates green; 15/15 static routes.
+
+- **2026-08-31 — F3: reduced-motion support (final roadmap item).**
+  `MotionConfig reducedMotion="user"` wraps main in layout — all framer
+  consumers render inside it (Navbar/Footer are CSS-only). Autoplay gates:
+  gallery folds the preference into R9's single gate; home adds an
+  api-guarded stop effect + preference-checked resume callback (closes
+  the hover-exit restart leak). Navbar R13 follow-up: `aria-expanded` +
+  `aria-controls`/`mobile-navigation` id on toggle ↔ tray. Verified: lint
+  clean, 15/15 static, SSR `aria-expanded="false"` present. Limits: hook
+  reads at mount (reload applies OS toggles); embla user-initiated slide
+  stays smooth (out of scope).
+
+- **2026-08-31 — Z-layer convention (z ladder).** `globals.css` now owns
+  stacking: documented scale (z-0 resting / z-10 raised / z-20 controls /
+  z-chrome 40 / z-overlay 50; 30 reserved) via `@utility` named utilities
+  (z has no @theme namespace in Tailwind 4.3). Navbar → z-chrome, modal →
+  z-overlay: the flagged navbar/modal z-50 tie resolved by construction.
+  Micro stacking (cards z-0, hover 10 via framer, arrows z-20) stays
+  stock; motion.ts comment points at the ladder. Verified in build CSS.
+
+- **2026-08-31 — Z ladder rework: stock z-40/z-50.** Review follow-up:
+  dropped the z-chrome/z-overlay @utility indirection — two single-
+  consumer layers earn no custom classes. The ladder comment in
+  globals.css remains the source of truth; navbar z-40 < modal z-50
+  stands; verified in build CSS.
+
 <!-- append above -->

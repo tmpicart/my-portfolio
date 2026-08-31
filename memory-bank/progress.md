@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-26** — what works, recent work, and the roadmap that
+**Updated: 2026-08-31** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Full completed-task
 record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 `.clinerules`).
@@ -21,19 +21,22 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   and home
 - All three carousels: embla + Autoplay (pause on hover/focus); dots
   everywhere (home dots added R9, approved)
+- Reduced-motion site-wide (F3): MotionConfig "user" provider + autoplay
+  gates on both carousel islands
 
 ## Recent Work
 
-- **2026-08-26 — R13 navbar menu-close:** render-time pathname reset replaces
-  the suppressed close-effect (zero suppressions repo-wide); derived
-  openPathname variant rejected in review (tray resurrected on back-nav);
-  Home-logo same-route close added.
-- **2026-08-26 — R12.1 ProjectCard hoist:** module-scope `cardSizeStyles`
-  (+ derived `CardSize` type); debt #15 closed. Visually neutral.
-- **2026-08-26 — R12 naming & consistency audit:** renames (`summaryClass`,
-  `carouselApi`, camelCase constants), BOM + layout-marker hygiene, `z-0`
-  swap; motion.main→motion.div (single `<main>`); navbar + `[slug]` unified
-  on the 1120px shell column (Thayer-approved); README refreshed. Gates green.
+- **2026-08-31 — Z-layer convention:** documented ladder in globals.css —
+  z-40 navbar / z-50 modal (tie resolved by construction); stock utilities
+  only, @utility indirection rejected in review (single-consumer layers).
+  Gates green; verified in build output.
+- **2026-08-31 — Navbar-overlay fix:** `spotlightHover.zIndex` 50→10 —
+  hovered cards tied navbar z-50 and won on DOM order, painting over the
+  fixed bar. Why-comment documents the stacking rule. Gates green.
+- **2026-08-31 — Features phase merge:** F1–F3 + navbar-overlay z-fix +
+  z-ladder docs folded into `main` (`--no-ff`, mirrors the R-phase fold);
+  gates green on tip and on merged `main`. Branch retires on push approval.
+
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -61,19 +64,21 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - ✅ 2026-08-26 — **R13** navbar menu-close render-time reset (`prevPathname`
   guard replaces suppressed effect; zero suppressions remain; logo same-route
   close added; derived openPathname variant rejected in review)
+- ✅ 2026-08-27 — **Refactor phase deployed** — R1–R13 merged to `main`
+  (merge `31eda54`) and live on Vercel; `refactor/cleanup` branch deleted
 
 ## Roadmap — Features
 
-- **F1. Resume button** — PDF in `public/`, icon link in footer beside the
-  existing contact icons.
-- **F2. SEO implementation** *(unblocked by R8)* — per-page `metadata`
-  exports, Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`,
-  `robots.ts`, per-project `generateMetadata` from lib data.
-- **F3. Reduced-motion support** *(deferred by choice during R10)* —
-  `MotionConfig reducedMotion="user"` provider in `layout.tsx` + autoplay
-  gate via `useReducedMotion()` in both carousel islands.
+- ✅ 2026-08-31 — **F1** footer resume button (aria-labels, contact links → `lib/contact.ts`, PDF renamed `Thayer-Picart-Resume.pdf`)
+- ✅ 2026-08-31 — **F2** SEO implementation (root + per-page metadata,
+  OG/Twitter cards, `metadataBase`, `sitemap.ts`, `robots.ts`, per-project
+  `generateMetadata`, generated OG card)
+- ✅ 2026-08-31 — **F3** reduced-motion (`MotionConfig reducedMotion="user"`
+  + `useReducedMotion()` autoplay gates; navbar `aria-expanded` follow-up)
+- ✅ 2026-08-31 — **Features phase merged** — F1–F3 + follow-ups folded
+  into `main` via `--no-ff` fold; Vercel deploy on push
 
 ## Status
 
-Next task: **F1**, then F2–F3. See `activeContext.md` for the current
-working snapshot.
+Roadmap complete (R1–R13 + F1–F3); both phases merged to `main`. Nothing
+queued — new work needs a new roadmap. Push/merge = Thayer's call.

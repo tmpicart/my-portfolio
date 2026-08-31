@@ -27,7 +27,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
+    <nav className="fixed left-0 top-0 z-40 w-full border-b border-white/10 bg-surface-1 px-4 py-3 shadow-lg">
       {/* One column with every page shell: max-w-6xl minus main's 16px px-4
           inset puts nav content on the shells' border edge. */}
       <div className="mx-auto flex max-w-[1120px] items-center justify-between">
@@ -43,6 +43,8 @@ export default function Navbar() {
 
         <button
           aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           className="rounded-lg border border-white/10 bg-menu p-2 text-2xl text-white transition-colors duration-200 hover:border-accent/40 hover:text-accent md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -59,7 +61,10 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="mx-auto mt-3 flex max-w-[1120px] flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden">
+        <div
+          id="mobile-navigation"
+          className="mx-auto mt-3 flex max-w-[1120px] flex-col gap-2 rounded-xl border border-white/10 bg-menu-tray p-2 shadow-inner md:hidden"
+        >
           {links.map((link) => (
             <Link
               key={link.href}

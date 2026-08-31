@@ -11,7 +11,12 @@ reasoning and the map.
 src/
 ├── app/
 │   ├── layout.tsx               # Server ✓ — Navbar + Footer components; root
-│   │                            #   metadata; body bg-canvas
+│   │                            #   metadata foundation (F2: metadataBase,
+│   │                            #   title template, canonicals, OG/Twitter);
+│   │                            #   MotionConfig reducedMotion="user" (F3)
+│   ├── sitemap.ts               # F2 — 9 URLs from lib data + siteUrl
+│   ├── robots.ts                # F2 — allow-all + sitemap pointer
+│   ├── opengraph-image.tsx      # F2 — next/og 1200×630 card (lib/home copy)
 │   ├── globals.css              # Design tokens: @theme palette — 16 semantic
 │   │                            #   colors, single source of truth (R6, +R9
 │   │                            #   backdrop)
@@ -31,8 +36,9 @@ src/
 │   ├── navbar.tsx               # "use client" — legit (menu state,
 │   │                            #   usePathname); FaTimes/FaBars toggle (R7);
 │   │                            #   tray-close = render-time pathname reset
-│   │                            #   + onClick closes, never an effect (R13)
-│   ├── footer.tsx               # Server ✓ — extracted R2; react-icons (R7)
+│   │                            #   + onClick closes, never an effect (R13);
+│   │                            #   aria-expanded disclosure (F3)
+│   ├── footer.tsx               # Server ✓ — renders lib/contactLinks; aria-labels + resume (F1)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── home-icon.tsx            # HomeIconId → react-icons (R8, SkillIcon
 │   │                            #   pattern for home's section/info-card icons)
@@ -120,7 +126,9 @@ top-level boundaries; relative imports for colocated files.
   PageShell is the stagger root on every page, variants live at module
   scope, and no `custom=` function variants remain. Hover policy:
   color/opacity via CSS `duration-200`; transform/spring via framer
-  label variants (`whileHover="hover"`).
+  label variants (`whileHover="hover"`). F3: layout wraps main in
+  `MotionConfig reducedMotion="user"`; `useReducedMotion()` gates
+  autoplay in both islands (home's resume callback checks it too).
 - **Assets** — ✅ landed R11: `public/images/**` all kebab-case; raster
   sources ≤1920px and compressed via sharp (transitive dep — binary image
   ops through shell-invoked sharp are the sanctioned exception to
@@ -129,7 +137,10 @@ top-level boundaries; relative imports for colocated files.
   (root layout owns it; PageShell/ProjectDetail render `motion.div`);
   one site column — navbar row/tray and `[slug]` content share the
   1120px edge (max-w-6xl − main's 16px `px-4` inset; Thayer-approved
-  visual exception).
+  visual exception). Z ladder (2026-08-31, lives in `globals.css`):
+  z-0 resting / z-10 raised+in-panel / z-20 controls / z-40 navbar
+  chrome / z-50 modal overlay — all stock utilities, documented in one
+  comment; 30 reserved for a future layer.
 - **Menu-close** — ✅ landed R13: tray closes on any navigation via a
   guarded render-time pathname reset + onClick on every nav affordance
   (logo included — same-route clicks bypass pathname diffing); no effect.
@@ -180,11 +191,12 @@ safer).
 9. ~~Assets: orphaned `Avatar.png`, unused template SVGs, oversized
    images~~ ✅ R11 (deleted + sharp compress + kebab-case; stock photos
    removed by Thayer's call — portfolio deck is 2 real slides now)
-10. SEO absent (single root metadata only) → F2 (unblocked by R8)
+10. ~~SEO absent (single root metadata only)~~ ✅ F2 (full metadata
+    layer, sitemap/robots, generated OG card)
 11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family, `pfp.jpg`~~
     ✅ R3/R5/R11 (`pfp.jpg` → `profile.jpg`)
 12. ~~Home content hardcoded~~ ✅ R8 (`lib/home.ts` + `HomeIcon` ID map)
-13. Footer contact links hardcoded → F1
+13. ~~Footer contact links hardcoded~~ ✅ F1 (`lib/contact.ts` + footer icon map)
 14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
     `relative`)
 15. ~~`sizeStyles` literal inside ProjectCard's body~~ ✅ R12.1

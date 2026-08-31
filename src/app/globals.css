@@ -31,3 +31,17 @@
   --color-menu-hover: #5b5f69;
   --color-menu-tray: #2f3138;
 }
+
+/*
+  Z-layer scale — the site's only sanctioned stacking values, all stock
+  Tailwind utilities (nothing here earns a custom class). 30 stays free so
+  a future layer can slot in.
+
+    z-0   resting positioned panels (project cards' hover base)
+    z-10  raised/hover content + in-panel overlays (framer's spotlightHover
+          in lib/motion.ts must stay in this layer)
+    z-20  interactive controls layered over content (carousel arrows)
+    z-40  fixed site chrome (navbar)
+    z-50  site-wide overlays (enlarged-image modal) — always above chrome,
+          so no DOM-order tie-break ever decides it
+*/
