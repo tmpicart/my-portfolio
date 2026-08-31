@@ -33,10 +33,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - **2026-08-31 — Navbar-overlay fix:** `spotlightHover.zIndex` 50→10 —
   hovered cards tied navbar z-50 and won on DOM order, painting over the
   fixed bar. Why-comment documents the stacking rule. Gates green.
-- **2026-08-31 — F3 reduced-motion:** `MotionConfig reducedMotion="user"`
-  in layout; `useReducedMotion()` autoplay gates in both carousel islands
-  (home resume-path leak closed); navbar `aria-expanded` disclosure.
-  Gates green, 15/15 static.
+- **2026-08-31 — Features phase merge:** F1–F3 + navbar-overlay z-fix +
+  z-ladder docs folded into `main` (`--no-ff`, mirrors the R-phase fold);
+  gates green on tip and on merged `main`. Branch retires on push approval.
+
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -75,8 +75,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   `generateMetadata`, generated OG card)
 - ✅ 2026-08-31 — **F3** reduced-motion (`MotionConfig reducedMotion="user"`
   + `useReducedMotion()` autoplay gates; navbar `aria-expanded` follow-up)
+- ✅ 2026-08-31 — **Features phase merged** — F1–F3 + follow-ups folded
+  into `main` via `--no-ff` fold; Vercel deploy on push
 
 ## Status
 
-Roadmap complete (R1–R13 + F1–F3). Queued (approved): navbar-overlay
-z-fix, then floating glass footer card. Push/merge = Thayer's call.
+Roadmap complete (R1–R13 + F1–F3); both phases merged to `main`. Nothing
+queued — new work needs a new roadmap. Push/merge = Thayer's call.
