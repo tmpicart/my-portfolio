@@ -26,6 +26,9 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-31 — Navbar-overlay fix:** `spotlightHover.zIndex` 50→10 —
+  hovered cards tied navbar z-50 and won on DOM order, painting over the
+  fixed bar. Why-comment documents the stacking rule. Gates green.
 - **2026-08-31 — F3 reduced-motion:** `MotionConfig reducedMotion="user"`
   in layout; `useReducedMotion()` autoplay gates in both carousel islands
   (home resume-path leak closed); navbar `aria-expanded` disclosure.
@@ -34,10 +37,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
   `siteUrl`); root + 4 static-page metadata + `[slug]` `generateMetadata`;
   `sitemap.ts`, `robots.ts`; `next/og` 1200×630 card from `lib/home.ts`
   hero copy. Gates green, 15/15 static. Photo rejected (discrimination).
-- **2026-08-31 — F1 resume button:** new `lib/contact.ts` (`ContactLink`);
-  footer renders four data-driven links — resume `FaFilePdf` opens
-  `Thayer-Picart-Resume.pdf` new-tab — plus aria-labels on all icon-only
-  footer links; divider variant rejected in review. Gates green.
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)

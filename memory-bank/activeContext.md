@@ -11,8 +11,9 @@ Bank Protocol.
   autoplay gates in both carousel islands + navbar `aria-expanded` a11y.
 - `useReducedMotion()` is mount-time-only in framer 12.43 — mid-session OS
   toggles need a reload (quirk noted in techContext).
-- **Queued (approved):** hovered project cards overlay the navbar
-  (`spotlightHover.zIndex` 50→10), then floating glass footer card.
+- Navbar-overlay fix landed (`spotlightHover.zIndex` 50→10, gates green).
+- Floating glass footer card rejected in review (implemented, reverted
+  pre-commit) — Thayer prefers the full-bleed strip; footer stays as-is.
 - Flagged, unfixed: navbar (z-50) ↔ modal overlay (z-50) tie survives on
   DOM order; deliberate scale would be cards 10 < chrome 50 < modal 60.
 - Resume-link navbar/hero variant parked — revisit if footer feels weak.
