@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-27** — what works, recent work, and the roadmap that
+**Updated: 2026-08-31** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Full completed-task
 record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 `.clinerules`).
@@ -24,6 +24,10 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Recent Work
 
+- **2026-08-31 — F1 resume button:** new `lib/contact.ts` (`ContactLink`);
+  footer renders four data-driven links — resume `FaFilePdf` opens
+  `Thayer-Picart-Resume.pdf` new-tab — plus aria-labels on all icon-only
+  footer links; divider variant rejected in review. Gates green.
 - **2026-08-27 — Git upkeep:** filter-repo purge of leaked resume blobs from
   all history (force-push; messages/dates/trees verified vs mirror backup);
   R1–R13 merged to `main` and deployed; `feat/portfolio-features` opened
@@ -31,9 +35,6 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 - **2026-08-26 — R13 navbar menu-close:** render-time pathname reset replaces
   the suppressed close-effect (zero suppressions repo-wide); Home-logo
   same-route close added; derived openPathname variant rejected in review.
-- **2026-08-26 — R12 + R12.1 naming & consistency audit:** renames, BOM
-  hygiene, `z-0` swap, single `<main>`, 1120px shell column; ProjectCard
-  `cardSizeStyles` hoist (debt #15 closed). Gates green.
 ## Roadmap — Refactor (dependency-ordered)
 
 - ✅ 2026-08-19 — **R1** lint tooling repaired (flat config)
@@ -66,9 +67,7 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Roadmap — Features
 
-- **F1. Resume button** — icon link in footer beside the existing contact
-  icons. Asset landed: redacted `public/resume.pdf` (commit `21a9880` on
-  `feat/portfolio-features`).
+- ✅ 2026-08-31 — **F1** footer resume button (aria-labels, contact links → `lib/contact.ts`, PDF renamed `Thayer-Picart-Resume.pdf`)
 - **F2. SEO implementation** *(unblocked by R8)* — per-page `metadata`
   exports, Open Graph/Twitter cards, `metadataBase`, `sitemap.ts`,
   `robots.ts`, per-project `generateMetadata` from lib data.
@@ -78,5 +77,5 @@ record: `completedTasks.md` (sealed — see Memory Bank Protocol in
 
 ## Status
 
-Next task: **F1** on `feat/portfolio-features`, then F2–F3. See
+Next task: **F2** SEO on `feat/portfolio-features`, then F3. See
 `activeContext.md` for the current working snapshot.

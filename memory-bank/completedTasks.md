@@ -168,4 +168,13 @@ confirms all roadmap tasks are complete; do not read it before then.
 - Opened `feat/portfolio-features`; `21a9880` adds redacted
   `public/resume.pdf` (F1 asset only, no button). `refactor/cleanup`
   deleted local+origin. Next: F1 button, then F2 SEO, F3 reduced-motion.
+### 2026-08-31 — F1 footer resume button
+- New `lib/contact.ts` (`ContactLink`: href/iconId/ariaLabel/opensInNewTab);
+  footer renders four data-driven links — resume `FaFilePdf` opens
+  `/Thayer-Picart-Resume.pdf` in a new tab (inline viewer has native
+  download/print). aria-labels on all icon-only footer links; tagline
+  updated. `public/resume.pdf` renamed `Thayer-Picart-Resume.pdf` (approved
+  R11 kebab-case exception: recruiter-facing filename). Divider variant
+  built, then rejected in review — flat uniform 4 chosen. Debt #13 dead.
+  Gates green (lint + build, 12/12 SSG).
 <!-- append above -->

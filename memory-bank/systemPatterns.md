@@ -32,7 +32,7 @@ src/
 │   │                            #   usePathname); FaTimes/FaBars toggle (R7);
 │   │                            #   tray-close = render-time pathname reset
 │   │                            #   + onClick closes, never an effect (R13)
-│   ├── footer.tsx               # Server ✓ — extracted R2; react-icons (R7)
+│   ├── footer.tsx               # Server ✓ — renders lib/contactLinks; aria-labels + resume (F1)
 │   ├── skill-icon.tsx           # SkillIconId → react-icons + brand colors (R4)
 │   ├── home-icon.tsx            # HomeIconId → react-icons (R8, SkillIcon
 │   │                            #   pattern for home's section/info-card icons)
@@ -184,7 +184,7 @@ safer).
 11. ~~Naming stragglers: `imageInfos`, `cardStyle`-family, `pfp.jpg`~~
     ✅ R3/R5/R11 (`pfp.jpg` → `profile.jpg`)
 12. ~~Home content hardcoded~~ ✅ R8 (`lib/home.ts` + `HomeIcon` ID map)
-13. Footer contact links hardcoded → F1
+13. ~~Footer contact links hardcoded~~ ✅ F1 (`lib/contact.ts` + footer icon map)
 14. ~~Skills accent-bar anchoring~~ ✅ fixed R5 (`panel` variant carries
     `relative`)
 15. ~~`sizeStyles` literal inside ProjectCard's body~~ ✅ R12.1
