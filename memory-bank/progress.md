@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-08-31** — what works, recent work, and the roadmap that
+**Updated: 2026-10-05** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Cycle 1's completed-
 task record was cleared at the 2026-08-31 master audit — the narrative
 lives in git history (through tip `7d028f9`).
@@ -19,15 +19,9 @@ lives in git history (through tip `7d028f9`).
 
 ## Recent Work
 
-- **2026-08-31 — Master quality audit:** comments cut to constraint-only;
-  v4 gradient utilities aligned; autoplay delay consolidated; dead
-  prop/classes pruned; icon light-scheme fix; README refreshed; bank
-  condensed to caps; archive renewed for Cycle 2. Gates green.
-- **2026-08-31 — Features phase merged:** F1–F3 + navbar-overlay z-fix +
-  z-ladder docs folded into `main` (`--no-ff`), pushed, deployed.
-- **2026-08-31 — Navbar-overlay fix + z-ladder:** hovered cards tied the
-  navbar's z-50 and won on DOM order → spotlight z 50→10; ladder
-  documented in `globals.css`.
+- **2026-10-05 — Resume swap (ad-hoc):** site PDF replaced with Resume A
+  (2026-09-28 refresh) under the same filename; footer link untouched.
+  Lint+build green; merged `--no-ff` to `main`, pushed, live.
 
 ## Roadmap — Cycle 1 (complete)
 
