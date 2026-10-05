@@ -12,4 +12,11 @@ that the cycle's roadmap is complete.
 
 
 
+- **2026-10-05 — Resume swap (ad-hoc):** replaced `public/Thayer-Picart-Resume.pdf`
+  with Resume A (2026-09-28 refresh, compiled from `resume-template.tex`) under
+  the same filename — footer link/aria-label unchanged; verified SHA-256 match
+  with the source PDF and no copy drift vs `lib/experience.ts`/`lib/education.ts`.
+  Lint + build green; `chore/resume-refresh` merged `--no-ff` into `main`,
+  pushed, live on Vercel.
+
 <!-- append above -->

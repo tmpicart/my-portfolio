@@ -1,13 +1,16 @@
 # Active Context
 
-**Snapshot: 2026-08-31 (post-master-audit)** — updated every task per
+**Snapshot: 2026-10-05 (resume swap)** — updated every task per
 the Memory Bank Protocol.
 
 ## Current State
 
-- **Roadmap complete + deployed** — R1–R13 and F1–F3 merged to `main`
-  (tip `7d028f9`, pushed, live on Vercel). `main` is the only branch;
-  feature branches are cut per task and retired post-merge.
+- **Roadmap complete + deployed** — R1–R13 and F1–F3 merged to `main`,
+  pushed, live on Vercel. `main` is the only branch; feature branches are
+  cut per task and retired post-merge.
+- **Resume swapped for Resume A** — 2026-09-28 refresh copied over
+  `public/Thayer-Picart-Resume.pdf` (same filename, footer link unchanged);
+  experience/education copy already matched the new resume.
 - **Master quality audit applied** — code comments cut to constraint-only,
   Tailwind v4 utilities aligned, dead code pruned, README refreshed, bank
   condensed to caps, `completedTasks.md` renewed for Cycle 2.
