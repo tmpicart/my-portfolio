@@ -4,16 +4,18 @@ export type SkillIconId =
   | "c"
   | "javascript"
   | "gdscript"
+  | "kotlin"
   | "html"
   | "css"
   | "tailwind"
   | "bootstrap"
   | "nextjs"
-  | "fastapi"
   | "django"
   | "sql"
   | "firebase"
   | "aws"
+  | "gemini-api"
+  | "cline"
   | "agile"
   | "git"
   | "github"
@@ -39,6 +41,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "C", iconId: "c" },
       { name: "JavaScript", iconId: "javascript" },
       { name: "GDScript", iconId: "gdscript" },
+      { name: "Kotlin", iconId: "kotlin" },
     ],
   },
   {
@@ -54,7 +57,6 @@ export const skillCategories: SkillCategory[] = [
     title: "Frameworks & Libraries",
     skills: [
       { name: "Next.js", iconId: "nextjs" },
-      { name: "FastAPI", iconId: "fastapi" },
       { name: "Django", iconId: "django" },
     ],
   },
@@ -64,6 +66,13 @@ export const skillCategories: SkillCategory[] = [
       { name: "SQL", iconId: "sql" },
       { name: "Firebase", iconId: "firebase" },
       { name: "AWS", iconId: "aws" },
+    ],
+  },
+  {
+    title: "AI Tools",
+    skills: [
+      { name: "Gemini API", iconId: "gemini-api" },
+      { name: "Cline", iconId: "cline" },
     ],
   },
   {
