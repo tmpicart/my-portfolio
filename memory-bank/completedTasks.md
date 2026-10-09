@@ -27,4 +27,13 @@ that the cycle's roadmap is complete.
   Gates green; `chore/resume-refresh-2` merged `--no-ff` to `main`, pushed,
   live (Content-Length verified). lib/ copy drift flagged, not fixed.
 
+- **2026-10-09 — Content sync (ad-hoc):** applied the 10/9 audit: FastAPI
+  removed from /skills + medical-codex frameworks + icon map (site-wide
+  zero hits), Grey-box Gemini bullet synced to the resume's corrected
+  wording, new "AI Tools" skills group (Gemini API, Cline via
+  SiGooglegemini/SiCline), Kotlin added to /skills (SiKotlin), Cline line
+  on John Dungeon features. TS intentionally kept off /skills. Gates green;
+  route set unchanged; `fix/content-sync` merged `--no-ff` to `main`,
+  pushed, live.
+
 <!-- append above -->

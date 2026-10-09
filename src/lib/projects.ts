@@ -73,6 +73,7 @@ export const projects: Project[] = [
         "Varied enemies and behaviors",
         "Player progression systems",
         "Fast-paced and dynamic combat",
+        "Ongoing solo development accelerated with Cline, an agentic AI coding tool",
       ],
     },
     github: "https://github.com/tmpicart/John-Dungeon",
@@ -115,7 +116,7 @@ export const projects: Project[] = [
     ],
     bullets: {
       languages: ["JavaScript", "TypeScript", "SQL"],
-      frameworks: ["Next.js", "Tailwind CSS", "FastAPI"],
+      frameworks: ["Next.js", "Tailwind CSS"],
       features: [
         "Translates medical terminologies across multiple languages",
         "SQL database contains extensive translations",

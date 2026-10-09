@@ -19,6 +19,10 @@ lives in git history (through tip `7d028f9`).
 
 ## Recent Work
 
+- **2026-10-09 — Content sync (ad-hoc):** site copy synced to the corrected
+  resume + audit rulings: FastAPI removed site-wide, Grey-box Gemini bullet
+  corrected, AI Tools skills group added (Gemini API, Cline), Kotlin added,
+  John Dungeon Cline bullet added. Gates green; pushed, live.
 - **2026-10-09 — Resume refresh 2 (ad-hoc):** re-swapped site PDF for updated
   Resume A (Gemini bullet rewrite; new AI Tools line; Cline project bullet).
   Lint+build green; merged `--no-ff`, pushed, live. lib/ pages now drift from
