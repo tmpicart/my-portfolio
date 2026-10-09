@@ -1,6 +1,6 @@
 # Progress
 
-**Updated: 2026-10-05** — what works, recent work, and the roadmap that
+**Updated: 2026-10-09** — what works, recent work, and the roadmap that
 drives it. One roadmap item = one task = one commit. Cycle 1's completed-
 task record was cleared at the 2026-08-31 master audit — the narrative
 lives in git history (through tip `7d028f9`).
@@ -19,6 +19,10 @@ lives in git history (through tip `7d028f9`).
 
 ## Recent Work
 
+- **2026-10-09 — Resume refresh 2 (ad-hoc):** re-swapped site PDF for updated
+  Resume A (Gemini bullet rewrite; new AI Tools line; Cline project bullet).
+  Lint+build green; merged `--no-ff`, pushed, live. lib/ pages now drift from
+  resume copy — flagged, sync pending.
 - **2026-10-05 — Resume swap (ad-hoc):** site PDF replaced with Resume A
   (2026-09-28 refresh) under the same filename; footer link untouched.
   Lint+build green; merged `--no-ff` to `main`, pushed, live.

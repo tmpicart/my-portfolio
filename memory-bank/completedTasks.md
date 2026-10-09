@@ -19,4 +19,12 @@ that the cycle's roadmap is complete.
   Lint + build green; `chore/resume-refresh` merged `--no-ff` into `main`,
   pushed, live on Vercel.
 
+- **2026-10-09 — Resume refresh 2 (ad-hoc):** re-replaced `public/Thayer-Picart-Resume.pdf`
+  with the rebuilt Resume A (69,460 bytes, SHA-256 `2DE395…4037` verified;
+  source `resume-template.tex` edited 10/9). Vs the prior resume: Grey-box
+  Gemini bullet rewritten, new "AI Tools" skills line (Gemini API, Cline),
+  new Cline bullet on John Dungeon. Same filename — footer link unchanged.
+  Gates green; `chore/resume-refresh-2` merged `--no-ff` to `main`, pushed,
+  live (Content-Length verified). lib/ copy drift flagged, not fixed.
+
 <!-- append above -->
